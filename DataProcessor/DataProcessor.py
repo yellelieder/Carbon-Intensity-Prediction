@@ -4,15 +4,16 @@ from datetime import datetime
 import regex as re
 rawProduction = "Ressources\\rawDataProduction.csv"
 rawConsumption = "Ressources\\rawDataConsumption.csv"
+productionTargetFolder="Ressources\\Training Data Production\\"
+consumptionTargetFolder="Ressources\\Training Data Consumption\\"
 
 timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
-df=pd.DataFrame(pd.read_csv(rawProduction))
+df=pd.read_csv(rawProduction)
+print(df.head())
+print(df.loc[3])
+#df.to_csv(productionTargetFolder+"trainingProduction_"+timeStamp+".csv")
 
-
-df.to_csv("Ressources\\Training Data Production\\trainingProduction_"+timeStamp+".csv")
-
-print(df.loc[1]+df.loc[2])
 #"Datum"
 # "Uhrzeit";
 # "Biomasse[MWh]";
