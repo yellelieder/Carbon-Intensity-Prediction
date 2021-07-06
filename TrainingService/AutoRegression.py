@@ -37,7 +37,8 @@ if __name__ == "__main__":
         print("\t", key, ": ",val)
     print(df_production)
     #check how many past values should be concidered
-    #partial autocorrelation
+    #partial autocorrelation k
+
     #shows how correlated different timeperiod values are
     #contains only direct effects
     pacf=plot_pacf(df_production["Renevables"], lags=1344)
