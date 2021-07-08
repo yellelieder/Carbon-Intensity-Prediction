@@ -50,7 +50,7 @@ if __name__ == "__main__":
     #x axis shows how many periods (15 min) the correlation is back, 96 periods is one day, whole df has 525.600 periods
     plt.show()
     #1344 is for the past two weeks
-    pacf=plot_acf(df_consumption["Consumption"], lags=1344)
+    acf=plot_acf(df_consumption["Consumption"], lags=1344)
     plt.show()
     #define training set
     x=df_consumption["Consumption"]
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     model=AutoReg(train, lags=192).fit()
     model.save(CONSUMPTION_MODEL_FOLDER_PATH+"AR_Consumption_"+timeStamp+".pickles")
     #just to test the import/export, could also continue with model.
-    imp=sm.load(CONSUMPTION_MODEL_FOLDER_PATH+getLatestFile(CONSUMPTION_MODEL_FOLDER_PATH))
+    imp=sm.load(CONSUMPTION_MODEL_FOLDER_PATH+StaticMain().getLatestFile(CONSUMPTION_MODEL_FOLDER_PATH))
     #p should still be lower than 0.5
     print(imp.summary())
     pred=imp.predict(start=len(train), end=len(x)-1, dynamic=False)

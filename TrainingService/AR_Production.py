@@ -26,7 +26,7 @@ if __name__ == "__main__":
     plt.ylabel("Production")
     plt.xlabel("Time")
     plt.show()
-    #checking that autoregression can be done on this data set, due to statistical limitations
+    #checking that autoregression can be done on this data set, due to statistical limitations (Augmented Dickey-Fuller unit root test)
     dftest=adfuller(df_production["Renevables"], autolag="AIC")
     print("1. ADF: ", dftest[0])
     #if p is high (>0.5), timeseries is not stationary, but it should be
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     #x axis shows how many periods (15 min) the correlation is back, 96 periods is one day, whole df has 525.600 periods
     plt.show()
     #1344 is for the past two weeks
-    pacf=plot_acf(df_production["Renevables"], lags=1344)
+    acf=plot_acf(df_production["Renevables"], lags=1344)
     plt.show()
     #define training set
     x=df_production["Renevables"]
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     train=x[:len(x)-no_of_days_to_predict]
     #test=x[len(x)-no_of_days_to_predict:]
     model=AutoReg(train, lags=192).fit()
-
+    print(model.summary())
     model.save(PRODUCTION_MODEL_FOLDER_PATH+"AR_Production_"+timeStamp+".pickles")
     
     #p should still be lower than 0.5
