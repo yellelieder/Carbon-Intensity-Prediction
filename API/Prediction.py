@@ -11,6 +11,8 @@ from statsmodels.tsa.ar_model import AutoReg
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 import numpy as np
+import sys
+
 
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
@@ -27,9 +29,8 @@ def timeToPeriod(time):
     #returns number of 15 min periods between last row in training date and input time
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
 
-def periodToTime(period, start, end):
+def periodToTime(period, start):
     #returns datetime based on n.th 15 min period since last rom in training date
-    print("period: "+str(period))
     return (datetime.strptime(start, '%d/%m/%Y %H:%M:%S')+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
 
 def predict(start, end, consumption_or_production):
@@ -47,7 +48,7 @@ def timeSeries(start, end):
     consumption_prediction=predict(start, end, "consumption")
     return production_prediction.divide(other=consumption_prediction).to_frame()
 
-def recommend(time_series, duration, start, end):
+def forcast(time_series, duration, start):
     norm_duration=int(duration/15)
     max_cummulative_ratio=0
     optimal_period=0
@@ -56,12 +57,23 @@ def recommend(time_series, duration, start, end):
         if subset_sum>max_cummulative_ratio:
             max_cummulative_ratio=subset_sum
             optimal_period=period
-    return periodToTime(optimal_period, start, end)
+    return periodToTime(optimal_period, start)
 
 if __name__ == "__main__":
     start="08/07/2021 07:00:00"
-    end="08/07/2021 11:00:00"
+    end="08/07/2021 19:00:00"
+    dur=90
     time_series=timeSeries(start, end)
     #durarion must be in minutes
-    rec=recommend(time_series,90, start, end) #returns index of period in timeframe
+    rec=forcast(time_series,dur, start)
     print(rec)
+
+def predict(start, end, duration):
+    time_series=timeSeries(start, end)
+    #durarion must be in minutes
+    rec=forcast(time_series,duration, start)
+    return rec
+
+'''if __name__ == "__main__":
+    sys.setrecursionlimit(100000)
+    print(predict("08/07/2021 07:00:00","08/07/2021 23:00:00", 90))'''
