@@ -59,16 +59,16 @@ def forcast(time_series, duration, start):
             optimal_period=period
     return periodToTime(optimal_period, start)
 
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     start="08/07/2021 07:00:00"
     end="08/07/2021 19:00:00"
     dur=90
     time_series=timeSeries(start, end)
     #durarion must be in minutes
     rec=forcast(time_series,dur, start)
-    print(rec)
+    print(rec)'''
 
-def predict(start, end, duration):
+def timeStamp(start, end, duration):
     time_series=timeSeries(start, end)
     #durarion must be in minutes
     rec=forcast(time_series,duration, start)
@@ -76,4 +76,4 @@ def predict(start, end, duration):
 
 '''if __name__ == "__main__":
     sys.setrecursionlimit(100000)
-    print(predict("08/07/2021 07:00:00","08/07/2021 23:00:00", 90))'''
+    print(timeStamp("08/07/2021 07:00:00","08/07/2021 23:00:00", 90))'''
