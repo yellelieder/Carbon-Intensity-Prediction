@@ -4,6 +4,8 @@ from flask_restful import Resource, Api
 import Prediction
 from datetime import datetime
 import regex as re
+import requests
+import json
 
 
 app=Flask(__name__)
@@ -11,10 +13,13 @@ api=Api(app)
     
 class EPI(Resource):
     def get(self):
+        #todo: create exception for non-sense inputs
         query=request.args 
         start=to_timestamp(query.get("stdate"),query.get("sttime"))
         end=to_timestamp(query.get("endate"),query.get("entime"))
         dur=int(query.get("dur"))
+        lat=float(query.get("lat"))
+        long=float(query.get("long"))
         if dur<15:
             return {"error":"duration must be minimum of 15 min"}, 406 
         elif start_after_end(start, end):
@@ -22,7 +27,11 @@ class EPI(Resource):
         elif start_in_past(start):
             return {"error":"enter upcoming timeframe"}, 406  
         elif time_le_dur(start, end, dur):
-            return {"error":"duration not in limits"}, 406
+            return {"error":"duration not fitting in timeframe"}, 406
+        elif lat<-90 or lat>90:
+            return {"error":"lattitude out of rang"}, 406
+        elif long<-180 or long>180:
+            return {"error":"longitude out of range"}, 40
         elif invalid_geo(query.get("lat"), query.get("long")):  
             return {"error":"enter german coodrinates"}, 406  
         else:
@@ -41,15 +50,19 @@ def start_after_end(start, end):
 def start_in_past(start):
     return datetime.strptime(start, '%d/%m/%Y %H:%M:%S')<datetime.now()
 
-#doese not work yet
 def time_le_dur(start, end, dur):
-    return int(divmod((datetime.strptime(end, '%d/%m/%Y %H:%M:%S')-datetime.strptime(start, '%d/%m/%Y %H:%M:%S')).total_seconds(),900)[0])>=dur
+    return not int(divmod((datetime.strptime(end, '%d/%m/%Y %H:%M:%S')-datetime.strptime(start, '%d/%m/%Y %H:%M:%S')).total_seconds(),900)[0])>=int(dur/15)
 
 def invalid_geo(lat, long):
-    #todo- google validation
-    return False
+    r=requests.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8")
+    #todo: find country in r
+    print(r.text)
+    if "Germany" in r.text:
+        return False
+    else:
+        return True
 
-#?lat=51.4582235&long=7.0158171&stdate=28.12.1995&sttime=06:455&endate=29.12.1995&entime=23:59&dur=180
+#?lat=51.4582235&long=7.0158171&stdate=28.12.1995&sttime=06:45&endate=29.12.1995&entime=23:59&dur=180
 api.add_resource(EPI,"/api/")
 api.add_resource(Home,"/")
 
