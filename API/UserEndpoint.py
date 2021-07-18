@@ -6,10 +6,12 @@ from datetime import datetime
 import regex as re
 import requests
 import json
+from flask_apscheduler import APScheduler
 
 
 app=Flask(__name__)
 api=Api(app)
+scheduler=APScheduler()
     
 class EPI(Resource):
     def get(self):
@@ -74,5 +76,10 @@ def invalid_geo(lat, lng):
 api.add_resource(EPI,"/api/")
 api.add_resource(Home,"/")
 
+def scheduledTask():
+    print("Task executed")
+
 if __name__=="__main__":
+    scheduler.add_job(id="Scheduled task", func=scheduledTask, trigger="interval", seconds=86400)
+    scheduler.start()
     app.run(debug=True)
