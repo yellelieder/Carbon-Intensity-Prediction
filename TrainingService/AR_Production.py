@@ -8,19 +8,21 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.ar_model import AutoReg
 from sklearn.metrics import mean_squared_error
 from math import sqrt
-import StaticMain
+import os
+
 
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
 timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
-
+def getLatestFile(dir):
+    return sorted(os.listdir(dir)).pop()
 
 def parser(s):
     return datetime.strftime(s,"%d/%m/%Y %H:%M:%S")
 
 if __name__ == "__main__":
-    df_production=pd.read_csv(PRODUCTION_DATA_FOLDER_PATH+StaticMain().getLatestFile(PRODUCTION_DATA_FOLDER_PATH), index_col=0, parse_dates=[1],sep=",")
+    df_production=pd.read_csv(PRODUCTION_DATA_FOLDER_PATH+getLatestFile(PRODUCTION_DATA_FOLDER_PATH), index_col=0, parse_dates=[1],sep=",")
     #plotting the production
     plt.plot(df_production["Date"],df_production["Renevables"])
     plt.ylabel("Production")

@@ -9,20 +9,22 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.ar_model import AutoReg
 from sklearn.metrics import mean_squared_error
 from math import sqrt
-import StaticMain
+import os
+
 
 CONSUMPTION_DATA_FOLDER_PATH="Ressources\\Training Data Consumption\\"
 CONSUMPTION_MODEL_FOLDER_PATH ="Ressources\\Models Consumption\\"
 
 timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
-
+def getLatestFile(dir):
+    return sorted(os.listdir(dir)).pop()
 
 def parser(s):
     return datetime.strftime(s,"%d/%m/%Y %H:%M:%S")
 
 if __name__ == "__main__":
-    df_consumption=pd.read_csv(CONSUMPTION_DATA_FOLDER_PATH+StaticMain().getLatestFile(CONSUMPTION_DATA_FOLDER_PATH), index_col=0, parse_dates=[1],sep=",")
+    df_consumption=pd.read_csv(CONSUMPTION_DATA_FOLDER_PATH+getLatestFile(CONSUMPTION_DATA_FOLDER_PATH), index_col=0, parse_dates=[1],sep=",")
     #plotting the consumption
     plt.plot(df_consumption["Date"], df_consumption["Consumption"])
     plt.ylabel("Consumption")

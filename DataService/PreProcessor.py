@@ -13,7 +13,7 @@ df=pd.read_csv(RAW_PRODUCTION_FILE, sep=";")
 cleanProdData=pd.DataFrame(columns=["Date","Renevables"])
 for i, row in df.iterrows():
     date=re.sub("[.]","/", row[0])+" "+row[1]+":00"
-    dict={"Date":date, "Renevables":int(str(row[2]).replace(".",""))+int(str(row[3]).replace(".",""))+int(str(row[4]).replace(".",""))+int(str(row[5]).replace(".",""))+int(str(row[6]).replace(".",""))+int(str(row[7]).replace(".",""))}
+    dict={"Date":date, "Renevables":int(float((str(row[2]).replace(".","")).replace(",",".")))+int(float((str(row[3]).replace(".","")).replace(",",".")))+int(float((str(row[4]).replace(".","")).replace(",",".")))+int(float((str(row[5]).replace(".","")).replace(",",".")))+int(float((str(row[6]).replace(".","")).replace(",",".")))+int(float((str(row[7]).replace(".","")).replace(",",".")))}
     cleanProdData= cleanProdData.append(dict, ignore_index=True)
 cleanProdData.to_csv(TARGET_PRODUCTION_FOLDER+"trainingProduction_"+timeStamp+".csv")
 
