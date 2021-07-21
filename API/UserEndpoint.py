@@ -65,8 +65,7 @@ def time_le_dur(start, end, dur):
 
 def invalid_geo(lat, lng):
     """Returns true if geo coordinates are outside of Germany."""
-    response=requests.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","
-    +lng+"&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8").json()["results"][0]["formatted_address"]
+    response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8").json()["results"][0]["formatted_address"]
     if response=="Germany":
         return False
     else:

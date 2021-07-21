@@ -13,6 +13,8 @@ end_period="1625867999999"
 timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
 def getUrl(category:str, start:str, end:str):
+    
+    #start/end must be unix time at 23:59:59
     return "https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:"+category+",%22selectedSubCategory%22:1,%22selectedRegion%22:%22DE%22,%22from%22:"+start+",%22to%22:"+end+",%22selectedFileType%22:%22CSV%22%7D"
 
 def scrape():
