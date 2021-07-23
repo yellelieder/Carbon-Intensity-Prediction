@@ -2,8 +2,8 @@ import pandas as pd
 from datetime import datetime
 import regex as re
 import matplotlib.pyplot as plt
-RAW_PRODUCTION_FILE = "Ressources\\rawDataProduction.csv"
-RAW_CONSUMPTION_FILE = "Ressources\\rawDataConsumption.csv"
+RAW_PRODUCTION_FILE = r"Ressources\RawDataMerged\raw_production.csv"
+RAW_CONSUMPTION_FILE = r"Ressources\RawDataMerged\raw_consumption.csv"
 TARGET_PRODUCTION_FOLDER="Ressources\\Training Data Production\\"
 TARGET_CONSUMPTION_FOLDER="Ressources\\Training Data Consumption\\"
 
@@ -11,8 +11,8 @@ timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M"))
 
 df=pd.read_csv(RAW_PRODUCTION_FILE, sep=";")
 cleanProdData=pd.DataFrame(columns=["Date","Renevables"])
-for i, row in df.iterrows():
-    date=re.sub("[.]","/", row[0])+" "+row[1]+":00"
+for row in df.iterrows():
+    date=re.sub(".","/", row[0])+" "+row[1]+":00"
     dict={"Date":date, "Renevables":int(float((str(row[2]).replace(".","")).replace(",",".")))+int(float((str(row[3]).replace(".","")).replace(",",".")))+int(float((str(row[4]).replace(".","")).replace(",",".")))+int(float((str(row[5]).replace(".","")).replace(",",".")))+int(float((str(row[6]).replace(".","")).replace(",",".")))+int(float((str(row[7]).replace(".","")).replace(",",".")))}
     cleanProdData= cleanProdData.append(dict, ignore_index=True)
 cleanProdData.to_csv(TARGET_PRODUCTION_FOLDER+"trainingProduction_"+timeStamp+".csv")
