@@ -6,6 +6,7 @@ import shutil
 from datetime import datetime
 import regex as re
 import time
+import pandas as pd
 DOWNLOAD_DIR="Ressources\Downloads"
 start_period="1625695200000"
 end_period="1625867999999"
@@ -16,7 +17,11 @@ def getLatestFile(dir):
     return sorted(os.listdir(dir)).pop()
 
 def getUrl(category:str, start:str, end:str):
-    return "https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:"+category+",%22selectedSubCategory%22:1,%22selectedRegion%22:%22DE%22,%22from%22:"+start+",%22to%22:"+end+",%22selectedFileType%22:%22CSV%22%7D"
+    if category=="1":
+        sub="1"
+    else:
+        sub="5"
+    return f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{category},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
 
 def getNextDate(type:str):
     path = getDownloadPath(type)
@@ -31,13 +36,17 @@ def getDownloadPath(type:str):
     else:
         return "Ressources\Downloads\Consumption"
 
-def scrape(type:int):
+def scrape(type:str):
     '''Type 1 for production, 2 for consumption'''
     no_of_days_to_get=1
     start_period=getNextDate(type)
     end_period=str(float(start_period)+(86400*no_of_days_to_get)).split(".")[0]
     options=webdriver.ChromeOptions()
-    preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI-Project\Ressources\Downloads"}
+    if type=="1":
+        t="\Production"
+    else: 
+        t= "\Consumption"
+    preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI-Project\Ressources\Downloads"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(getUrl(type,start_period,end_period))
@@ -47,9 +56,16 @@ def scrape(type:int):
     #shutil.move(filename,os.path.join(DOWNLOAD_DIR,"download_"+start_period+"_"+end_period+"_"+timeStamp+".csv"))
     driver.close()
     driver.quit()
-1625833622
-1625920022
+
+def merge(dir):
+    data=pd.DataFrame()
+    for i in os.listdir(dir):
+        print(i)
+        data=data.append(pd.read_csv(dir+"\\"+i, sep=";"), ignore_index=True)
+    df = pd.DataFrame(data)
+    df=df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+"_"+str(df.iloc[0,0])+"_to_"+str(df.iloc[-1,0])+".csv")
 
 if __name__=="__main__":
     #print(getNextDate("1"))
-    scrape("1")
+    #scrape("1")
+    merge(getDownloadPath("1"))
