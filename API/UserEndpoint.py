@@ -7,6 +7,7 @@ import regex as re
 import requests
 import json
 from flask_apscheduler import APScheduler
+import DataService.Scraper
 
 
 app=Flask(__name__)
@@ -34,7 +35,7 @@ class EPI(Resource):
             elif lat<-90 or lat>90:
                 return {"error":"lattitude out of rang"}, 406
             elif lng<-180 or lng>180:
-                return {"error":"longitude out of range"}, 40
+                return {"error":"longitude out of range"}, 406
             elif invalid_geo(query.get("lat"), query.get("long")):  
                 return {"error":"enter german coodrinates"}, 406  
             else:
@@ -76,9 +77,10 @@ api.add_resource(EPI,"/api/")
 api.add_resource(Home,"/")
 
 def scheduledTask():
+
     print("Task executed")
 
 if __name__=="__main__":
-    scheduler.add_job(id="Scheduled task", func=scheduledTask, trigger="interval", seconds=86400)
+    scheduler.add_job(id="Scheduled task", func=scheduledTask, trigger="interval", seconds=7*86400)
     scheduler.start()
     app.run(debug=True)
