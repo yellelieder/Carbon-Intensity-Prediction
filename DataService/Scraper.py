@@ -26,7 +26,6 @@ def getUrl(category:str, start:str, end:str):
 
 def getNextDate(type:str):
     path = getDownloadPath(type)
-    #filename = max([path + "\\" + f for f in os.listdir(path)],key=os.path.getctime)
     filename = getLatestFile(path)
     x= filename.split("_")[3]
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
@@ -52,44 +51,24 @@ def scrape(type:str):
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(getUrl(type,start_period,end_period))
     driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
+    #should validate column names here
     time.sleep(5)
-    #filename = max([DOWNLOAD_DIR + "\\" + f for f in os.listdir(DOWNLOAD_DIR)],key=os.path.getctime)
-    #shutil.move(filename,os.path.join(DOWNLOAD_DIR,"download_"+start_period+"_"+end_period+"_"+timeStamp+".csv"))
     driver.close()
     driver.quit()
 
 def merge(dir):
     data=pd.DataFrame()
     for i in os.listdir(dir):
-        file=pd.read_csv(dir+"\\"+i, sep=",")
-        if "prod" in str(dir).lower():
-            file.rename(columns = {0:"Datum",1:"Uhrzeit",2:"Biomasse[MWh]",3:"Wasserkraft[MWh]",4:"Wind Offshore[MWh]",5:"Wind Onshore[MWh]",6:"Photovoltaik[MWh]",7:"Sonstige Erneuerbare[MWh]",8:"Kernenergie[MWh]",9:"Braunkohle[MWh]",10:"Steinkohle[MWh]",11:"Erdgas[MWh]",12:"Pumpspeicher[MWh]",13:"Sonstige Konventionelle[MWh]"})
-        else:
-            print(data.head())
-            file.rename(columns = {0:"Datum",1:"Uhrzeit",2:"Gesamt (Netzlast)[MWh]",3:"Residuallast[MWh]",4:"Pumpspeicher[MWh]"}, 
-            inplace = True)
+        file=pd.read_csv(dir+"\\"+i, sep=";")
         data=data.append(file, ignore_index=True)
     df = pd.DataFrame(data)
-    #should delete existing files here
+    #must handle existance of multiple files in this fol
     df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+"_"+str(df.iloc[0,0])+"_to_"+str(df.iloc[-1,0])+".csv")
 
 if __name__=="__main__":
-    print("\n")
-    print("Start time: ", timeStamp)
-    #print(getNextDate("1"))
-    print("scraping started..")
     #scrape("1")
     #scrape("2")
-    print("scraping finished, file merging started..")
-    #merge(getDownloadPath("1"))
-    #merge(getDownloadPath("2"))
-    print("merging finished, data cleanup started..")
-    #PreProcessor.clean("1")
-
-    PreProcessor.clean_colum_titles("Ressources\Downloads\Production")
-
-
-    #PreProcessor.clean("2")
-    print("automated collection of new training date finished..")
-    print("End time: ", timeStamp)
-    print("\n")
+    merge(getDownloadPath("1"))
+    merge(getDownloadPath("2"))
+    PreProcessor.clean("1")
+    PreProcessor.clean("2")

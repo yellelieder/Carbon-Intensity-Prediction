@@ -1,4 +1,4 @@
-﻿Date;Time of day;Gesamt (Netzlast)[MWh];Residuallast[MWh];Pumpspeicher[MWh]
+﻿Datum;Uhrzeit;Gesamt (Netzlast)[MWh];Residuallast[MWh];Pumpspeicher[MWh]
 01.01.2019;00:00;10.918;5.372;405
 01.01.2019;00:15;10.799;5.068;276
 01.01.2019;00:30;10.676;4.765;222
