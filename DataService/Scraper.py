@@ -61,24 +61,35 @@ def scrape(type:str):
 def merge(dir):
     data=pd.DataFrame()
     for i in os.listdir(dir):
-        data=data.append(pd.read_csv(dir+"\\"+i, sep=";"), ignore_index=True)
+        file=pd.read_csv(dir+"\\"+i, sep=",")
+        if "prod" in str(dir).lower():
+            file.rename(columns = {0:"Datum",1:"Uhrzeit",2:"Biomasse[MWh]",3:"Wasserkraft[MWh]",4:"Wind Offshore[MWh]",5:"Wind Onshore[MWh]",6:"Photovoltaik[MWh]",7:"Sonstige Erneuerbare[MWh]",8:"Kernenergie[MWh]",9:"Braunkohle[MWh]",10:"Steinkohle[MWh]",11:"Erdgas[MWh]",12:"Pumpspeicher[MWh]",13:"Sonstige Konventionelle[MWh]"})
+        else:
+            print(data.head())
+            file.rename(columns = {0:"Datum",1:"Uhrzeit",2:"Gesamt (Netzlast)[MWh]",3:"Residuallast[MWh]",4:"Pumpspeicher[MWh]"}, 
+            inplace = True)
+        data=data.append(file, ignore_index=True)
     df = pd.DataFrame(data)
-    #df=df.replace("-",0)
-    df=df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+"_"+str(df.iloc[0,0])+"_to_"+str(df.iloc[-1,0])+".csv")
+    #should delete existing files here
+    df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+"_"+str(df.iloc[0,0])+"_to_"+str(df.iloc[-1,0])+".csv")
 
 if __name__=="__main__":
     print("\n")
     print("Start time: ", timeStamp)
     #print(getNextDate("1"))
     print("scraping started..")
-    scrape("1")
-    scrape("2")
+    #scrape("1")
+    #scrape("2")
     print("scraping finished, file merging started..")
-    merge(getDownloadPath("1"))
-    merge(getDownloadPath("2"))
+    #merge(getDownloadPath("1"))
+    #merge(getDownloadPath("2"))
     print("merging finished, data cleanup started..")
-    PreProcessor.clean("1")
-    PreProcessor.clean("2")
+    #PreProcessor.clean("1")
+
+    PreProcessor.clean_colum_titles("Ressources\Downloads\Production")
+
+
+    #PreProcessor.clean("2")
     print("automated collection of new training date finished..")
     print("End time: ", timeStamp)
     print("\n")
