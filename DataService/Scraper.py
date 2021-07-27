@@ -15,9 +15,11 @@ end_period="1625867999999"
 timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
 def getLatestFile(dir):
+    """returns name of alphabetically last file in folder, as string"""
     return sorted(os.listdir(dir)).pop()
 
 def getUrl(category:str, start:str, end:str):
+    """returns url for power marked-data download, as string"""
     if category=="1":
         sub="1"
     else:
@@ -25,19 +27,21 @@ def getUrl(category:str, start:str, end:str):
     return f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{category},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
 
 def getNextDate(type:str):
+    """returns date from which on power-marked data is missing, as string"""
     path = getDownloadPath(type)
     filename = getLatestFile(path)
     x= filename.split("_")[3]
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
 
 def getDownloadPath(type:str):
+    """retruns folder path for downloaded files, as string"""
     if type=="1":
         return "Ressources\Downloads\Production"
     else:
         return "Ressources\Downloads\Consumption"
 
 def scrape(type:str):
-    '''Type 1 for production, 2 for consumption'''
+    '''scrapes new data from smard.de, input type: 1 = production, 2 = consumption'''
     no_of_days_to_get=7
     start_period=getNextDate(type)
     end_period=str(float(start_period)+(86400*no_of_days_to_get)).split(".")[0]
@@ -57,18 +61,33 @@ def scrape(type:str):
     driver.quit()
 
 def merge(dir):
+    """merges all existing downloads of same structure to one csv"""
     data=pd.DataFrame()
     for i in os.listdir(dir):
         file=pd.read_csv(dir+"\\"+i, sep=";")
         data=data.append(file, ignore_index=True)
     df = pd.DataFrame(data)
     #must handle existance of multiple files in this fol
-    df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+"_"+str(df.iloc[0,0])+"_to_"+str(df.iloc[-1,0])+".csv")
+    df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".csv")
 
 if __name__=="__main__":
-    #scrape("1")
-    #scrape("2")
+    start = time.time()
+    scrape("1")
+    end1 = time.time()
+    print("first scraping took: ", end1-start)
+    scrape("2")
+    end2 = time.time()
+    print("second scraping took: ", end2-end1)
     merge(getDownloadPath("1"))
+    end3 = time.time()
+    print("first merging took: ", end3-end2)
     merge(getDownloadPath("2"))
+    end4 = time.time()
+    print("second merging took: ", end4-end3)
     PreProcessor.clean("1")
+    end5 = time.time()
+    print("first cleaning took: ", end5-end4)
     PreProcessor.clean("2")
+    end6 = time.time()
+    print("second cleaning took: ", end6-end5)
+    print("\ntotal scrapting time: ", end6-start)
