@@ -13,17 +13,13 @@ timeStamp = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M"))
 
 def clean(type:str):
     """formats dataframe for ml training and saves it as csv"""
-    if type=="1":
-        file_index=1
-        file="Production"
-    else:
-        file_index=0
-        file="Consumption"
+    file_index=1 if type=="1" else 0
+    file_name="Production" if type=="1" else "Consumption"
     df=pd.read_csv("Ressources\\RawDataMerged\\"+sorted(os.listdir("Ressources\\RawDataMerged\\"))[file_index], sep=",", index_col=0)
     df=df.replace("-",0)
     df["Datum"]= df[['Datum', 'Uhrzeit']].agg(' '.join, axis=1)
     df["Datum"]=df["Datum"].apply(lambda x: re.sub("[.]","/", x)+":00")
-    pd.DataFrame(clean_rows(type, df)).to_csv("Ressources\\TrainingData\\"+file+".csv")
+    pd.DataFrame(clean_rows(type, df)).to_csv("Ressources\\TrainingData\\"+file_name+".csv")
 
 def clean_rows(type, df):
     """formats row according to the file type (production/consumption)"""
