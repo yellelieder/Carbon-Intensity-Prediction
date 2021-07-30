@@ -1,0 +1,64 @@
+2021-07-30 08:27:15,534:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:27:15,535:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:27:15,537:INFO:start_in_past:validating user input start
+2021-07-30 08:27:15,537:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:27:15,537:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:27:15,761:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:27:15,762:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:27:15,762:INFO:get:error: strptime() argument 1 must be str, not function
+2021-07-30 08:31:05,536:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:31:05,537:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:31:05,539:INFO:start_in_past:validating user input start
+2021-07-30 08:31:05,539:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:31:05,539:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:31:05,807:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:31:05,807:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:31:05,807:INFO:get:error: strptime() argument 1 must be str, not function
+2021-07-30 08:32:38,934:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:32:38,935:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:32:38,937:INFO:start_in_past:validating user input start
+2021-07-30 08:32:38,937:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:32:38,937:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:32:39,069:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:32:39,069:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:32:39,069:INFO:get:error: time data '<function get_latest_training_date at 0x000002A8BE7A25E0>' does not match format '%d/%m/%Y %H:%M:%S'
+2021-07-30 08:36:18,632:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:36:18,633:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:36:18,636:INFO:start_in_past:validating user input start
+2021-07-30 08:36:18,636:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:36:18,636:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:36:18,780:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:36:18,781:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:36:18,781:INFO:get:error: strptime() argument 1 must be str, not function
+2021-07-30 08:38:18,502:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:38:18,503:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:38:18,505:INFO:start_in_past:validating user input start
+2021-07-30 08:38:18,505:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:38:18,506:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:38:18,631:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:38:18,631:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:38:18,632:INFO:get:error: strptime() argument 1 must be str, not function
+2021-07-30 08:39:07,533:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:39:07,534:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:39:07,536:INFO:start_in_past:validating user input start
+2021-07-30 08:39:07,536:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:39:07,537:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:39:07,674:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:39:07,675:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:39:07,676:INFO:get:error: strptime() argument 1 must be str, not function
+2021-07-30 08:39:50,307:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:39:50,309:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:39:50,312:INFO:start_in_past:validating user input start
+2021-07-30 08:39:50,313:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:39:50,313:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:39:50,441:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:39:50,442:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:39:50,443:INFO:get:error: strptime() argument 1 must be str, not function
+2021-07-30 08:45:20,228:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-07-30 08:45:20,229:INFO:start_after_end:validating user input start and end time
+2021-07-30 08:45:20,232:INFO:start_in_past:validating user input start
+2021-07-30 08:45:20,232:INFO:time_le_dur:validating user input start, end, duration
+2021-07-30 08:45:20,233:INFO:invalid_geo:validation user geo coordinates
+2021-07-30 08:45:20,512:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-07-30 08:45:20,512:INFO:predict:applining pre trained ar model to user input
+2021-07-30 08:45:20,513:INFO:get:error: strptime() argument 1 must be str, not function

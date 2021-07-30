@@ -7,7 +7,7 @@ WEATHER_DATA_API_KEY="89f83e40489b5e87c4cb16463dc68b42"
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
-handler=logging.FileHandler("weatherdata.log")
+handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 

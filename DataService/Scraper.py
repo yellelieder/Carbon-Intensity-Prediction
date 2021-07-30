@@ -13,7 +13,7 @@ TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
-handler=logging.FileHandler("scraper.log")
+handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 

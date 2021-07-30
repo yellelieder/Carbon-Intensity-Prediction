@@ -7,12 +7,12 @@ import regex as re
 import requests
 import json
 from flask_apscheduler import APScheduler
-import DataService.Scraper
 import logging
+import traceback
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
-handler=logging.FileHandler("userendpoint.log")
+handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 
@@ -47,7 +47,9 @@ class EPI(Resource):
                 return {"error":"enter german coodrinates"}, 406  
             else:
                 return {"ideal start":Prediction.timeStamp(start, end, dur)}, 200
-        except:
+        except Exception as e:
+            log.info(f"error: {str(e)}")
+            traceback.print_exc(e.__traceback__)
             return {"error":"invalid input"}, 406
 
 class Home(Resource):

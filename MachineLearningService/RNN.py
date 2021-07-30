@@ -14,7 +14,7 @@ CONSUMPTION_MODEL_FOLDER_PATH ="Ressources\\Models Consumption\\"
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
-handler=logging.FileHandler("autoregression.log")
+handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 

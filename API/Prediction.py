@@ -21,7 +21,7 @@ CONSUMPTION_DATA_FOLDER_PATH="Ressources\\Training Data Consumption\\"
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
-handler=logging.FileHandler("prediction.log")
+handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 
@@ -56,7 +56,8 @@ def get_latest_training_date():
     log.info(f"gathering latest training data")
     p=str(pd.read_csv("Ressources\TrainingData\Production.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")
     c=str(pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")
-    return min(p,c)
+    print("\n\nReturned datetime string: ", str(min(p,c)),"\n\n")
+    return str(min(p,c))
 
 def time_to_period(time):
     '''
@@ -77,7 +78,8 @@ def time_to_period(time):
             The index of the period.
     '''
     input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
-    base_time_index=datetime.strptime(get_latest_training_date, '%d/%m/%Y %H:%M:%S')
+    #get_latest_training_date
+    base_time_index=datetime.strptime("19/07/2021 23:59", '%d/%m/%Y %H:%M:%S')
     #returns number of 15 min periods between last row in training date and input time
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
 
@@ -122,8 +124,11 @@ def predict(start, end, type):
     '''
     log.info(f"applining pre trained ar model to user input")
     norm_start=time_to_period(start)
+    print("norm strt:",norm_start)
     norm_end=time_to_period(end)
+    print("norm end",norm_end)
     folder_path = PRODUCTION_MODEL_FOLDER_PATH if (type=="production") else CONSUMPTION_MODEL_FOLDER_PATH
+    print("folder path: ",folder_path)
     model=sm.load(folder_path+get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 
