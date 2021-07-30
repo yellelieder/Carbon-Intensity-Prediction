@@ -58,91 +58,101 @@ class Home(Resource):
 
 def to_timestamp(date, time):
     '''
-    asdf
+    Converts data and time to timestamp.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+
+        date : str        
+        time : str
+            User input when process can start.
 
         Returns:
         ----------
-        asdf : int
-            asdf
-    '''
 
-    """Converts 'Date' and 'Time' strings into properly formated datetime string."""
+        date_time : str
+            In form dd/mm/yyy hh:mm:ss
+    '''
     return str(re.sub("[.]","/", date)+" "+time+":00")
 
 def start_after_end(start, end):
     '''
-    asdf
+    Checks if start and end time are compatible.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        start : str
+            Ealiest time process can be started.
+        
+        end : str
+            Latest time process must be finished.            
 
         Returns:
         ----------
-        asdf : int
-            asdf
+
+        valitation : bool
+            False if input is valid, True if input is invalid.
     '''
-    """Returns true, if start date is later then end date."""
     log.info(f"validating user input start and end time")
     return datetime.strptime(start, '%d/%m/%Y %H:%M:%S')>datetime.strptime(end, '%d/%m/%Y %H:%M:%S')
 
 def start_in_past(start):
     '''
-    asdf
+    Checks if user input is already in the past. 
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        start : str
+            Date to be validated. 
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        validation : bool
+            False if input is valid, True if input is in the past.
     '''
-    """Returns true if start date is already passed."""
     log.info(f"validating user input start")
     return datetime.strptime(start, '%d/%m/%Y %H:%M:%S')<datetime.now()
 
 def time_le_dur(start, end, dur):
     '''
-    asdf
+    Checks if duration fits into given timeframe.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        start : str
+            Where duration can start.
+        
+        end : str
+            Where duration must end.
+
+        dur : int
+            Duration in minutes.
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        validation : bool
+            False if input is valid, true if duration does not fit between start and end.
     '''
-    """Returns true if dur(ation) does not fit in range between start and end."""
     log.info(f"validating user input start, end, duration")
     return not int(divmod((datetime.strptime(end, '%d/%m/%Y %H:%M:%S')-datetime.strptime(start, '%d/%m/%Y %H:%M:%S')).total_seconds(),900)[0])>=int(dur/15)
 
 def invalid_geo(lat, lng):
     '''
-    asdf
+    Checks weather geo coordinates are in germany.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        lat : str
+            Geographical lattitude.
+        
+        lng : str 
+            Geographical longitude.
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        validation : bool
+            False if coordinates are in Germany, true if they are outside germany.
     '''
-    """Returns true if geo coordinates are outside of Germany."""
     log.info(f"validation user geo coordinates")
     response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8").json()["results"][0]["formatted_address"]
     if response=="Germany":

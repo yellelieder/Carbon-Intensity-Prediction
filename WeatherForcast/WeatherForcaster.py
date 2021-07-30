@@ -17,6 +17,7 @@ def getUrl(lat, lng):
 
         Parameters:
         ----------
+
         lat : str
             Lattitude of the place where energy is going to be consumed.
 
@@ -25,6 +26,7 @@ def getUrl(lat, lng):
 
         Returns:
         ----------
+
         url : str
             Url with correct parameter for requesting weather data.
     '''
@@ -39,6 +41,7 @@ def getForcast(lat, lng):
 
         Parameters:
         ----------
+
         lat : str
             Lattitude of the place where energy is going to be consumed.
 
@@ -47,10 +50,10 @@ def getForcast(lat, lng):
 
         Returns:
         ----------
+
         response : str
             Weather forcast for wind and sun, for timeframe requested.
     '''
-    """Converts geo coordinates in wind and sun prediction."""
     #start und ende in unix
     log.info(f"request weather api")
     response=requests.get(getUrl(lat,lng)).json()

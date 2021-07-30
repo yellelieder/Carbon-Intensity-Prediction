@@ -9,9 +9,6 @@ import pandas as pd
 import PreProcessor
 import logging
 
-DOWNLOAD_DIR="Ressources\Downloads"
-START_PERIOD="1625695200000"
-END_PERIOD="1625867999999"
 TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
 log=logging.getLogger(__name__)
@@ -26,11 +23,13 @@ def getLatestFile(dir):
 
         Parameters:
         ----------
+
         dir : str
             Folder to search from.
 
         Returns:
         ----------
+
         file_name : str
             Name of the last file from the folder in alphabetical order.
     '''
@@ -38,19 +37,26 @@ def getLatestFile(dir):
 
 def getUrl(type:str, start:str, end:str):
     '''
-    asdf
+    Turns start and end time into electricity marked data api url.
 
         Parameters:
         ----------
+
+        start : str
+            First date for which data must be scraped.
+
+        end : str
+            Last data from which data must be scraped.
+
         type : str
             The type of data. 1=production, 2=consumption
 
         Returns:
         ----------
-        asdf : int
-            asdf
+
+        url : str
+            Url with correct parameter for requesting electricity market data.
     '''
-    """returns url for power marked-data download, as string"""
     log.info(f"creating smard.de url from type: {type}, start: {start}, end: {end}")
     if type=="1":
         sub="1"
@@ -60,19 +66,20 @@ def getUrl(type:str, start:str, end:str):
 
 def getNextDate(type:str):
     '''
-    asdf
+    Returns first date for which market data is not already persistet. 
 
         Parameters:
         ----------
+
         type : str
             The type of data. 1=production, 2=consumption
 
         Returns:
         ----------
-        asdf : int
-            asdf
+
+        date : str
+            Date for which market data is missing. 
     '''
-    """returns date from which on power-marked data is missing, as string"""
     log.info(f"calculating date, where to start scraping")
     path = getDownloadPath(type)
     filename = getLatestFile(path)
@@ -81,19 +88,20 @@ def getNextDate(type:str):
 
 def getDownloadPath(type:str):
     '''
-    asdf
+    Returns folder path for downloaded files by data type. 
 
         Parameters:
         ----------
+
         type : str
             The type of data. 1=production, 2=consumption
 
         Returns:
         ----------
-        asdf : int
-            asdf
+
+        path : str
+            Relative folder path for downloaded data.
     '''
-    """retruns folder path for downloaded files, as string"""
     if type=="1":
         return "Ressources\Downloads\Production"
     else:
@@ -101,19 +109,19 @@ def getDownloadPath(type:str):
 
 def scrape(type:str):
     '''
-    asdf
+    Scrapes most recent electricity market data.
 
         Parameters:
         ----------
+
         type : str
             The type of data. 1=production, 2=consumption
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        
+        Persists data as csv in projects download folder.
     '''
-    '''scrapes new data from smard.de, input type: 1 = production, 2 = consumption'''
     log.info(f"scraping new date from smard.de for type {type}")
     no_of_days_to_get=7
     start_period=getNextDate(type)
@@ -123,6 +131,10 @@ def scrape(type:str):
         t="\Production"
     else: 
         t= "\Consumption"
+
+    '''There is unfortunately no way to make this path relative with selenium.
+    But selenium is needed, as the scraped site is build dynamically.'''
+
     preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI-Project\Ressources\Downloads"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
@@ -135,19 +147,19 @@ def scrape(type:str):
 
 def merge(dir):
     '''
-    asdf
+    Merges all existing downloads of same type to single csv.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        
+        dir : str
+            Folder path from where to merge files.
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        
+        Persists result as single csv at Ressources\RawDataMerged
     '''
-    """merges all existing downloads of same structure to one csv"""
     log.info(f"merging files from folder: {dir}")
     data=pd.DataFrame()
     for i in os.listdir(dir):

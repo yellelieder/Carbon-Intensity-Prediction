@@ -43,33 +43,32 @@ def getLatestFile(dir):
 
 def parser(s):
     '''
-    asdf
+    Parses dates from csv into date object.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        s : str
+            Timestapm in csv
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        date : datetime
+            Object of form dd/mm/yyyy hh:mm:ss
     '''
     return datetime.strftime(s,"%d/%m/%Y %H:%M:%S")
 
-def train_ar_model(file_path):
+def update_ar_model(file_path):
     '''
-    asdf
+    Trains the AR model based on latest training data.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        file_path : str
+            Path of the training data set.
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        Persists trained model in Ressources\Models\ModelsAutoRegression
     '''
     log.info(f"training ar model with data from file: {file_path}")
     df=pd.read_csv(file_path, index_col=0, parse_dates=[1],sep=",")
@@ -93,17 +92,24 @@ def train_ar_model(file_path):
 
 def analyze_training_data(df, col):
     '''
-    asdf
+    Performs, prints and displays statistical tests as graphs.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        df : pf.DataFrame
+            Dataframe to analyze
+        
+        col : str
+            Name of the column with the relevant data.
 
         Returns:
         ----------
-        asdf : int
-            asdf
+
+        Prints the augemnted Dickey-Fuller unit root test.
+
+        Plots the person correlation coefficient.
+
+        Plots the auto correlation coefficient.
     '''
     log.info(f"creating visual analyziz for auto regression training")
     dftest=adfuller(df[col], autolag="AIC")
@@ -125,7 +131,7 @@ def analyze_training_data(df, col):
 if __name__ == "__main__":
     start = time.time()
     print("start..\n")
-    train_ar_model("Ressources\TrainingData\Production.csv")
+    update_ar_model("Ressources\TrainingData\Production.csv")
     print("end\n","duration: ", time.time()-start)
     
 

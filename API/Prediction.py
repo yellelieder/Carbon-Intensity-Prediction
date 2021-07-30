@@ -31,11 +31,13 @@ def get_latest_file(dir):
 
         Parameters:
         ----------
+
         dir : str
             Folder to search from.
 
         Returns:
         ----------
+
         file_name : str
             Name of the last file from the folder in alphabetical order.
     '''
@@ -47,6 +49,7 @@ def get_latest_training_date():
 
         Returns:
         ----------
+
         date : str
             Latest available date in training data.
     '''
@@ -63,11 +66,13 @@ def time_to_period(time):
 
         Parameters:
         ----------
+
         time : str
             Time to be converted.
 
         Returns:
         ----------
+
         period_id : int
             The index of the period.
     '''
@@ -78,43 +83,51 @@ def time_to_period(time):
 
 def period_to_time(period, start):
     '''
-    Turns row index from training data to human readable time.
+    Turns row index from training data into human readable time.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        period : int
+            n-th row in training set, if one woult continue conting. 
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        date_time : datetime
+            Exact time, accurate to 15 minutes.
     '''
     #returns datetime based on n.th 15 min period since last rom in training date
     return (datetime.strptime(start, '%d/%m/%Y %H:%M:%S')+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
 
-def predict(start, end, consumption_or_production):
+def predict(start, end, type):
     '''
-    asdf
+    Returns prediction of the ideal starting point. 
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+
+        start : str
+            Starting point for timeframe to be predicted.
+
+        end : str
+            Last point in time for which prediction must be made.
+        
+        type : str
+            Type of prediction. Can be "production" or "consumption"
 
         Returns:
         ----------
-        asdf : int
-            asdf
+
+        prediction : pd.Series
+            Containing predictions of elctricity production or consumption.
     '''
     log.info(f"applining pre trained ar model to user input")
     norm_start=time_to_period(start)
     norm_end=time_to_period(end)
-    folder_path = PRODUCTION_MODEL_FOLDER_PATH if (consumption_or_production=="production") else CONSUMPTION_MODEL_FOLDER_PATH
+    folder_path = PRODUCTION_MODEL_FOLDER_PATH if (type=="production") else CONSUMPTION_MODEL_FOLDER_PATH
     model=sm.load(folder_path+get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 
-def timeSeries(start, end):
+def get_predicted_ratios(start, end):
     '''
     Returns single time series with productioin/sonsumption ratio.
 
@@ -136,7 +149,7 @@ def timeSeries(start, end):
     consumption_prediction=predict(start, end, "consumption")
     return production_prediction.divide(other=consumption_prediction).to_frame()
 
-def forcast(time_series, duration, start):
+def select_suitable_time(time_series, duration, start):
     '''
     Selects best time to start consuming energy from a time series.
 
@@ -169,19 +182,23 @@ def forcast(time_series, duration, start):
 
 def timeStamp(start, end, duration):
     '''
-    asdf
+    Turns start, end, duration into prediction.
 
         Parameters:
         ----------
-        asdf : str
-            asdf
+        start : str
+            When the process must end.
+        
+        end : str
+            When the process can start.
+        
+        duration : int
+            Duration in minutes, how long the process will take.
 
         Returns:
         ----------
-        asdf : int
-            asdf
+        point_in_time : str
+            Actual prediction when to start consuming energy.
     '''
-    time_series=timeSeries(start, end)
-    #durarion must be in minutes
-    recommendation=forcast(time_series,duration, start)
-    return recommendation
+    time_series=get_predicted_ratios(start, end)
+    return select_suitable_time(time_series,duration, start)
