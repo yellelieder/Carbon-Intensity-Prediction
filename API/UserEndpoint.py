@@ -46,6 +46,7 @@ class EPI(Resource):
             elif invalid_geo(query.get("lat"), query.get("long")):  
                 return {"error":"enter german coodrinates"}, 406  
             else:
+                log.info(f"input valid")
                 return {"ideal start":Prediction.timeStamp(start, end, dur)}, 200
         except Exception as e:
             log.info(f"error: {str(e)}")

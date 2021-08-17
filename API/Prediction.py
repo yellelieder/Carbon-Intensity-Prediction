@@ -14,9 +14,9 @@ import numpy as np
 import sys
 import logging
 
-PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
+PRODUCTION_MODEL_FOLDER_PATH="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\\"
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
-CONSUMPTION_MODEL_FOLDER_PATH ="Ressources\\Models Consumption\\"
+CONSUMPTION_MODEL_FOLDER_PATH ="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\\"
 CONSUMPTION_DATA_FOLDER_PATH="Ressources\\Training Data Consumption\\"
 
 log=logging.getLogger(__name__)
@@ -24,6 +24,22 @@ log.setLevel(logging.INFO)
 handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
+
+def parser(s):
+    '''
+    Parses dates from csv into date object.
+
+        Parameters:
+        ----------
+        s : str
+            Timestapm in csv
+
+        Returns:
+        ----------
+        date : datetime
+            Object of form dd/mm/yyyy hh:mm:ss
+    '''
+    return datetime.strftime(s,"%d/%m/%Y %H:%M:%S")
 
 def get_latest_file(dir):
     '''
@@ -54,10 +70,14 @@ def get_latest_training_date():
             Latest available date in training data.
     '''
     log.info(f"gathering latest training data")
-    p=str(pd.read_csv("Ressources\TrainingData\Production.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")
-    c=str(pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")
-    print("\n\nReturned datetime string: ", str(min(p,c)),"\n\n")
-    return str(min(p,c))
+    '''p=str(pd.read_csv("Ressources\TrainingData\Production.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")
+    c=str(pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")'''
+    p=pd.read_csv("Ressources\TrainingData\Production.csv", index_col=0, parse_dates=[1],sep=",")
+    c=pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",")
+    timestampA= pd.to_datetime(p.iloc[-1,0]).strftime("%d-%m-%Y %H:%M:%S")
+    timestampB= pd.to_datetime(c.iloc[-1,0]).strftime("%d-%m-%Y %H:%M:%S")
+    print("\ntime stamp from get latest training data",str(str(min(timestampA,timestampB)).replace("-","/")),"\n")
+    return str(str(min(timestampA,timestampB)).replace("-","/"))
 
 def time_to_period(time):
     '''
@@ -78,9 +98,8 @@ def time_to_period(time):
             The index of the period.
     '''
     input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
-    #get_latest_training_date
-    base_time_index=datetime.strptime("19/07/2021 23:59", '%d/%m/%Y %H:%M:%S')
-    #returns number of 15 min periods between last row in training date and input time
+    time = str(get_latest_training_date)
+    base_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
 
 def period_to_time(period, start):
@@ -206,4 +225,6 @@ def timeStamp(start, end, duration):
             Actual prediction when to start consuming energy.
     '''
     time_series=get_predicted_ratios(start, end)
-    return select_suitable_time(time_series,duration, start)
+    point_in_time =select_suitable_time(time_series,duration, start)
+    log.info(f"prediction successful")
+    return point_in_time
