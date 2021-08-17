@@ -59,6 +59,7 @@ def get_latest_file(dir):
     '''
     return sorted(os.listdir(dir)).pop()
 
+#todo check if output really is str
 def get_latest_training_date():
     '''
     Returns latest date for which training data is available.
@@ -98,8 +99,10 @@ def time_to_period(time):
             The index of the period.
     '''
     input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
-    time = str(get_latest_training_date)
-    base_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
+
+    #todo: make date dynamic
+    #time = str(get_latest_training_date)
+    base_time_index=datetime.strptime("17/07/2021 23:45:00", '%d/%m/%Y %H:%M:%S')
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
 
 def period_to_time(period, start):
@@ -116,7 +119,7 @@ def period_to_time(period, start):
         date_time : datetime
             Exact time, accurate to 15 minutes.
     '''
-    #returns datetime based on n.th 15 min period since last rom in training date
+    #returns datetime based on n.th 15 min period since last row in training date
     return (datetime.strptime(start, '%d/%m/%Y %H:%M:%S')+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
 
 def predict(start, end, type):

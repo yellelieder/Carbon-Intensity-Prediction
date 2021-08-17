@@ -166,3 +166,23 @@
 2021-07-30 12:06:53,508:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
 2021-07-30 12:06:53,508:INFO:predict:applining pre trained ar model to user input
 2021-07-30 12:06:53,509:INFO:get:error: time data '<function get_latest_training_date at 0x000002109E332700>' does not match format '%d/%m/%Y %H:%M:%S'
+2021-08-17 07:51:23,411:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-08-17 07:51:23,413:INFO:start_after_end:validating user input start and end time
+2021-08-17 07:51:23,420:INFO:start_in_past:validating user input start
+2021-08-17 07:51:23,421:INFO:time_le_dur:validating user input start, end, duration
+2021-08-17 07:51:23,422:INFO:invalid_geo:validation user geo coordinates
+2021-08-17 07:51:23,674:INFO:get:input valid
+2021-08-17 07:51:23,674:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-08-17 07:51:23,674:INFO:predict:applining pre trained ar model to user input
+2021-08-17 07:51:23,675:INFO:get:error: time data '<function get_latest_training_date at 0x000001FCFFF22700>' does not match format '%d/%m/%Y %H:%M:%S'
+2021-08-17 07:55:08,593:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-08-17 07:55:08,594:INFO:start_after_end:validating user input start and end time
+2021-08-17 07:55:08,597:INFO:start_in_past:validating user input start
+2021-08-17 07:55:08,598:INFO:time_le_dur:validating user input start, end, duration
+2021-08-17 07:55:08,598:INFO:invalid_geo:validation user geo coordinates
+2021-08-17 07:55:08,744:INFO:get:input valid
+2021-08-17 07:55:08,744:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-08-17 07:55:08,744:INFO:predict:applining pre trained ar model to user input
+2021-08-17 07:55:08,835:INFO:predict:applining pre trained ar model to user input
+2021-08-17 07:55:08,882:INFO:select_suitable_time:selecting optimal starting time from timeseries
+2021-08-17 07:55:08,897:INFO:timeStamp:prediction successful
