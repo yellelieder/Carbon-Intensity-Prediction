@@ -175,3 +175,7 @@ if __name__=="__main__":
     SCHEDULER.add_job(id="Scheduled task", func=scheduledTask, trigger="interval", seconds=7*86400)
     SCHEDULER.start()
     APP.run(debug=True)
+
+
+
+   

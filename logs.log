@@ -186,3 +186,4 @@
 2021-08-17 07:55:08,835:INFO:predict:applining pre trained ar model to user input
 2021-08-17 07:55:08,882:INFO:select_suitable_time:selecting optimal starting time from timeseries
 2021-08-17 07:55:08,897:INFO:timeStamp:prediction successful
+2021-08-17 08:44:40,728:INFO:updateModel:updating the rnn model of type: production

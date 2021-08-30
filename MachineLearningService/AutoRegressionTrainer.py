@@ -15,7 +15,7 @@ import logging
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
 LAGS=672
-NO_OF_DAYS_TO_PREDICT=3
+NO_OF_DAYS_TO_PREDICT=7
 
 TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
