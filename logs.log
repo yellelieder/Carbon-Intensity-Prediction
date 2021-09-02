@@ -186,3 +186,344 @@
 2021-08-17 07:55:08,835:INFO:predict:applining pre trained ar model to user input
 2021-08-17 07:55:08,882:INFO:select_suitable_time:selecting optimal starting time from timeseries
 2021-08-17 07:55:08,897:INFO:timeStamp:prediction successful
+2021-08-17 08:44:40,728:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 13:43:36,280:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 13:46:19,159:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 13:47:01,309:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 13:47:52,773:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 13:48:16,847:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 13:49:07,349:INFO:updateModel:updating the rnn model of type: production
+2021-08-30 21:10:27,729:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-08-30 21:10:27,738:INFO:start_after_end:validating user input start and end time
+2021-08-30 21:10:27,741:INFO:start_in_past:validating user input start
+2021-08-30 21:10:27,741:INFO:time_le_dur:validating user input start, end, duration
+2021-08-30 21:10:27,741:INFO:invalid_geo:validation user geo coordinates
+2021-08-30 21:10:28,036:INFO:get:input valid
+2021-08-30 21:10:28,037:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-08-30 21:10:28,037:INFO:predict:applining pre trained ar model to user input
+2021-08-30 21:10:28,107:INFO:predict:applining pre trained ar model to user input
+2021-08-30 21:10:28,156:INFO:select_suitable_time:selecting optimal starting time from timeseries
+2021-08-30 21:10:28,164:INFO:timeStamp:prediction successful
+2021-08-30 21:18:45,503:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-30 21:19:05,186:INFO:analyze_training_data:creating visual analyziz for auto regression training
+2021-08-31 07:10:07,164:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:13:21,854:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:15:04,105:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:16:44,379:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:19:23,366:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:22:48,583:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:24:19,563:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:28:49,748:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:36:08,958:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 07:43:25,506:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 08:25:25,922:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 08:26:25,020:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 08:29:06,457:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 08:30:27,575:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 08:31:43,362:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 13:18:24,582:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 13:28:55,705:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-08-31 13:45:03,286:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 13:46:57,708:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 16:30:23,142:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 16:32:21,415:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 17:17:10,242:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 17:20:30,601:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 17:21:44,435:INFO:updateModel:updating the rnn model of type: production
+2021-08-31 17:25:50,960:INFO:updateModel:updating the rnn model of type: production
+2021-09-01 07:57:58,939:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 07:57:58,940:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 07:58:01,755:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 07:58:14,196:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 07:58:14,197:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 07:58:15,548:INFO:getUrl:creating smard.de url from type: 2, start: 1626645540000, end: 1626646144800
+2021-09-01 07:58:27,897:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 07:58:30,022:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 07:58:42,785:INFO:clean_rows:formatting production data rows
+2021-09-01 07:58:45,094:INFO:clean:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 07:58:55,859:INFO:clean_rows:formating consumption data rows
+2021-09-01 07:58:56,688:INFO:clean:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 13:48:20,540:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 13:48:20,541:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 13:48:22,130:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 13:48:34,591:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 13:48:34,592:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 13:48:36,016:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 13:48:44,441:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 13:48:46,660:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 13:48:59,437:INFO:merge_columns:formatting production data rows
+2021-09-01 13:49:01,841:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 13:49:13,879:INFO:merge_columns:formating consumption data rows
+2021-09-01 13:49:14,737:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 14:24:42,221:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 14:24:42,222:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:24:43,640:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 14:24:55,816:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 14:24:55,817:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:24:57,495:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 14:25:10,378:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 14:25:12,708:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 14:25:29,203:INFO:merge_columns:formatting production data rows
+2021-09-01 14:25:32,834:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 14:25:48,671:INFO:merge_columns:formating consumption data rows
+2021-09-01 14:25:49,818:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 14:39:13,916:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 14:39:13,917:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:39:15,930:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 14:39:29,294:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 14:39:29,294:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:39:31,029:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 14:39:44,046:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 14:39:46,874:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 14:40:06,018:INFO:merge_columns:formatting production data rows
+2021-09-01 14:40:09,970:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 14:40:43,302:INFO:merge_columns:formating consumption data rows
+2021-09-01 14:40:44,838:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 14:44:15,539:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 14:44:15,539:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:44:16,975:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 14:44:29,284:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 14:44:29,284:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:44:30,754:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 14:44:43,473:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 14:44:45,305:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 14:45:00,968:INFO:merge_columns:formatting production data rows
+2021-09-01 14:45:03,782:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 14:45:17,291:INFO:merge_columns:formating consumption data rows
+2021-09-01 14:45:18,353:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 14:52:23,914:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 14:52:23,915:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:52:25,351:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 14:52:37,755:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 14:52:37,756:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:52:39,616:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 14:52:55,994:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 14:52:58,631:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 14:53:15,089:INFO:merge_columns:formatting production data rows
+2021-09-01 14:54:27,789:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 14:54:27,789:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:54:29,165:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 14:54:41,490:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 14:54:41,491:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:54:43,075:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 14:54:55,650:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 14:54:57,876:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 14:55:19,034:INFO:merge_columns:formatting production data rows
+2021-09-01 14:55:35,409:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 14:55:35,410:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:55:37,162:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 14:55:46,165:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 14:55:46,166:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 14:55:47,715:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 14:55:56,545:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 14:55:58,602:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 14:56:15,205:INFO:merge_columns:formatting production data rows
+2021-09-01 14:56:18,180:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 14:56:31,983:INFO:merge_columns:formating consumption data rows
+2021-09-01 14:56:33,039:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 15:02:48,854:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:02:48,855:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:02:50,262:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 15:03:04,187:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:03:04,187:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:03:05,785:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:03:18,570:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:04:17,580:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:04:17,580:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:04:19,056:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 15:04:28,404:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:04:28,404:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:04:30,133:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:04:43,158:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:04:48,033:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 15:16:24,388:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:16:24,388:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:16:25,863:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 15:16:38,555:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:16:38,556:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:16:40,155:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:16:52,984:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:16:55,277:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 15:17:11,967:INFO:merge_columns:formatting production data rows
+2021-09-01 15:17:11,967:INFO:merge_columns:formatting production data rows
+2021-09-01 15:17:15,117:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 15:17:29,400:INFO:merge_columns:formating consumption data rows
+2021-09-01 15:17:31,081:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 15:19:18,753:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:19:18,753:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:19:20,209:INFO:getUrl:creating smard.de url from type: 1, start: 1625954340000, end: 1625954944800
+2021-09-01 15:19:32,622:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:19:32,623:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:19:34,070:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:19:46,905:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:19:48,647:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 15:20:02,614:INFO:merge_columns:formatting production data rows
+2021-09-01 15:20:02,614:INFO:merge_columns:formatting production data rows
+2021-09-01 15:20:05,173:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 15:20:18,639:INFO:merge_columns:formating consumption data rows
+2021-09-01 15:20:19,507:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 15:26:40,419:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:26:40,419:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:26:41,926:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 15:26:54,354:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:26:54,355:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:26:55,826:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:27:08,505:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:27:10,489:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 15:27:22,949:INFO:merge_columns:formatting production data rows
+2021-09-01 15:27:22,950:INFO:merge_columns:formatting production data rows
+2021-09-01 15:27:25,331:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 15:27:39,143:INFO:merge_columns:formating consumption data rows
+2021-09-01 15:27:40,949:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 15:32:45,618:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:32:45,618:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:32:47,141:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 15:32:59,558:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:32:59,558:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:33:01,102:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:33:13,747:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:33:15,440:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 15:33:31,112:INFO:merge_columns:formatting production data rows
+2021-09-01 15:33:31,112:INFO:merge_columns:formatting production data rows
+2021-09-01 15:34:26,358:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 15:34:26,358:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:34:27,743:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 15:34:40,109:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 15:34:40,110:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 15:34:41,566:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 15:34:54,093:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 15:34:55,793:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 15:35:08,433:INFO:merge_columns:formatting production data rows
+2021-09-01 15:35:08,434:INFO:merge_columns:formatting production data rows
+2021-09-01 15:35:10,816:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 15:35:24,643:INFO:merge_columns:formating consumption data rows
+2021-09-01 15:35:25,743:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 15:36:21,967:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 15:39:39,222:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 15:44:15,385:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 15:47:46,799:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:48:49,849:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:49:40,059:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:51:22,969:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:52:52,730:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:53:32,564:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:54:29,455:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 17:55:54,531:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:03:05,856:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:03:58,020:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:05:36,460:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:14:09,106:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 18:14:09,106:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:14:10,812:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 18:14:23,219:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 18:14:23,220:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:14:24,554:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 18:14:36,932:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 18:14:38,723:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 18:14:51,012:INFO:merge_columns:formatting production data rows
+2021-09-01 18:14:53,573:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 18:15:05,249:INFO:merge_columns:formating consumption data rows
+2021-09-01 18:15:06,164:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 18:22:20,802:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 18:22:20,803:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:22:22,365:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 18:22:34,802:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 18:22:34,803:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:22:36,381:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 18:22:49,123:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 18:22:50,735:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 18:23:03,190:INFO:merge_columns:formatting production data rows
+2021-09-01 18:26:38,914:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 18:26:38,915:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:26:40,424:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 18:26:52,840:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 18:26:52,841:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:26:54,318:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 18:27:06,722:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 18:27:08,242:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 18:27:20,975:INFO:merge_columns:formatting production data rows
+2021-09-01 18:27:23,871:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 18:27:35,993:INFO:merge_columns:formating consumption data rows
+2021-09-01 18:27:36,890:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 18:28:46,465:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 18:28:46,466:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:28:47,957:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 18:29:00,431:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 18:29:00,432:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:29:01,866:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 18:29:14,376:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 18:29:16,041:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 18:29:32,748:INFO:merge_columns:formatting production data rows
+2021-09-01 18:29:35,601:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 18:29:51,934:INFO:merge_columns:formating consumption data rows
+2021-09-01 18:29:53,463:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 18:37:04,662:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 18:37:04,662:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:37:06,240:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 18:37:18,734:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 18:37:18,735:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:37:20,142:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 18:37:32,449:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 18:37:33,882:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 18:37:45,511:INFO:merge_columns:formatting production data rows
+2021-09-01 18:40:04,970:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-01 18:40:04,970:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:40:06,603:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-01 18:40:19,419:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-01 18:40:19,420:INFO:getNextDate:calculating date, where to start scraping
+2021-09-01 18:40:20,929:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-01 18:40:33,909:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-01 18:40:35,377:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-01 18:40:52,361:INFO:merge_columns:formatting production data rows
+2021-09-01 18:40:55,535:INFO:clean_dates:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-01 18:41:08,071:INFO:merge_columns:formating consumption data rows
+2021-09-01 18:41:08,903:INFO:clean_dates:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-01 18:52:04,138:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:52:58,592:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:58:27,129:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 18:59:40,199:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:01:19,724:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:04:21,419:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:05:09,971:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:07:15,305:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:08:37,486:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:18:45,709:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-01 19:24:04,539:INFO:updateModel:updating the rnn model of type: production
+2021-09-01 19:24:53,701:INFO:updateModel:updating the rnn model of type: production
+2021-09-02 14:16:04,336:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-02 14:16:04,347:INFO:start_after_end:validating user input start and end time
+2021-09-02 14:16:04,352:INFO:start_in_past:validating user input start
+2021-09-02 14:16:04,353:INFO:time_le_dur:validating user input start, end, duration
+2021-09-02 14:16:04,353:INFO:invalid_geo:validation user geo coordinates
+2021-09-02 14:16:04,634:INFO:get:input valid
+2021-09-02 14:16:04,634:INFO:get_predicted_ratios:calculating production/consumption ratios for user input
+2021-09-02 14:16:04,636:INFO:predict:applining pre trained ar model to user input
+2021-09-02 14:16:05,247:INFO:predict:applining pre trained ar model to user input
+2021-09-02 14:16:05,304:INFO:select_suitable_time:selecting optimal starting time from timeseries
+2021-09-02 14:16:05,316:INFO:timeStamp:prediction successful
+2021-09-02 14:19:30,773:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-02 14:19:30,774:INFO:getNextDate:calculating date, where to start scraping
+2021-09-02 14:19:35,091:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-02 14:19:45,648:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-02 14:19:45,648:INFO:getNextDate:calculating date, where to start scraping
+2021-09-02 14:19:47,801:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-02 14:19:57,443:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-02 14:20:00,053:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-02 14:20:21,347:INFO:merge_columns:formatting production data rows
+2021-09-02 14:20:26,258:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-02 14:20:48,313:INFO:merge_columns:formating consumption data rows
+2021-09-02 14:36:51,491:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-02 14:36:51,492:INFO:getNextDate:calculating date, where to start scraping
+2021-09-02 14:36:53,520:INFO:getUrl:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-02 14:37:03,280:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-02 14:37:03,281:INFO:getNextDate:calculating date, where to start scraping
+2021-09-02 14:37:05,196:INFO:getUrl:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-02 14:37:14,693:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-02 14:37:17,130:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-02 14:37:35,747:INFO:merge_columns:formatting production data rows
+2021-09-02 14:37:39,595:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-02 14:37:57,650:INFO:merge_columns:formating consumption data rows
+2021-09-02 14:37:59,182:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-02 14:38:59,199:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-02 14:40:59,718:INFO:getForcast:request weather api
+2021-09-02 14:40:59,719:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url

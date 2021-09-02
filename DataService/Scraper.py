@@ -140,7 +140,7 @@ def scrape(type:str):
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(getUrl(type,start_period,end_period))
     driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
-    #should validate column names here
+    #todo: validate incoming col names for variations
     time.sleep(5)
     driver.close()
     driver.quit()
@@ -163,10 +163,10 @@ def merge(dir):
     log.info(f"merging files from folder: {dir}")
     data=pd.DataFrame()
     for i in os.listdir(dir):
-        file=pd.read_csv(dir+"\\"+i, sep=";")
+        file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
         data=data.append(file, ignore_index=True)
     df = pd.DataFrame(data)
-    #must handle existance of multiple files in this fol
+    #todo: handle existence of multiple files in folder
     df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".csv")
 
 if __name__=="__main__":
@@ -183,10 +183,10 @@ if __name__=="__main__":
     merge(getDownloadPath("2"))
     end4 = time.time()
     print("second merging took: ", end4-end3)
-    PreProcessor.clean("1")
+    PreProcessor.clean_files("1")
     end5 = time.time()
     print("first cleaning took: ", end5-end4)
-    PreProcessor.clean("2")
+    PreProcessor.clean_files("2")
     end6 = time.time()
     print("second cleaning took: ", end6-end5)
     print("\ntotal scrapting time: ", end6-start)

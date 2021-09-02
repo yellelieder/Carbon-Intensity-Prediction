@@ -22,7 +22,20 @@ SCHEDULER=APScheduler()
     
 class EPI(Resource):
     def get(self):
-        """Handles users get request with prediction in form of json."""
+        '''
+        Handles users get request with prediction in form of json.
+
+        Parameters:
+        ----------
+        self : object of type EPI
+            basically the app
+
+        Returns:
+        ----------
+
+        response : json
+            response to the request
+        '''
         log.info(f"handling get request in /api/ directory: {request}")
         try:
             query=request.args 
@@ -55,7 +68,21 @@ class EPI(Resource):
 
 class Home(Resource):
     def get(self):
-        """Returns instruction to use /api/ from home directory."""
+        '''
+        Returns instruction to use /api/ from home directory.
+
+        Parameters:
+        ----------
+
+        self : object of type home
+
+        Returns:
+        ----------
+
+        response : string
+            notice that the wrong url was called
+        '''
+        
         log.info(f"handling user request in root directory")
         return "please send your GET to /api/ for a prediction", 200
 
@@ -168,10 +195,13 @@ API.add_resource(EPI,"/api/")
 API.add_resource(Home,"/")
 
 def scheduledTask():
-
     print("Task executed")
 
 if __name__=="__main__":
     SCHEDULER.add_job(id="Scheduled task", func=scheduledTask, trigger="interval", seconds=7*86400)
     SCHEDULER.start()
     APP.run(debug=True)
+
+
+
+   

@@ -14,9 +14,9 @@ import logging
 
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
-LAGS=672
-NO_OF_DAYS_TO_PREDICT=3
 
+NO_OF_DAYS_TO_PREDICT=1
+LAGS=96*3
 TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
 log=logging.getLogger(__name__)
@@ -43,7 +43,7 @@ def getLatestFile(dir):
 
 def parser(s):
     '''
-    Parses dates from csv into date object.
+    Parses dates from csv into datetime object.
 
         Parameters:
         ----------
@@ -75,15 +75,22 @@ def update_ar_model(file_path):
     col= "Consumption" if ("cons" in file_path.lower()) else "Production"
     data=df[col]
     data=data.apply(lambda y: int((y)))
-    analyze_training_data(df, col)
+
+    #relevant during development, to be deleted later
+    #analyze_training_data(df, col)
+
     predition_lenght = NO_OF_DAYS_TO_PREDICT*96
     train=data[:len(data)-predition_lenght]
-    test=data[len(data)-predition_lenght:]
     model=AutoReg(train, lags=LAGS).fit()
-    print(model.summary())
     output_folder_path= "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption" if ("cons" in file_path.lower()) else "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction"
-    model.save(output_folder_path+"\AR_"+col+"_"+TIME_STAMP+".pickles")
+    model.save(output_folder_path+"\AR_"+col+"_"+TIME_STAMP+"_lags_"+str(LAGS)+"_.pickles")
+    
+    model_validation(model, train, data, predition_lenght)
+
+def model_validation(model, train, data, predition_lenght):
+    test=data[len(data)-predition_lenght:]
     pred=model.predict(start=len(train), end=len(data)-1, dynamic=False)
+    print(model.summary())
     plt.plot(pred)
     plt.plot(test, color="red")
     plt.show()
