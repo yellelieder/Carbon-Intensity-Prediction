@@ -14,14 +14,9 @@ import logging
 
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
-<<<<<<< HEAD
-||||||| 41d5e77
+
 LAGS=672
 NO_OF_DAYS_TO_PREDICT=3
-=======
-LAGS=672
-NO_OF_DAYS_TO_PREDICT=7
->>>>>>> ae77019b0fb436b650180077e086353da9d13438
 
 NO_OF_DAYS_TO_PREDICT=1
 LAGS=96*3
