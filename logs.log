@@ -186,6 +186,7 @@
 2021-08-17 07:55:08,835:INFO:predict:applining pre trained ar model to user input
 2021-08-17 07:55:08,882:INFO:select_suitable_time:selecting optimal starting time from timeseries
 2021-08-17 07:55:08,897:INFO:timeStamp:prediction successful
+<<<<<<< HEAD
 2021-08-17 08:44:40,728:INFO:updateModel:updating the rnn model of type: production
 2021-08-30 13:43:36,280:INFO:updateModel:updating the rnn model of type: production
 2021-08-30 13:46:19,159:INFO:updateModel:updating the rnn model of type: production
@@ -527,3 +528,7 @@
 2021-09-02 14:38:59,199:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
 2021-09-02 14:40:59,718:INFO:getForcast:request weather api
 2021-09-02 14:40:59,719:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+||||||| 41d5e77
+=======
+2021-08-17 08:44:40,728:INFO:updateModel:updating the rnn model of type: production
+>>>>>>> ae77019b0fb436b650180077e086353da9d13438
