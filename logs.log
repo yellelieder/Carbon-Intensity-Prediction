@@ -532,3 +532,34 @@
 =======
 2021-08-17 08:44:40,728:INFO:updateModel:updating the rnn model of type: production
 >>>>>>> ae77019b0fb436b650180077e086353da9d13438
+2021-09-02 20:19:44,047:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-02 20:46:08,464:INFO:getForcast:request weather api
+2021-09-02 20:46:08,465:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:48:46,948:INFO:getForcast:request weather api
+2021-09-02 20:48:46,948:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:49:25,127:INFO:getForcast:request weather api
+2021-09-02 20:49:25,128:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:50:23,904:INFO:getForcast:request weather api
+2021-09-02 20:50:23,905:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:52:39,930:INFO:getForcast:request weather api
+2021-09-02 20:52:39,930:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:53:00,561:INFO:getForcast:request weather api
+2021-09-02 20:53:00,561:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:53:48,951:INFO:getForcast:request weather api
+2021-09-02 20:53:48,952:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:55:14,727:INFO:getForcast:request weather api
+2021-09-02 20:55:14,727:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-02 20:55:42,677:INFO:getForcast:request weather api
+2021-09-02 20:55:42,678:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-03 07:26:36,037:INFO:getForcast:request weather api
+2021-09-03 07:26:36,039:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-03 07:40:35,659:INFO:getForcast:request weather api
+2021-09-03 07:40:35,659:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-03 07:40:50,382:INFO:getForcast:request weather api
+2021-09-03 07:40:50,383:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-03 07:47:16,975:INFO:getForcast:request weather api
+2021-09-03 07:47:16,976:INFO:getUrl:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-03 07:49:14,402:INFO:getForcast:request weather api
+2021-09-03 07:49:14,403:INFO:getUrl:converting 51.4638242 and 6.9408401 to weather api url
+2021-09-03 07:49:27,380:INFO:getForcast:request weather api
+2021-09-03 07:49:27,380:INFO:getUrl:converting 51.4638242 and 6.9408401 to weather api url

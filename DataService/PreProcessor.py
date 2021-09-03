@@ -79,7 +79,5 @@ def merge_columns(type, df):
         mean=df["Gesamt (Netzlast)[MWh]"].mean(skipna=True)
         df=df.replace({"Gesamt (Netzlast)[MWh]": {0: mean}})
         df={"Date":df["Datum"], "Consumption":df["Gesamt (Netzlast)[MWh]"]}
-
-        ##todo fix error
         df["Consumption"]=(df["Consumption"].apply(lambda y: int(float(str(y)))))    
     return df

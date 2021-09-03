@@ -14,10 +14,6 @@ import logging
 
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
-
-LAGS=672
-NO_OF_DAYS_TO_PREDICT=3
-
 NO_OF_DAYS_TO_PREDICT=1
 LAGS=96*3
 TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
@@ -78,27 +74,20 @@ def update_ar_model(file_path):
     col= "Consumption" if ("cons" in file_path.lower()) else "Production"
     data=df[col]
     data=data.apply(lambda y: int((y)))
-
-    #relevant during development, to be deleted later
-    #analyze_training_data(df, col)
-
-    predition_lenght = NO_OF_DAYS_TO_PREDICT*96
-    train=data[:len(data)-predition_lenght]
+    '''analyze_training_data(df, col)'''
+    intervalls = NO_OF_DAYS_TO_PREDICT*96
+    train=data[:len(data)-intervalls]
     model=AutoReg(train, lags=LAGS).fit()
-    output_folder_path= "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption" if ("cons" in file_path.lower()) else "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction"
-    model.save(output_folder_path+"\AR_"+col+"_"+TIME_STAMP+"_lags_"+str(LAGS)+"_.pickles")
-    
-    model_validation(model, train, data, predition_lenght)
-
-def model_validation(model, train, data, predition_lenght):
-    test=data[len(data)-predition_lenght:]
+    test=data[len(data)-intervalls:]
     pred=model.predict(start=len(train), end=len(data)-1, dynamic=False)
-    print(model.summary())
+    '''print(model.summary())
     plt.plot(pred)
     plt.plot(test, color="red")
-    plt.show()
+    plt.show()'''
     rmse=sqrt(mean_squared_error(test,pred))
-    print(rmse)
+    output_folder_path= "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption" if ("cons" in file_path.lower()) else "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction"
+    model.save(output_folder_path+"\AR_"+col+"_"+TIME_STAMP+"_Lags_"+str(LAGS)+"_RMSE_"+rmse+"_.pickles")
+    
 
 def analyze_training_data(df, col):
     '''
@@ -138,6 +127,7 @@ def analyze_training_data(df, col):
     acf=plot_acf(df[col], lags=LAGS)
     plt.show()
 
+#for manual testing
 if __name__ == "__main__":
     start = time.time()
     print("start..\n")
