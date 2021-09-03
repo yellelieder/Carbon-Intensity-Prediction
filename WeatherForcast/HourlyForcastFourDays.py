@@ -11,7 +11,7 @@ handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 
-def getUrl(lat, lng):
+def get_url(lat, lng):
     '''
     Turns geo-coordinates in weather api url.
 
@@ -37,7 +37,7 @@ def getUrl(lat, lng):
 
 
 #https://openweathermap.org/api/one-call-api
-def getForcast(lat, lng):
+def get_forcast(lat, lng):
     '''
     Turns geo-coordinates in weather forcast.
 
@@ -58,13 +58,13 @@ def getForcast(lat, lng):
     '''
     #start und ende in unix
     log.info(f"request weather api")
-    response=requests.get(getUrl(lat,lng)).json()
+    response=requests.get(get_url(lat,lng)).json()
     return response
 
 if __name__=="__main__":
     #nur wenn Anfrage in den nächsten 30 Tage
     #dann genau für den Zeitraum
-    print(json.dumps(getForcast("51.4582235","7.0158171"), indent=1))
+    print(json.dumps(get_forcast("51.4582235","7.0158171"), indent=1))
 
 #sonnenstunden
 #uv index

@@ -17,7 +17,7 @@ handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 
-def getLatestFile(dir):
+def get_latest_file(dir):
     '''
     Returns last file form folder by alphabetical order.
 
@@ -35,7 +35,7 @@ def getLatestFile(dir):
     '''
     return sorted(os.listdir(dir)).pop()
 
-def getUrl(type:str, start:str, end:str):
+def get_url(type:str, start:str, end:str):
     '''
     Turns start and end time into electricity marked data api url.
 
@@ -64,7 +64,7 @@ def getUrl(type:str, start:str, end:str):
         sub="5"
     return f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{type},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
 
-def getNextDate(type:str):
+def get_next_date(type:str):
     '''
     Returns first date for which market data is not already persistet. 
 
@@ -81,12 +81,12 @@ def getNextDate(type:str):
             Date for which market data is missing. 
     '''
     log.info(f"calculating date, where to start scraping")
-    path = getDownloadPath(type)
-    filename = getLatestFile(path)
+    path = get_download_path(type)
+    filename = get_latest_file(path)
     x= filename.split("_")[3]
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
 
-def getDownloadPath(type:str):
+def get_download_path(type:str):
     '''
     Returns folder path for downloaded files by data type. 
 
@@ -124,7 +124,7 @@ def scrape(type:str):
     '''
     log.info(f"scraping new date from smard.de for type {type}")
     no_of_days_to_get=7
-    start_period=getNextDate(type)
+    start_period=get_next_date(type)
     end_period=str(float(start_period)+(86400*no_of_days_to_get)).split(".")[0]
     options=webdriver.ChromeOptions()
     if type=="1":
@@ -138,7 +138,7 @@ def scrape(type:str):
     preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI-Project\Ressources\Downloads"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
-    driver.get(getUrl(type,start_period,end_period))
+    driver.get(get_url(type,start_period,end_period))
     driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
     #todo: validate incoming col names for variations
     time.sleep(5)
@@ -177,10 +177,10 @@ if __name__=="__main__":
     scrape("2")
     end2 = time.time()
     print("second scraping took: ", end2-end1)
-    merge(getDownloadPath("1"))
+    merge(get_download_path("1"))
     end3 = time.time()
     print("first merging took: ", end3-end2)
-    merge(getDownloadPath("2"))
+    merge(get_download_path("2"))
     end4 = time.time()
     print("second merging took: ", end4-end3)
     PreProcessor.clean_files("1")

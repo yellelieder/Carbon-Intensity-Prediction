@@ -122,7 +122,7 @@ def period_to_time(period, start):
     #returns datetime based on n.th 15 min period since last row in training date
     return (datetime.strptime(start, '%d/%m/%Y %H:%M:%S')+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
 
-def predict(start, end, type):
+def get_predictions(start, end, type):
     '''
     Returns prediction of the ideal starting point. 
 
@@ -154,7 +154,7 @@ def predict(start, end, type):
     model=sm.load(folder_path+get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 
-def get_predicted_ratios(start, end):
+def get_production_consumption_ratio(start, end):
     '''
     Returns single time series with productioin/sonsumption ratio.
 
@@ -172,11 +172,11 @@ def get_predicted_ratios(start, end):
             Data frame with predicted ratios of energy marked data.
     '''
     log.info(f"calculating production/consumption ratios for user input")
-    production_prediction=predict(start, end, "production")
-    consumption_prediction=predict(start, end, "consumption")
+    production_prediction=get_predictions(start, end, "production")
+    consumption_prediction=get_predictions(start, end, "consumption")
     return production_prediction.divide(other=consumption_prediction).to_frame()
 
-def select_suitable_time(time_series, duration, start):
+def find_optimum(time_series, duration, start):
     '''
     Selects best time to start consuming energy from a time series.
 
@@ -207,7 +207,7 @@ def select_suitable_time(time_series, duration, start):
             optimal_period=period
     return period_to_time(optimal_period, start)
 
-def timeStamp(start, end, duration):
+def get_best_start(start, end, duration):
     '''
     Turns start, end, duration into prediction.
 
@@ -227,7 +227,7 @@ def timeStamp(start, end, duration):
         point_in_time : str
             Actual prediction when to start consuming energy.
     '''
-    time_series=get_predicted_ratios(start, end)
-    point_in_time =select_suitable_time(time_series,duration, start)
+    time_series=get_production_consumption_ratio(start, end)
+    point_in_time =find_optimum(time_series,duration, start)
     log.info(f"prediction successful")
     return point_in_time

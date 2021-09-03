@@ -60,7 +60,7 @@ class EPI(Resource):
                 return {"error":"enter german coodrinates"}, 406  
             else:
                 log.info(f"input valid")
-                return {"ideal start":Prediction.timeStamp(start, end, dur)}, 200
+                return {"ideal start":Prediction.get_best_start(start, end, dur)}, 200
         except Exception as e:
             log.info(f"error: {str(e)}")
             traceback.print_exc(e.__traceback__)
@@ -194,11 +194,13 @@ def invalid_geo(lat, lng):
 API.add_resource(EPI,"/api/")
 API.add_resource(Home,"/")
 
-def scheduledTask():
+def scheduled_task():
+    #todo, add scraper and ar model training
     print("Task executed")
 
 if __name__=="__main__":
-    SCHEDULER.add_job(id="Scheduled task", func=scheduledTask, trigger="interval", seconds=7*86400)
+    day_intervall_for_schedule = 14
+    SCHEDULER.add_job(id="Scheduled task", func=scheduled_task, trigger="interval", seconds=day_intervall_for_schedule*86400)
     SCHEDULER.start()
     APP.run(debug=True)
 

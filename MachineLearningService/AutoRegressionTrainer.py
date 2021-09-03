@@ -24,7 +24,7 @@ handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 
-def getLatestFile(dir):
+def get_latest_file(dir):
     '''
     Returns last file form folder by alphabetical order.
 
