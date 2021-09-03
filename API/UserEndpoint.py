@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template, flash, redirect
 from flask_restful import Resource, Api
 import Prediction
 from datetime import datetime
@@ -9,6 +9,9 @@ import json
 from flask_apscheduler import APScheduler
 import logging
 import traceback
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -66,10 +69,16 @@ class EPI(Resource):
             traceback.print_exc(e.__traceback__)
             return {"error":"invalid input"}, 406
 
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
+
 class Home(Resource):
     def get(self):
         '''
-        Returns instruction to use /api/ from home directory.
+        Shows forms for inputs to user.
 
         Parameters:
         ----------
@@ -79,12 +88,16 @@ class Home(Resource):
         Returns:
         ----------
 
-        response : string
-            notice that the wrong url was called
+        GUI
         '''
-        
-        log.info(f"handling user request in root directory")
-        return "please send your GET to /api/ for a prediction", 200
+        form = LoginForm()
+        if form.validate_on_submit():
+            flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+            return redirect('/index')
+        return render_template('login.html', title='Sign In', form=form)
+        '''log.info(f"handling user request in root directory")
+        return "please send your GET to /api/ for a prediction", 200'''
 
 def to_timestamp(date, time):
     '''
