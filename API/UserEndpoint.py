@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from flask import Flask, request, jsonify,render_template, flash, redirect
+from flask import Flask, request, jsonify,render_template, flash, redirect, make_response
 from flask_restful import Resource, Api
 import Prediction
 from datetime import datetime
@@ -12,6 +12,7 @@ import traceback
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+import markdown.extensions.fenced_code
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -69,12 +70,6 @@ class EPI(Resource):
             traceback.print_exc(e.__traceback__)
             return {"error":"invalid input"}, 406
 
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
-
 class Home(Resource):
     def get(self):
         '''
@@ -90,14 +85,44 @@ class Home(Resource):
 
         GUI
         '''
-        form = LoginForm()
-        if form.validate_on_submit():
-            flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-            return redirect('/index')
-        return render_template('login.html', title='Sign In', form=form)
-        '''log.info(f"handling user request in root directory")
-        return "please send your GET to /api/ for a prediction", 200'''
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('base.html'),200,headers)
+
+class API_Docu(Resource):
+    def get(self):
+        '''
+        Shows forms for inputs to user.
+
+        Parameters:
+        ----------
+
+        self : object of type home
+
+        Returns:
+        ----------
+
+        GUI
+        '''
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('api-docu.html'),200,headers)
+
+class App(Resource):
+    def get(self):
+        '''
+        Shows forms for inputs to user.
+
+        Parameters:
+        ----------
+
+        self : object of type home
+
+        Returns:
+        ----------
+
+        GUI
+        '''
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('visual-app.html'),200,headers)
 
 def to_timestamp(date, time):
     '''
@@ -206,6 +231,8 @@ def invalid_geo(lat, lng):
 #?lat=51.4582235&long=7.0158171&stdate=28.12.1995&sttime=06:45&endate=29.12.1995&entime=23:59&dur=180
 API.add_resource(EPI,"/api/")
 API.add_resource(Home,"/")
+API.add_resource(App,"/app")
+API.add_resource(API_Docu,"/api-docu")
 
 def scheduled_task():
     #todo, add scraper and ar model training

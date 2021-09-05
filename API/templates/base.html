@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %}EPI - Ecological Power Interface</title>
+    {% endblock %}
+  </head>
+  <body>
+    <a href="/">Home</a>  |  <a href="/app">Visual App</a>  |  <a href="/api-docu"> API documentation</a>
+    <br>
+    <div id="content">{% block content %}
+      <br>
+      EPI<br>
+      Ecological Prediction Interface<br>
+      Welcome to the EPI project!<br>
+      The goal of this project is to provide software engineers with a simple solution to concider carbon emission in their application development.<br>
+      <br>
+      WHY IT'S WORTH IT<br>
+      - software is responsible for at least 3% of world carbon emission<br>
+      - using renevables, if possible has the potential to drastically reduce this<br>
+      <br>
+      HOW IT WORKS:<br>
+      - we have gathered electricity market data (and continue scraping the most current ones)<br>
+      - we concider weather forcasts (for predictions within the next 30 days)<br>
+      - we make predictions for future availability of renevable energy<br>
+      - this way we enable you to run ressource intensive processes when ther is a high probability for an green energy surplus<br>
+      <br>
+      FIELDS OF APPLICATION<br>
+      (just some inspiration for some processes where this can be used)<br>
+      - database indexing<br>
+      - backups<br>
+      - synchronization<br>
+      - training of machine learning models<br>
+      - mining of crypto currency<br>
+      {% endblock %}</div>
+    <br>
+    <div id="footer">
+      {% block footer %}
+      &copy; Author: Yelle Lieder</a>.
+      {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+{%block title%} Login Page{%endblock%}
+{%block content%}
+<form action="#" method="post">
+    <br>
+    HOW TO USE IT<br>
+    - make a call to /api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180<br>
+    - lat is the lattitue of where the electricity is going to be consumed<br>
+    - lng is the longitude<br>
+    - stdate is the earliest possible date for the process to be started<br>
+    - sttime is the time<br>
+    - endate is the date when the process latest must be finished<br>
+    - entime is the latest time<br>
+    - dur is the approximate duration of your process in minutes<br>
+    <br>
+    Response will be a json like this: <br>
+    <br>
+    {<br>
+        &ensp; "ideal start" : "01/01/2023 18:37:00"<br>
+    }<br>
+</form>
+{%endblock%}
