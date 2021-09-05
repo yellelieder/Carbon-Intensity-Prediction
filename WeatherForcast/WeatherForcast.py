@@ -2,6 +2,7 @@ import logging
 import requests
 import json
 import logging
+from datetime import datetime
 
 WEATHER_DATA_API_KEY="89f83e40489b5e87c4cb16463dc68b42"
 
@@ -30,13 +31,14 @@ def get_url(lat, lng):
         url : str
             Url with correct parameter for requesting weather data.yoy
     '''
+    #starts at last full hour, if it is 7:30 now, first return is 6
+    no_of_hours=12
     log.info(f"converting {lat} and {lng} to weather api url")
-    #allows max one year back..
-    return f"http://history.openweathermap.org/data/2.5/history/city?lat={lat}&lon={lng}&type=hour&start=1420585200&end=1420671600&appid={WEATHER_DATA_API_KEY}"
+    return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&cnt={no_of_hours}&units=metric&appid={WEATHER_DATA_API_KEY}"
 
 
 #https://openweathermap.org/api/one-call-api
-def get_forcast(lat, lng):
+def get_forcast(lat, lng, hours_from_now, hours_total):
     '''
     Turns geo-coordinates in weather forcast.
 
@@ -57,13 +59,18 @@ def get_forcast(lat, lng):
     '''
     #start und ende in unix
     log.info(f"request weather api")
-    response=requests.get(get_url(lat,lng)).json()
+    #response=requests.get(get_url(lat,lng)).json()
+    response=requests.get(get_url(lat,lng)).json()["list"][hours_from_now:hours_from_now+hours_total]
     return response
 
 if __name__=="__main__":
     #nur wenn Anfrage in den nächsten 30 Tage
     #dann genau für den Zeitraum
-    print(json.dumps(get_forcast("51.4582235","7.0158171"), indent=1))
+    #print(json.dumps(get_forcast("51.4582235","7.0158171", 3,2), indent=1))
+    for i in get_forcast("51.4582235","7.0158171", 3,5):
+        print("\nTime: ",datetime.utcfromtimestamp(i["dt"]).strftime('%d.%m.%Y %H:%M'))
+        print("Cloudiness: ",i["clouds"]["all"],"%")
+        print("Wind: ",i["wind"]["speed"],"meters/second")
 
 #sonnenstunden
 #uv index
