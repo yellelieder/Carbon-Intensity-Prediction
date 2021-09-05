@@ -1,15 +1,19 @@
 <!doctype html>
 <html>
+
   <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %}EPI - Ecological Power Interface</title>
     {% endblock %}
   </head>
   <body>
+    
     <a href="/">Home</a>  |  <a href="/app">Visual App</a>  |  <a href="/api-docu"> API documentation</a>
     <br>
     <div id="content">{% block content %}
+      <h1>Home</h1>
       <br>
       EPI<br>
       Ecological Prediction Interface<br>

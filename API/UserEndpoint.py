@@ -41,34 +41,34 @@ class EPI(Resource):
             response to the request
         '''
         log.info(f"handling get request in /api/ directory: {request}")
-        try:
-            query=request.args 
-            start=to_timestamp(query.get("stdate"),query.get("sttime"))
-            end=to_timestamp(query.get("endate"),query.get("entime"))
-            dur=int(query.get("dur"))
-            lat=float(query.get("lat"))
-            lng=float(query.get("long"))
-            if dur<15:
-                return {"error":"duration must be minimum of 15 min"}, 406 
-            elif start_after_end(start, end):
-                return {"error":"end before start"}, 406 
-            elif start_in_past(start):
-                return {"error":"enter upcoming timeframe"}, 406  
-            elif time_le_dur(start, end, dur):
-                return {"error":"duration not fitting in timeframe"}, 406
-            elif lat<-90 or lat>90:
-                return {"error":"lattitude out of rang"}, 406
-            elif lng<-180 or lng>180:
-                return {"error":"longitude out of range"}, 406
-            elif invalid_geo(query.get("lat"), query.get("long")):  
-                return {"error":"enter german coodrinates"}, 406  
-            else:
-                log.info(f"input valid")
-                return {"ideal start":Prediction.get_best_start(start, end, dur)}, 200
-        except Exception as e:
-            log.info(f"error: {str(e)}")
-            traceback.print_exc(e.__traceback__)
-            return {"error":"invalid input"}, 406
+        query=request.args 
+        return get_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+
+def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+    try:
+        start=to_timestamp(stdate,sttime)
+        end=to_timestamp(enddate,endtime)
+        if dur<15:
+            return {"error":"duration must be minimum of 15 min"}, 406 
+        elif start_after_end(start, end):
+            return {"error":"end before start"}, 406 
+        elif start_in_past(start):
+            return {"error":"enter upcoming timeframe"}, 406  
+        elif time_le_dur(start, end, dur):
+            return {"error":"duration not fitting in timeframe"}, 406
+        elif lat<-90 or lat>90:
+            return {"error":"lattitude out of rang"}, 406
+        elif lng<-180 or lng>180:
+            return {"error":"longitude out of range"}, 406
+        elif invalid_geo(lat, lng):  
+            return {"error":"enter german coodrinates"}, 406  
+        else:
+            log.info(f"input valid")
+            return {"ideal start":Prediction.get_best_start(start, end, dur)}, 200
+    except Exception as e:
+        log.info(f"error: {str(e)}")
+        traceback.print_exc(e.__traceback__)
+        return {"error":"invalid input"}, 406
 
 class Home(Resource):
     def get(self):
@@ -123,6 +123,27 @@ class App(Resource):
         '''
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template('visual-app.html'),200,headers)
+
+    def post(self):
+        '''lat =float(request.form["lat"])
+        lng =float(request.form["lng"])
+        stdate =str(request.form["stdate"])
+        sttime =str(request.form["sttime"])
+        enddate =str(request.form["enddate"])
+        endtime =str(request.form["endtime"])
+        dur = int(request.form["dur"])'''
+        lat =51.0
+        lng =7.0
+        stdate ="28.12.2021"
+        sttime ="06:45"
+        enddate ="29.12.2021"
+        endtime ="23:59"
+        dur = 180
+        print("dur: ", dur)
+        get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('result.html', result="now!"),200,headers)
+
 
 def to_timestamp(date, time):
     '''
