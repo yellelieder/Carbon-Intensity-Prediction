@@ -38,7 +38,7 @@
         background-color: #546dbe;
         color: white;
       }
-      div:not(#menu){
+      div:not(#menu, #footer){
         padding: 0px 50px 50px 50px;
         margin: 0px 20px 20px 20px;
       }
@@ -48,6 +48,11 @@
       flex-direction:column; 
       }
       </style>
+      <script>
+        function goBack() {
+          window.history.back();
+        }
+        </script>
   </head>
   <body>
     <div id="menu" class="topnav">
@@ -59,8 +64,6 @@
     <div id="content">{% block content %}
       <h1>Home</h1>
       <br>
-      EPI<br>
-      Ecological Prediction Interface<br>
       Welcome to the EPI project!<br>
       The goal of this project is to provide software engineers with a simple solution to concider carbon emission in their application development.<br>
       <br>
@@ -68,14 +71,14 @@
       - software is responsible for at least 3% of world carbon emission<br>
       - using renevables, if possible has the potential to drastically reduce this<br>
       <br>
-      HOW IT WORKS:<br>
+      HOW IT WORKS<br>
       - we have gathered electricity market data (and continue scraping the most current ones)<br>
       - we concider weather forcasts (for predictions within the next 30 days)<br>
       - we make predictions for future availability of renevable energy<br>
       - this way we enable you to run ressource intensive processes when ther is a high probability for an green energy surplus<br>
       <br>
       FIELDS OF APPLICATION<br>
-      (just some inspiration for some processes where this can be used)<br>
+      (some inspiration for some processes where this can be used)<br>
       - database indexing<br>
       - backups<br>
       - synchronization<br>
