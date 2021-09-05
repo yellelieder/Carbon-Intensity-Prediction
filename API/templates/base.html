@@ -7,10 +7,54 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %}EPI - Ecological Power Interface</title>
     {% endblock %}
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      .topnav {
+        position: relative;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      .topnav a {
+        text-align: center;
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      
+      .topnav a.active {
+        background-color: #546dbe;
+        color: white;
+      }
+      div:not(#menu){
+        padding: 0px 50px 50px 50px;
+        margin: 0px 20px 20px 20px;
+      }
+      body{ 
+        padding-top: 0px;
+      display:flex; 
+      flex-direction:column; 
+      }
+      </style>
   </head>
   <body>
-    
-    <a href="/">Home</a>  |  <a href="/app">Visual App</a>  |  <a href="/api-docu"> API documentation</a>
+    <div id="menu" class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/app">App</a>
+      <a href="/api-docu">API</a>
+    </div>
     <br>
     <div id="content">{% block content %}
       <h1>Home</h1>

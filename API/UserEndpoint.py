@@ -125,24 +125,16 @@ class App(Resource):
         return make_response(render_template('visual-app.html'),200,headers)
 
     def post(self):
-        '''lat =float(request.form["lat"])
+        lat =float(request.form["lat"])
         lng =float(request.form["lng"])
-        stdate =str(request.form["stdate"])
+        stdate=str(datetime.strptime(request.form["stdate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
         sttime =str(request.form["sttime"])
-        enddate =str(request.form["enddate"])
+        enddate=str(datetime.strptime(request.form["enddate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
         endtime =str(request.form["endtime"])
-        dur = int(request.form["dur"])'''
-        lat =51.0
-        lng =7.0
-        stdate ="28.12.2021"
-        sttime ="06:45"
-        enddate ="29.12.2021"
-        endtime ="23:59"
-        dur = 180
-        print("dur: ", dur)
-        get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)
+        dur = int(request.form["dur"])
+        pred=get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('result.html', result="now!"),200,headers)
+        return make_response(render_template('result.html', result=re.sub("{}\"","", str(pred[0]))),headers)
 
 
 def to_timestamp(date, time):

@@ -726,3 +726,324 @@
 2021-09-05 11:35:40,594:INFO:time_le_dur:validating user input start, end, duration
 2021-09-05 11:35:40,595:INFO:invalid_geo:validation user geo coordinates
 2021-09-05 11:35:40,751:INFO:get_prediction:input valid
+2021-09-05 11:35:40,751:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 11:35:40,751:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:35:40,959:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:35:40,984:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 11:35:40,991:INFO:get_best_start:prediction successful
+2021-09-05 11:36:09,338:INFO:start_after_end:validating user input start and end time
+2021-09-05 11:36:09,339:INFO:start_in_past:validating user input start
+2021-09-05 11:36:09,339:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 11:36:09,339:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 11:36:09,480:INFO:get_prediction:input valid
+2021-09-05 11:36:09,480:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 11:36:09,480:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:36:09,682:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:36:09,705:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 11:36:09,712:INFO:get_best_start:prediction successful
+2021-09-05 11:38:55,442:INFO:start_after_end:validating user input start and end time
+2021-09-05 11:38:55,442:INFO:start_in_past:validating user input start
+2021-09-05 11:38:55,443:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 11:38:55,443:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 11:38:55,595:INFO:get_prediction:input valid
+2021-09-05 11:38:55,595:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 11:38:55,596:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:38:55,805:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:38:55,832:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 11:38:55,844:INFO:get_best_start:prediction successful
+2021-09-05 11:39:13,414:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 11:39:13,415:INFO:start_after_end:validating user input start and end time
+2021-09-05 11:39:13,415:INFO:start_in_past:validating user input start
+2021-09-05 11:39:13,416:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 11:39:13,416:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 11:39:13,540:INFO:get_prediction:input valid
+2021-09-05 11:39:13,540:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 11:39:13,540:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:39:13,779:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:39:13,805:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 11:39:13,811:INFO:get_best_start:prediction successful
+2021-09-05 11:40:16,436:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 11:40:16,437:INFO:start_after_end:validating user input start and end time
+2021-09-05 11:40:16,440:INFO:start_in_past:validating user input start
+2021-09-05 11:40:16,441:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 11:40:16,441:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 11:40:16,552:INFO:get_prediction:input valid
+2021-09-05 11:40:16,552:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 11:40:16,553:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:40:16,761:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 11:40:16,791:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 11:40:16,798:INFO:get_best_start:prediction successful
+2021-09-05 11:45:12,504:INFO:start_after_end:validating user input start and end time
+2021-09-05 11:45:12,507:INFO:get_prediction:error: time data '2021/09/07 12:45:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 11:47:30,545:INFO:start_after_end:validating user input start and end time
+2021-09-05 11:47:30,547:INFO:get_prediction:error: time data '2021/09/17 14:47:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:01:08,458:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 12:01:08,458:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:01:08,461:INFO:start_in_past:validating user input start
+2021-09-05 12:01:08,461:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:01:08,461:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:01:08,697:INFO:get_prediction:input valid
+2021-09-05 12:01:08,697:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:01:08,697:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:01:08,928:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:01:08,960:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:01:08,971:INFO:get_best_start:prediction successful
+2021-09-05 12:01:50,857:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 12:01:50,857:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:01:50,858:INFO:start_in_past:validating user input start
+2021-09-05 12:01:50,858:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:01:50,858:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:01:50,987:INFO:get_prediction:input valid
+2021-09-05 12:01:50,987:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:01:50,987:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:01:51,183:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:01:51,208:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:01:51,214:INFO:get_best_start:prediction successful
+2021-09-05 12:04:59,441:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 12:04:59,441:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:04:59,442:INFO:start_in_past:validating user input start
+2021-09-05 12:04:59,442:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:04:59,442:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:04:59,574:INFO:get_prediction:input valid
+2021-09-05 12:04:59,574:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:04:59,575:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:04:59,782:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:04:59,804:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:04:59,812:INFO:get_best_start:prediction successful
+2021-09-05 12:05:24,016:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 12:05:24,017:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:05:24,017:INFO:start_in_past:validating user input start
+2021-09-05 12:05:24,018:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:05:24,018:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:05:24,147:INFO:get_prediction:input valid
+2021-09-05 12:05:24,147:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:05:24,147:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:05:24,344:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:05:24,365:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:05:24,372:INFO:get_best_start:prediction successful
+2021-09-05 12:06:40,396:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:06:40,400:INFO:get_prediction:error: time data '2021/09/06 13:06:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:07:56,523:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:07:56,526:INFO:get_prediction:error: time data '2021/09/06 13:06:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:08:15,810:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:08:15,810:INFO:get_prediction:error: time data '2021/09/06 13:06:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:16:16,266:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:16:16,270:INFO:get_prediction:error: time data '2021/09/07 14:16:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:19:21,656:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:19:21,659:INFO:get_prediction:error: time data '2021-09-09 13:19:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:22:02,141:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:22:02,142:INFO:get_prediction:error: time data '2021-09-09 00:00:00 12:21:00' does not match format '%d/%m/%Y %H:%M:%S'
+2021-09-05 12:24:08,527:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:24:08,528:INFO:get_prediction:error: unconverted data remains:  14:24:00
+2021-09-05 12:27:10,493:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:27:10,494:INFO:start_in_past:validating user input start
+2021-09-05 12:27:10,494:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:27:10,495:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:27:10,709:INFO:get_prediction:input valid
+2021-09-05 12:27:10,709:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:27:10,709:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:27:10,913:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:27:10,934:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:27:10,938:INFO:get_best_start:prediction successful
+2021-09-05 12:27:38,965:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:27:38,966:INFO:start_in_past:validating user input start
+2021-09-05 12:27:38,967:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:27:38,967:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:27:39,119:INFO:get_prediction:input valid
+2021-09-05 12:27:39,120:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:27:39,120:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:27:39,326:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:27:39,348:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:27:39,352:INFO:get_best_start:prediction successful
+2021-09-05 12:28:30,360:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:28:30,361:INFO:start_in_past:validating user input start
+2021-09-05 12:28:30,361:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:28:30,361:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:28:30,493:INFO:get_prediction:input valid
+2021-09-05 12:28:30,493:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:28:30,493:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:28:30,723:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:28:30,746:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:28:30,751:INFO:get_best_start:prediction successful
+2021-09-05 12:29:10,577:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:29:10,578:INFO:start_in_past:validating user input start
+2021-09-05 12:29:10,578:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:29:10,578:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:29:10,700:INFO:get_prediction:input valid
+2021-09-05 12:29:10,700:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:29:10,700:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:29:10,903:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:29:10,928:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:29:10,932:INFO:get_best_start:prediction successful
+2021-09-05 12:31:28,294:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:31:28,296:INFO:start_in_past:validating user input start
+2021-09-05 12:31:28,296:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:31:28,296:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:31:28,478:INFO:get_prediction:input valid
+2021-09-05 12:31:28,478:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:31:28,478:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:31:28,678:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:31:28,700:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:31:28,704:INFO:get_best_start:prediction successful
+2021-09-05 12:31:53,170:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:32:36,650:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:32:36,651:INFO:start_in_past:validating user input start
+2021-09-05 12:32:36,651:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:35:46,678:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:35:46,680:INFO:start_in_past:validating user input start
+2021-09-05 12:35:46,680:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:35:46,680:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:35:46,890:INFO:get_prediction:input valid
+2021-09-05 12:35:46,890:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:35:46,890:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:35:47,099:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:35:47,122:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:35:47,130:INFO:get_best_start:prediction successful
+2021-09-05 12:36:51,835:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:36:51,836:INFO:start_in_past:validating user input start
+2021-09-05 12:36:51,836:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:36:51,836:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:36:51,966:INFO:get_prediction:input valid
+2021-09-05 12:36:51,966:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:36:51,966:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:36:52,165:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:36:52,188:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:36:52,202:INFO:get_best_start:prediction successful
+2021-09-05 12:40:21,493:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:40:21,494:INFO:start_in_past:validating user input start
+2021-09-05 12:40:21,494:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:40:21,494:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:40:21,630:INFO:get_prediction:input valid
+2021-09-05 12:40:21,630:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:40:21,630:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:40:21,833:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:40:21,860:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:40:21,890:INFO:get_best_start:prediction successful
+2021-09-05 12:40:54,969:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 12:40:54,970:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:40:54,973:INFO:start_in_past:validating user input start
+2021-09-05 12:40:54,973:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:40:54,973:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:40:55,167:INFO:get_prediction:input valid
+2021-09-05 12:40:55,168:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:40:55,168:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:40:55,363:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:40:55,385:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:40:55,393:INFO:get_best_start:prediction successful
+2021-09-05 12:43:05,113:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:43:05,114:INFO:start_in_past:validating user input start
+2021-09-05 12:44:02,874:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:44:02,875:INFO:start_in_past:validating user input start
+2021-09-05 12:44:02,875:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:44:02,875:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:44:03,004:INFO:get_prediction:input valid
+2021-09-05 12:44:03,004:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:44:03,005:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:03,208:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:03,231:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:44:03,262:INFO:get_best_start:prediction successful
+2021-09-05 12:44:19,309:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:44:19,310:INFO:start_in_past:validating user input start
+2021-09-05 12:44:19,310:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:44:19,310:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:44:19,429:INFO:get_prediction:input valid
+2021-09-05 12:44:19,430:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:44:19,430:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:19,631:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:19,653:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:44:19,684:INFO:get_best_start:prediction successful
+2021-09-05 12:44:49,946:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:44:49,947:INFO:start_in_past:validating user input start
+2021-09-05 12:44:49,947:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:44:49,947:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:44:50,074:INFO:get_prediction:input valid
+2021-09-05 12:44:50,074:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:44:50,074:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:50,278:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:50,304:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:44:50,334:INFO:get_best_start:prediction successful
+2021-09-05 12:44:57,263:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:44:57,264:INFO:start_in_past:validating user input start
+2021-09-05 12:44:57,264:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:44:57,264:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:44:57,404:INFO:get_prediction:input valid
+2021-09-05 12:44:57,404:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:44:57,404:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:57,605:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:44:57,629:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:44:57,671:INFO:get_best_start:prediction successful
+2021-09-05 12:45:35,509:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:45:35,510:INFO:start_in_past:validating user input start
+2021-09-05 12:45:35,510:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:45:48,408:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:45:48,408:INFO:start_in_past:validating user input start
+2021-09-05 12:45:48,408:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:45:48,408:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:47:05,389:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:47:05,390:INFO:start_in_past:validating user input start
+2021-09-05 12:47:05,390:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:47:05,390:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:47:06,857:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/' [GET]>
+2021-09-05 12:47:06,857:INFO:get_prediction:error: expected string or buffer
+2021-09-05 12:50:48,269:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:50:48,270:INFO:start_in_past:validating user input start
+2021-09-05 12:50:48,270:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:50:48,271:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:51:03,726:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:51:03,727:INFO:start_in_past:validating user input start
+2021-09-05 12:51:03,727:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:51:03,727:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:52:49,873:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 12:52:49,874:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:52:49,874:INFO:start_in_past:validating user input start
+2021-09-05 12:52:49,874:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:52:49,875:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:52:50,112:INFO:get_prediction:input valid
+2021-09-05 12:52:50,112:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:52:50,112:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:52:50,309:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:52:50,331:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:52:50,339:INFO:get_best_start:prediction successful
+2021-09-05 12:54:56,190:INFO:start_after_end:validating user input start and end time
+2021-09-05 12:54:56,191:INFO:start_in_past:validating user input start
+2021-09-05 12:54:56,191:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 12:54:56,191:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 12:54:56,420:INFO:get_prediction:input valid
+2021-09-05 12:54:56,421:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 12:54:56,421:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:54:56,608:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 12:54:56,629:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 12:54:56,631:INFO:get_best_start:prediction successful
+2021-09-05 13:01:36,032:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 13:01:36,032:INFO:start_after_end:validating user input start and end time
+2021-09-05 13:01:36,033:INFO:start_in_past:validating user input start
+2021-09-05 13:01:36,033:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 13:01:36,033:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 13:01:36,176:INFO:get_prediction:input valid
+2021-09-05 13:01:36,176:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 13:01:36,176:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 13:01:36,378:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 13:01:36,403:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 13:01:36,411:INFO:get_best_start:prediction successful
+2021-09-05 13:01:42,551:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 13:01:42,552:INFO:start_after_end:validating user input start and end time
+2021-09-05 13:01:42,552:INFO:start_in_past:validating user input start
+2021-09-05 13:01:42,553:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 13:01:42,553:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 13:01:42,690:INFO:get_prediction:input valid
+2021-09-05 13:01:42,690:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 13:01:42,690:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 13:01:42,893:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 13:01:42,917:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 13:01:42,924:INFO:get_best_start:prediction successful
+2021-09-05 13:01:46,783:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180' [GET]>
+2021-09-05 13:01:46,784:INFO:start_after_end:validating user input start and end time
+2021-09-05 13:01:46,784:INFO:start_in_past:validating user input start
+2021-09-05 13:01:46,785:INFO:time_le_dur:validating user input start, end, duration
+2021-09-05 13:01:46,785:INFO:invalid_geo:validation user geo coordinates
+2021-09-05 13:01:46,937:INFO:get_prediction:input valid
+2021-09-05 13:01:46,937:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-05 13:01:46,937:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 13:01:47,164:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-05 13:01:47,188:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-05 13:01:47,197:INFO:get_best_start:prediction successful
