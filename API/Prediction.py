@@ -14,6 +14,7 @@ import numpy as np
 import sys
 import logging
 
+
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\\"
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 CONSUMPTION_MODEL_FOLDER_PATH ="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\\"
@@ -207,6 +208,16 @@ def find_optimum(time_series, duration, start):
             optimal_period=period
     return period_to_time(optimal_period, start)
 
+def ar_prediction(start, end, duration):
+    time_series=get_production_consumption_ratio(start, end)
+    point_in_time =find_optimum(time_series,duration, start)
+    log.info(f"prediction successful")
+    return point_in_time
+
+def weather_predicition(start, end, duration):
+    ...
+def climate_prediction(start, end, duration):
+    ...
 def get_best_start(start, end, duration):
     '''
     Turns start, end, duration into prediction.
@@ -227,7 +238,14 @@ def get_best_start(start, end, duration):
         point_in_time : str
             Actual prediction when to start consuming energy.
     '''
-    time_series=get_production_consumption_ratio(start, end)
-    point_in_time =find_optimum(time_series,duration, start)
-    log.info(f"prediction successful")
-    return point_in_time
+    if (parser(start)-datetime.now()).days < 30:
+        if (parser(end)-parser(start)).days<4:
+            weather_predicition(start, end, duration)
+        else:
+            if duration<(60*24):
+                return ar_prediction(start, end, duration)
+            else: 
+                climate_prediction(start, end, duration)
+    else:
+        return ar_prediction(start, end, duration)
+    

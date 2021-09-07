@@ -67,7 +67,7 @@ def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
             return {"ideal start":Prediction.get_best_start(start, end, dur)}, 200
     except Exception as e:
         log.info(f"error: {str(e)}")
-        traceback.print_exc(e.__traceback__)
+        traceback.print_exc(e)
         return {"error":"invalid input"}, 406
 
 class Home(Resource):
@@ -88,7 +88,7 @@ class Home(Resource):
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template('base.html'),200,headers)
 
-class API_Docu(Resource):
+class Usage_Docu(Resource):
     def get(self):
         '''
         Shows forms for inputs to user.
@@ -105,6 +105,25 @@ class API_Docu(Resource):
         '''
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template('api-docu.html'),200,headers)
+
+class Technical_Docu(Resource):
+    def get(self):
+        '''
+        Shows forms for inputs to user.
+
+        Parameters:
+        ----------
+
+        self : object of type home
+
+        Returns:
+        ----------
+
+        GUI
+        '''
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('api-design-docu.html'),200,headers)
+
 
 class App(Resource):
     def get(self):
@@ -235,7 +254,10 @@ def invalid_geo(lat, lng):
             False if coordinates are in Germany, true if they are outside germany.
     '''
     log.info(f"validation user geo coordinates")
-    response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8").json()["results"][0]["formatted_address"]
+    try:
+        response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8").json()["results"][0]["formatted_address"]
+    except Exception as e:
+        return True
     if response=="Germany":
         return False
     else:
@@ -245,7 +267,8 @@ def invalid_geo(lat, lng):
 API.add_resource(EPI,"/api/")
 API.add_resource(Home,"/")
 API.add_resource(App,"/app")
-API.add_resource(API_Docu,"/api-docu")
+API.add_resource(Usage_Docu,"/api-docu")
+API.add_resource(Technical_Docu,"/api-tech")
 
 def scheduled_task():
     #todo, add scraper and ar model training
@@ -256,7 +279,6 @@ if __name__=="__main__":
     SCHEDULER.add_job(id="Scheduled task", func=scheduled_task, trigger="interval", seconds=day_intervall_for_schedule*86400)
     SCHEDULER.start()
     APP.run(debug=True)
-
 
 
    

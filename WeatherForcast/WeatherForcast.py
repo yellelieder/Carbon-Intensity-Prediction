@@ -60,17 +60,18 @@ def get_forcast(lat, lng, hours_from_now, hours_total):
     #start und ende in unix
     log.info(f"request weather api")
     #response=requests.get(get_url(lat,lng)).json()
-    response=requests.get(get_url(lat,lng)).json()["list"][hours_from_now:hours_from_now+hours_total]
-    return response
+    return requests.get(get_url(lat,lng)).json()["list"][hours_from_now:hours_from_now+hours_total]
 
 if __name__=="__main__":
     #nur wenn Anfrage in den nächsten 30 Tage
     #dann genau für den Zeitraum
     #print(json.dumps(get_forcast("51.4582235","7.0158171", 3,2), indent=1))
-    for i in get_forcast("51.4582235","7.0158171", 3,5):
+    forcast = get_forcast("51.4582235","7.0158171", 3,5)
+    for i in forcast:
         print("\nTime: ",datetime.utcfromtimestamp(i["dt"]).strftime('%d.%m.%Y %H:%M'))
         print("Cloudiness: ",i["clouds"]["all"],"%")
         print("Wind: ",i["wind"]["speed"],"meters/second")
+        
 
 #sonnenstunden
 #uv index
