@@ -40,7 +40,7 @@ def parser(s):
         date : datetime
             Object of form dd/mm/yyyy hh:mm:ss
     '''
-    return datetime.strftime(s,"%d/%m/%Y %H:%M:%S")
+    return datetime.strptime(s,"%d/%m/%Y %H:%M:%S")
 
 def get_latest_file(dir):
     '''
@@ -238,6 +238,7 @@ def get_best_start(start, end, duration):
         point_in_time : str
             Actual prediction when to start consuming energy.
     '''
+    return ar_prediction(start, end, duration)
     if (parser(start)-datetime.now()).days < 30:
         if (parser(end)-parser(start)).days<4:
             weather_predicition(start, end, duration)
