@@ -78,11 +78,10 @@ def get_forcast(lat, lng, days_from_now, days_total):
     response=requests.get(get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     return response
 
-def predict(lat, lon, start:str, end:str, dur:int):
+def get_best_start(lat, lon, start:str, end:str, dur:int):
     dur_in_days = math.ceil(dur/(24*60))
     start_in_days = (parser(start)-datetime.now()).days
     days_total = (parser(end)-parser(start)).days+1
-    print("Dur: ", dur_in_days," Start in ", start_in_days," days, total days: ", days_total)
     pred=get_forcast(lat,lon, start_in_days,days_total+1)
     max_wind_speed = 0
     max_wind_day = 0
@@ -101,31 +100,9 @@ def predict(lat, lon, start:str, end:str, dur:int):
         if subset_sum_wind<min_cloudiness:
             min_cloud_day=day
             min_cloudiness=subset_sum_clouds
-    print("Start at day ", max_wind_day, "with total wind of ", max_wind_speed)
-    print("Start at day ", min_cloud_day, "with total clouds of ", min_cloudiness)
-
-    
-    min(max_wind_day, min_cloud_day) # tag
-
-
-    #1. max wind - day
-    #2. min clouds - day
-    #3. max sun hourse - 15 minute intervalls
-    for day in pred:
-        print(datetime.utcfromtimestamp(day["dt"]).strftime('%d.%m.%Y'),datetime.utcfromtimestamp(day["sunrise"]).strftime('%H:%M'),datetime.utcfromtimestamp(day["sunset"]).strftime('%H:%M'),day["speed"],"meter/sec",day["clouds"],"%")
+    start_day = min(max_wind_day, min_cloud_day)
+    surise=datetime.utcfromtimestamp(pred[start_day]["sunrise"]).strftime('%H:%M')
+    return datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00"
 
 if __name__=="__main__":
-    print(predict("51.4582235","7.0158171","19/09/2021 21:30:00", "26/09/2021 04:20:00", 2160))
-    '''#nur wenn Anfrage in den nächsten 30 Tage
-    #dann genau für den Zeitraum
-    for i in get_forcast("51.4582235","7.0158171", 0,3):
-        print("\nDate: ",datetime.utcfromtimestamp(i["dt"]).strftime('%d.%m.%Y'))
-        print("Sunrise: ",datetime.utcfromtimestamp(i["sunrise"]).strftime('%H:%M'))
-        print("Sunset: ",datetime.utcfromtimestamp(i["sunset"]).strftime('%H:%M'))
-        print("Wind Speed: ",i["speed"],"meter/sec")
-        print("Cloudiness: ",i["clouds"],"%")
-    #print(json.dumps(get_forcast("51.4582235","7.0158171", 0,3), indent=1))'''
-
-#sonnenstunden
-#uv index
-#windstärke
+    print(get_best_start("51.4582235","7.0158171","19/09/2021 21:30:00", "26/09/2021 04:20:00", 2160))
