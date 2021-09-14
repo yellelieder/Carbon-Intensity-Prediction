@@ -214,39 +214,5 @@ def ar_prediction(start, end, duration):
     log.info(f"prediction successful")
     return point_in_time
 
-def weather_predicition(start, end, duration):
-    ...
-def climate_prediction(start, end, duration):
-    ...
 def get_best_start(start, end, duration):
-    '''
-    Turns start, end, duration into prediction.
-
-        Parameters:
-        ----------
-        start : str
-            When the process must end.
-        
-        end : str
-            When the process can start.
-        
-        duration : int
-            Duration in minutes, how long the process will take.
-
-        Returns:
-        ----------
-        point_in_time : str
-            Actual prediction when to start consuming energy.
-    '''
     return ar_prediction(start, end, duration)
-    if (parser(start)-datetime.now()).days < 30:
-        if (parser(end)-parser(start)).days<4:
-            weather_predicition(start, end, duration)
-        else:
-            if duration<(60*24):
-                return ar_prediction(start, end, duration)
-            else: 
-                climate_prediction(start, end, duration)
-    else:
-        return ar_prediction(start, end, duration)
-    

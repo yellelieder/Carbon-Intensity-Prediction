@@ -1,4 +1,5 @@
 <!doctype html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <html>
 
 <head>
@@ -8,6 +9,14 @@
   <title>{% block title %}{% endblock %}Energy Prediction Interface</title>
   {% endblock %}
   <style>
+    ::selection {
+      background: #00aa0098;
+    }
+    
+    ::-moz-selection {
+      background: #00aa0098;
+    }
+
     .ss-wrapper {
       overflow: hidden;
       height: 100%;
@@ -15,7 +24,7 @@
       z-index: 1;
       float: left;
     }
-    
+
     .footer {
       position: fixed;
       font-size: 14px;
@@ -145,8 +154,9 @@
   <div class="footer" id="footer">
     {% block footer %}
     &ensp;Author: <a href="mailto:lieder@mailbox.org?subject=EPI Project">Yelle Lieder</a>, for the bachelor project at
-    <a href="https://www.uni-due.de/">University of Duisburg-Essen</a>, <a href="https://se.wiwi.uni-due.de/">Chair for
-      Software Engineering esp. Mobile Applications</a> </a>.
+    <a target="blank" href="https://www.uni-due.de/">University of Duisburg-Essen</a>, <a target="blank"
+      href="https://se.wiwi.uni-due.de/">Chair for
+      Software Engineering esp. Mobile Applications</a> | <a href="/imprint">Imprint</a> </a>
     {% endblock %}
   </div>
 </body>

@@ -12,6 +12,8 @@ import os
 import time
 import logging
 
+from wtforms.fields.core import Label
+
 PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\\Models Production\\"
 NO_OF_DAYS_TO_PREDICT=1
@@ -80,13 +82,19 @@ def update_ar_model(file_path):
     model=AutoReg(train, lags=LAGS).fit()
     test=data[len(data)-intervalls:]
     pred=model.predict(start=len(train), end=len(data)-1, dynamic=False)
-    '''print(model.summary())
-    plt.plot(pred)
-    plt.plot(test, color="red")
-    plt.show()'''
+    #print(model.summary())
+    plt.plot(pred, label="Prediction")
+    plt.plot(test, color="red", label="Target")
+    plt.title("Prediction Evaluation")   
+    plt.xlabel("15 min. time frames")
+    plt.ylabel("Energy in MWh")
+    #plt.ylim(ymin=0)
+    #plt.xlim(xmin=0)
+    plt.legend()
+    plt.show()
     rmse=sqrt(mean_squared_error(test,pred))
     output_folder_path= "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption" if ("cons" in file_path.lower()) else "Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction"
-    model.save(output_folder_path+"\AR_"+col+"_"+TIME_STAMP+"_Lags_"+str(LAGS)+"_RMSE_"+rmse+"_.pickles")
+    model.save(output_folder_path+"\AR_"+col+"_"+TIME_STAMP+"_Lags_"+str(LAGS)+"_RMSE_"+str(rmse)+"_.pickles")
     
 
 def analyze_training_data(df, col):

@@ -14,6 +14,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import markdown.extensions.fenced_code
 import ValidationHelper
+import MethodSelector
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -65,7 +66,7 @@ def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
             return {"error":"enter german coodrinates"}, 406  
         else:
             log.info(f"input valid")
-            return {"ideal start":Prediction.get_best_start(start, end, dur)}, 200
+            return {"ideal start":MethodSelector.run(lat, lng, start, end, dur)}, 200
     except Exception as e:
         log.info(f"error: {str(e)}")
         traceback.print_exc(e)
@@ -125,6 +126,10 @@ class Technical_Docu(Resource):
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template('api-design-docu.html'),200,headers)
 
+class Imprint(Resource):
+    def get(self):
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('imprint.html'),200,headers)
 
 class App(Resource):
     def get(self):
@@ -152,9 +157,9 @@ class App(Resource):
         enddate=str(datetime.strptime(request.form["enddate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
         endtime =str(request.form["endtime"])
         dur = int(request.form["dur"])
-        pred=get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)
+        pred=get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('result.html', result=re.sub("{}\"","", str(pred[0]))),headers)
+        return make_response(render_template('result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
 
 
 def to_timestamp(date, time):
@@ -182,6 +187,7 @@ API.add_resource(Home,"/")
 API.add_resource(App,"/app")
 API.add_resource(Usage_Docu,"/api-docu")
 API.add_resource(Technical_Docu,"/api-tech")
+API.add_resource(Imprint,"/imprint")
 
 def scheduled_task():
     #todo, add scraper and ar model training

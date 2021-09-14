@@ -4,6 +4,7 @@
 
 <h2>General</h2>
 <p>The system is written in python. The frontend is only for demo puroses and basically plain html. There are a few JavaScript functions and a tiny fraction of css</p>
+<img src="\static\EPI_Service_Architecture.png" alt="Architecture">
 
 <h2>Server</h2>
 <p>The webserver uses Flask and Flask Restfull.</p>
@@ -19,6 +20,8 @@ The system conciders a 30 day, daily climate forcast and a 4 day hourly weather 
 
 <h2>Machine Learning</h2>
 <p>Predictions are based on a Auto Regression Model from the python statsmodels library.</p>
+<p>The prediction made with the AR Model has a <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation", target="blank">RMSE</a> of about 1404 MWh. </p>
+<img src="\static\PredictionEvaluation.png" alt="Predition Evaluation">
 
 <h2>Prediction</h2>
 <p>Predictions by the system are based on the follwing decision tree:</p>
