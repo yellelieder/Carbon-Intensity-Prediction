@@ -12,7 +12,7 @@ import traceback
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
-import markdown.extensions.fenced_code
+import markdown.extensions
 import ValidationHelper
 import MethodSelector
 
@@ -198,6 +198,3 @@ if __name__=="__main__":
     SCHEDULER.add_job(id="Scheduled task", func=scheduled_task, trigger="interval", seconds=day_intervall_for_schedule*86400)
     SCHEDULER.start()
     APP.run(debug=True)
-
-
-   

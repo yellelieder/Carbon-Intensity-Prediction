@@ -78,7 +78,6 @@ def get_latest_training_date():
     c=pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",")
     timestampA= pd.to_datetime(p.iloc[-1,0]).strftime("%d-%m-%Y %H:%M:%S")
     timestampB= pd.to_datetime(c.iloc[-1,0]).strftime("%d-%m-%Y %H:%M:%S")
-    print("\ntime stamp from get latest training data",str(str(min(timestampA,timestampB)).replace("-","/")),"\n")
     return str(str(min(timestampA,timestampB)).replace("-","/"))
 
 def time_to_period(time):
@@ -147,11 +146,8 @@ def get_predictions(start, end, type):
     '''
     log.info(f"applining pre trained ar model to user input")
     norm_start=time_to_period(start)
-    print("norm strt:",norm_start)
     norm_end=time_to_period(end)
-    print("norm end",norm_end)
     folder_path = PRODUCTION_MODEL_FOLDER_PATH if (type=="production") else CONSUMPTION_MODEL_FOLDER_PATH
-    print("folder path: ",folder_path)
     model=sm.load(folder_path+get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 

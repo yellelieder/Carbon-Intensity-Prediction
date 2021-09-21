@@ -48,9 +48,8 @@ def get_url(lat, lng):
             Url with correct parameter for requesting weather data.yoy
     '''
     #starts at last full hour, if it is 7:30 now, first return is 6
-    no_of_hours=12
     log.info(f"converting {lat} and {lng} to weather api url")
-    return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&cnt={no_of_hours}&units=metric&appid={WEATHER_DATA_API_KEY}"
+    return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={WEATHER_DATA_API_KEY}"
 
 
 #https://openweathermap.org/api/one-call-api
@@ -76,41 +75,48 @@ def get_forcast(lat, lng, hours_from_now, hours_total):
     #start und ende in unix
     log.info(f"request weather api")
     #response=requests.get(get_url(lat,lng)).json()
-    return requests.get(get_url(lat,lng)).json()["list"][hours_from_now:hours_from_now+hours_total]
+    return requests.get(get_url(lat,lng)).json()["list"]
+    #[hours_from_now:hours_from_now+hours_total]
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
-    dur_in_days = math.ceil(dur/(24*60))
-    start_in_days = (parser(start)-datetime.now()).days
-    days_total = (parser(end)-parser(start)).days+1
-    pred=get_forcast(lat,lon, start_in_days,days_total+1)
+    dur_in_hours = math.ceil(dur/60)
+    start_in_hours = (parser(start)-datetime.now())
+    days, seconds = start_in_hours.days, start_in_hours.seconds
+    start_in_hours = days * 24 + seconds
+    hours_total = (parser(end)-parser(start))
+    days, seconds = hours_total.days+1, hours_total.seconds
+    hours_total = days * 24 + seconds
+    
+    pred=get_forcast(lat,lon, start_in_hours,hours_total+1)
     max_wind_speed = 0
     max_wind_day = 0
     min_cloudiness= math.inf
     min_cloud_day = 0
     #a very simple solution in lack of proper domain knowledge
-    for day in range(len(pred)-dur_in_days):
-        print(day)
+    for hour in range(len(pred)-dur_in_hours):
+        print(hour)
         subset_sum_wind=0
         subset_sum_clouds=0
-        for day_in_subset in pred[day:day+dur_in_days]:
-            subset_sum_wind +=day_in_subset["speed"]
-            subset_sum_clouds +=day_in_subset["clouds"]
+        for hour_in_subset in pred[hour:hour+dur_in_hours]:
+            subset_sum_wind +=hour_in_subset["speed"]
+            subset_sum_clouds +=hour_in_subset["clouds"]
         if subset_sum_wind>max_wind_speed:
-            max_wind_day=day
+            max_wind_day=hour
             max_wind_speed=subset_sum_wind
         if subset_sum_wind<min_cloudiness:
-            min_cloud_day=day
+            min_cloud_day=hour
             min_cloudiness=subset_sum_clouds
-    start_day = min(max_wind_day, min_cloud_day)
-    surise=datetime.utcfromtimestamp(pred[start_day]["sunrise"]).strftime('%H:%M')
-    return datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00"
+    start_hour = min(max_wind_day, min_cloud_day)
+    surise=datetime.utcfromtimestamp(pred[start_hour]["sunrise"]).strftime('%H:%M')
+    return datetime.utcfromtimestamp(pred[start_hour]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00"
 
 if __name__=="__main__":
     #nur wenn Anfrage in den nächsten 30 Tage
     #dann genau für den Zeitraum
     #print(json.dumps(get_forcast("51.4582235","7.0158171", 3,2), indent=1))
-    forcast = get_forcast("51.4582235","7.0158171", 3,5)
-    for i in forcast:
-        print("\nTime: ",datetime.utcfromtimestamp(i["dt"]).strftime('%d.%m.%Y %H:%M'))
-        print("Cloudiness: ",i["clouds"]["all"],"%")
-        print("Wind: ",i["wind"]["speed"],"meters/second")
+    # forcast = get_forcast("51.4582235","7.0158171", 3,5)
+    # for i in forcast:
+    #     print("\nTime: ",datetime.utcfromtimestamp(i["dt"]).strftime('%d.%m.%Y %H:%M'))
+    #     print("Cloudiness: ",i["clouds"]["all"],"%")
+    #     print("Wind: ",i["wind"]["speed"],"meters/second")
+    print(get_best_start("51.4582235","7.0158171","22/09/2021 21:30:00", "23/09/2021 04:20:00", 360))

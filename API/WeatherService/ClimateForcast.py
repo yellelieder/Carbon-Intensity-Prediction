@@ -105,4 +105,4 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     return datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00"
 
 if __name__=="__main__":
-    print(get_best_start("51.4582235","7.0158171","19/09/2021 21:30:00", "26/09/2021 04:20:00", 2160))
+    print(get_best_start("51.4582235","7.0158171","22/09/2021 21:30:00", "23/09/2021 04:20:00", 2160))
