@@ -82,9 +82,13 @@ def update_ar_model(file_path):
     model=AutoReg(train, lags=LAGS).fit()
     test=data[len(data)-intervalls:]
     pred=model.predict(start=len(train), end=len(data)-1, dynamic=False)
+    pred_mean = df.mean(pred)
+    test_mean = df.mean(test)
     #print(model.summary())
     plt.plot(pred, label="Prediction")
     plt.plot(test, color="red", label="Target")
+    plt.plot(pred_mean, color="skyblue", label="Prediction Mean")
+    plt.plot(test_mean, color="salmon", label="Prediction Mean")
     plt.title("Prediction Evaluation")   
     plt.xlabel("15 min. time frames")
     plt.ylabel("Energy in MWh")

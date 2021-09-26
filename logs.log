@@ -2970,3 +2970,6 @@
 2021-09-21 09:18:15,435:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
 2021-09-21 09:39:23,929:INFO:get_forcast:request weather api
 2021-09-21 09:39:23,930:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-25 15:22:05,913:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-25 15:45:57,390:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-25 16:33:34,867:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
