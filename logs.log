@@ -2973,3 +2973,312 @@
 2021-09-25 15:22:05,913:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
 2021-09-25 15:45:57,390:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
 2021-09-25 16:33:34,867:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-26 10:32:11,177:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-09-26 10:32:11,180:INFO:start_after_end:validating user input start and end time
+2021-09-26 10:32:11,184:INFO:start_in_past:validating user input start
+2021-09-26 10:32:11,185:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 10:32:11,185:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 10:32:11,423:INFO:get_prediction:input valid
+2021-09-26 10:32:11,424:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-26 10:32:11,424:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-26 10:32:11,884:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-26 10:32:11,934:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-26 10:32:11,948:INFO:ar_prediction:prediction successful
+2021-09-26 10:32:37,897:INFO:start_after_end:validating user input start and end time
+2021-09-26 10:32:37,897:INFO:start_in_past:validating user input start
+2021-09-26 10:32:37,897:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 10:32:37,898:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 10:32:38,065:INFO:get_prediction:input valid
+2021-09-26 10:32:38,065:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-26 10:32:38,065:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-26 10:32:38,268:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-26 10:32:38,291:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-26 10:32:38,296:INFO:ar_prediction:prediction successful
+2021-09-26 10:38:27,714:INFO:get_forcast:request weather api
+2021-09-26 10:38:27,715:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:38:46,734:INFO:get_forcast:request weather api
+2021-09-26 10:38:46,734:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:38:47,371:INFO:get_forcast:request weather api
+2021-09-26 10:38:47,372:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:39:42,634:INFO:get_forcast:request weather api
+2021-09-26 10:39:42,635:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:41:16,678:INFO:get_forcast:request weather api
+2021-09-26 10:41:16,679:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:43:29,346:INFO:get_forcast:request weather api
+2021-09-26 10:43:29,346:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:43:59,720:INFO:get_forcast:request weather api
+2021-09-26 10:43:59,720:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:46:45,955:INFO:get_forcast:request weather api
+2021-09-26 10:46:45,955:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:49:06,482:INFO:get_forcast:request weather api
+2021-09-26 10:49:06,483:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:49:06,704:INFO:get_forcast:request weather api
+2021-09-26 10:49:06,704:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:49:26,068:INFO:get_forcast:request weather api
+2021-09-26 10:49:26,068:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:49:26,261:INFO:get_forcast:request weather api
+2021-09-26 10:49:26,262:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:49:54,389:INFO:get_forcast:request weather api
+2021-09-26 10:49:54,390:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:49:54,561:INFO:get_forcast:request weather api
+2021-09-26 10:49:54,562:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:50:33,733:INFO:get_forcast:request weather api
+2021-09-26 10:50:33,733:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:50:33,918:INFO:get_forcast:request weather api
+2021-09-26 10:50:33,918:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:51:11,158:INFO:get_forcast:request weather api
+2021-09-26 10:51:11,159:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:51:11,371:INFO:get_forcast:request weather api
+2021-09-26 10:51:11,371:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:51:48,303:INFO:get_forcast:request weather api
+2021-09-26 10:51:48,304:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:51:48,489:INFO:get_forcast:request weather api
+2021-09-26 10:51:48,489:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:52:21,108:INFO:get_forcast:request weather api
+2021-09-26 10:52:21,109:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:52:21,291:INFO:get_forcast:request weather api
+2021-09-26 10:52:21,291:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:53:30,106:INFO:get_forcast:request weather api
+2021-09-26 10:53:30,106:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:53:49,204:INFO:get_forcast:request weather api
+2021-09-26 10:53:49,204:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:53:59,097:INFO:get_forcast:request weather api
+2021-09-26 10:53:59,098:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:53:59,291:INFO:get_forcast:request weather api
+2021-09-26 10:53:59,292:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:54:16,159:INFO:get_forcast:request weather api
+2021-09-26 10:54:16,159:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:54:16,312:INFO:get_forcast:request weather api
+2021-09-26 10:54:16,312:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:59:17,058:INFO:get_forcast:request weather api
+2021-09-26 10:59:17,058:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 10:59:50,790:INFO:get_forcast:request weather api
+2021-09-26 10:59:50,790:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:00:19,627:INFO:get_forcast:request weather api
+2021-09-26 11:00:19,627:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:01:54,183:INFO:get_forcast:request weather api
+2021-09-26 11:01:54,184:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:02:51,813:INFO:get_forcast:request weather api
+2021-09-26 11:02:51,814:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:03:18,841:INFO:get_forcast:request weather api
+2021-09-26 11:03:18,841:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:04:11,469:INFO:get_forcast:request weather api
+2021-09-26 11:04:11,470:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:04:41,388:INFO:get_forcast:request weather api
+2021-09-26 11:04:41,389:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:05:04,193:INFO:get_forcast:request weather api
+2021-09-26 11:05:04,194:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:05:16,339:INFO:get_forcast:request weather api
+2021-09-26 11:05:16,340:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:05:43,208:INFO:get_forcast:request weather api
+2021-09-26 11:05:43,208:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:06:08,333:INFO:get_forcast:request weather api
+2021-09-26 11:06:08,333:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:06:49,225:INFO:get_forcast:request weather api
+2021-09-26 11:06:49,225:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:06:57,879:INFO:get_forcast:request weather api
+2021-09-26 11:06:57,879:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:07:44,477:INFO:get_forcast:request weather api
+2021-09-26 11:07:44,477:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:07:59,343:INFO:get_forcast:request weather api
+2021-09-26 11:07:59,343:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:09:22,241:INFO:get_forcast:request weather api
+2021-09-26 11:09:22,241:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:09:40,381:INFO:get_forcast:request weather api
+2021-09-26 11:09:40,381:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:09:53,363:INFO:get_forcast:request weather api
+2021-09-26 11:09:53,364:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:10:11,267:INFO:get_forcast:request weather api
+2021-09-26 11:10:11,268:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:10:19,942:INFO:get_forcast:request weather api
+2021-09-26 11:10:19,942:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:10:53,878:INFO:get_forcast:request weather api
+2021-09-26 11:10:53,879:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:11:05,577:INFO:get_forcast:request weather api
+2021-09-26 11:11:05,577:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:11:18,527:INFO:get_forcast:request weather api
+2021-09-26 11:11:18,527:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:11:30,486:INFO:get_forcast:request weather api
+2021-09-26 11:11:30,486:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:12:04,510:INFO:get_forcast:request weather api
+2021-09-26 11:12:04,510:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:12:14,209:INFO:get_forcast:request weather api
+2021-09-26 11:12:14,209:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:13:12,119:INFO:get_forcast:request weather api
+2021-09-26 11:13:12,119:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:13:38,384:INFO:get_forcast:request weather api
+2021-09-26 11:13:38,384:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:40:22,469:INFO:get_forcast:request weather api
+2021-09-26 11:40:22,469:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:40:26,455:INFO:get_forcast:request weather api
+2021-09-26 11:40:26,455:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:44:20,113:INFO:get_forcast:request weather api
+2021-09-26 11:44:20,114:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:45:10,964:INFO:get_forcast:request weather api
+2021-09-26 11:45:10,964:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:48:57,552:INFO:get_forcast:request weather api
+2021-09-26 11:48:57,552:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:50:34,444:INFO:get_forcast:request weather api
+2021-09-26 11:50:34,444:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:51:44,320:INFO:get_forcast:request weather api
+2021-09-26 11:51:44,320:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:59:25,932:INFO:get_forcast:request weather api
+2021-09-26 11:59:25,933:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 11:59:36,471:INFO:get_forcast:request weather api
+2021-09-26 11:59:36,472:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:00:10,824:INFO:get_forcast:request weather api
+2021-09-26 12:00:10,824:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:00:23,789:INFO:get_forcast:request weather api
+2021-09-26 12:00:23,790:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:00:50,945:INFO:get_forcast:request weather api
+2021-09-26 12:00:50,945:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:01:24,541:INFO:get_forcast:request weather api
+2021-09-26 12:01:24,542:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:02:02,885:INFO:get_forcast:request weather api
+2021-09-26 12:02:02,886:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:03:23,378:INFO:get_forcast:request weather api
+2021-09-26 12:03:23,379:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:04:43,713:INFO:get_forcast:request weather api
+2021-09-26 12:04:43,713:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:05:01,192:INFO:get_forcast:request weather api
+2021-09-26 12:05:01,193:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:05:48,553:INFO:get_forcast:request weather api
+2021-09-26 12:05:48,554:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:17:40,934:INFO:get_forcast:request weather api
+2021-09-26 12:17:40,935:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:18:09,397:INFO:get_forcast:request weather api
+2021-09-26 12:18:09,397:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:19:23,987:INFO:get_forcast:request weather api
+2021-09-26 12:19:23,988:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:19:37,149:INFO:get_forcast:request weather api
+2021-09-26 12:19:37,149:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:20:07,069:INFO:get_forcast:request weather api
+2021-09-26 12:20:07,070:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:20:37,386:INFO:get_forcast:request weather api
+2021-09-26 12:20:37,386:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:20:53,132:INFO:get_forcast:request weather api
+2021-09-26 12:20:53,133:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:23:02,757:INFO:get_forcast:request weather api
+2021-09-26 12:23:02,757:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:23:13,268:INFO:get_forcast:request weather api
+2021-09-26 12:23:13,268:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:24:10,352:INFO:get_forcast:request weather api
+2021-09-26 12:24:10,353:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:26:12,561:INFO:get_forcast:request weather api
+2021-09-26 12:26:12,562:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:26:31,804:INFO:get_forcast:request weather api
+2021-09-26 12:26:31,805:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:27:38,689:INFO:get_forcast:request weather api
+2021-09-26 12:27:38,689:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:28:05,076:INFO:get_forcast:request weather api
+2021-09-26 12:28:05,077:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:30:36,310:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:30:36,310:INFO:start_in_past:validating user input start
+2021-09-26 12:30:36,311:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:30:36,311:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:30:36,561:INFO:get_prediction:input valid
+2021-09-26 12:30:36,561:INFO:get_forcast:request weather api
+2021-09-26 12:30:36,561:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:30:36,767:INFO:get_prediction:error: list index out of range
+2021-09-26 12:32:09,399:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:32:09,400:INFO:start_in_past:validating user input start
+2021-09-26 12:32:09,401:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:32:09,401:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:32:09,576:INFO:get_prediction:input valid
+2021-09-26 12:32:09,576:INFO:get_forcast:request weather api
+2021-09-26 12:32:09,577:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:32:09,770:INFO:get_prediction:error: list index out of range
+2021-09-26 12:32:13,250:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:32:13,250:INFO:start_in_past:validating user input start
+2021-09-26 12:32:13,250:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:32:13,250:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:32:13,400:INFO:get_prediction:input valid
+2021-09-26 12:32:13,400:INFO:get_forcast:request weather api
+2021-09-26 12:32:13,400:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:32:13,583:INFO:get_prediction:error: list index out of range
+2021-09-26 12:33:14,167:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:33:14,168:INFO:start_in_past:validating user input start
+2021-09-26 12:33:14,169:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:33:14,169:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:33:14,319:INFO:get_prediction:input valid
+2021-09-26 12:33:14,319:INFO:get_forcast:request weather api
+2021-09-26 12:33:14,320:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:33:14,505:INFO:get_prediction:error: list index out of range
+2021-09-26 12:33:51,903:INFO:get_forcast:request weather api
+2021-09-26 12:33:51,903:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:35:03,901:INFO:get_forcast:request weather api
+2021-09-26 12:35:03,902:INFO:get_url:converting 51.4582235 and 7.0158171 to weather api url
+2021-09-26 12:36:13,900:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:36:13,901:INFO:start_in_past:validating user input start
+2021-09-26 12:36:13,901:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:36:13,902:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:36:14,065:INFO:get_prediction:input valid
+2021-09-26 12:36:14,066:INFO:get_forcast:request weather api
+2021-09-26 12:36:14,066:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:36:42,432:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:36:42,433:INFO:start_in_past:validating user input start
+2021-09-26 12:36:42,433:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:36:42,433:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:36:42,578:INFO:get_prediction:input valid
+2021-09-26 12:36:42,579:INFO:get_forcast:request weather api
+2021-09-26 12:36:42,579:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:40:36,431:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:40:36,432:INFO:start_in_past:validating user input start
+2021-09-26 12:40:36,433:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:40:36,433:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:40:36,574:INFO:get_prediction:input valid
+2021-09-26 12:40:36,574:INFO:get_forcast:request weather api
+2021-09-26 12:40:36,575:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:40:36,784:INFO:get_prediction:error: '>' not supported between instances of 'str' and 'datetime.datetime'
+2021-09-26 12:41:58,524:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:41:58,525:INFO:start_in_past:validating user input start
+2021-09-26 12:41:58,526:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:41:58,526:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:41:58,705:INFO:get_prediction:input valid
+2021-09-26 12:41:58,706:INFO:get_forcast:request weather api
+2021-09-26 12:41:58,706:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:44:03,111:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:44:03,112:INFO:start_in_past:validating user input start
+2021-09-26 12:44:03,112:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:44:03,112:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:44:03,273:INFO:get_prediction:input valid
+2021-09-26 12:44:03,274:INFO:get_forcast:request weather api
+2021-09-26 12:44:03,274:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:44:23,867:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:44:23,868:INFO:start_in_past:validating user input start
+2021-09-26 12:44:23,868:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:44:23,868:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:44:24,005:INFO:get_prediction:input valid
+2021-09-26 12:44:24,006:INFO:get_forcast:request weather api
+2021-09-26 12:44:24,006:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:45:37,797:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:45:37,797:INFO:start_in_past:validating user input start
+2021-09-26 12:45:37,798:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:45:37,798:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:45:37,997:INFO:get_prediction:input valid
+2021-09-26 12:45:37,997:INFO:get_forcast:request weather api
+2021-09-26 12:45:37,997:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:45:56,357:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:45:56,357:INFO:start_in_past:validating user input start
+2021-09-26 12:45:56,357:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:45:56,358:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:45:56,485:INFO:get_prediction:input valid
+2021-09-26 12:45:56,486:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-26 12:45:56,486:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-26 12:45:56,695:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-26 12:45:56,716:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-26 12:45:56,742:INFO:ar_prediction:prediction successful
+2021-09-26 12:46:20,748:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:46:20,748:INFO:start_in_past:validating user input start
+2021-09-26 12:46:20,748:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:46:20,748:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:46:20,880:INFO:get_prediction:input valid
+2021-09-26 12:46:20,880:INFO:get_forcast:request weather api
+2021-09-26 12:46:20,880:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-26 12:48:42,548:INFO:start_after_end:validating user input start and end time
+2021-09-26 12:48:42,549:INFO:start_in_past:validating user input start
+2021-09-26 12:48:42,549:INFO:time_le_dur:validating user input start, end, duration
+2021-09-26 12:48:42,549:INFO:invalid_geo:validation user geo coordinates
+2021-09-26 12:48:42,693:INFO:get_prediction:input valid
+2021-09-26 12:48:42,693:INFO:get_forcast:request weather api
+2021-09-26 12:48:42,693:INFO:get_url:converting 51.0 and 7.0 to weather api url

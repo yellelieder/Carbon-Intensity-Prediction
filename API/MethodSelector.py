@@ -28,12 +28,11 @@ def run(lat, lng, start, end, dur):
     days_in_future=(parser(start)-datetime.now()).days
     if(days_in_future<30):
         if(days_in_future<4):
-            return Prediction.get_best_start(start, end, dur)
-            #WeatherService.WeatherForcast.get_forcast(lat, lng, start, end, dur)
+            return WeatherService.WeatherForcast.get_best_start(lat, lng, start, end, dur)
         else:
-            if(math.ceil(dur/24))<24:
+            if(math.ceil(dur/60))<24:
                 return Prediction.get_best_start(start, end, dur)
             else:
-                return WeatherService.ClimateForcast.get_forcast(lat, lng, start, end, dur)
+                return WeatherService.ClimateForcast.get_best_start(lat, lng, start, end, dur)
     else:
         return Prediction.get_best_start(start, end, dur)

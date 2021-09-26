@@ -89,8 +89,7 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     min_cloud_day = 0
     #a very simple solution in lack of proper domain knowledge
     for day in range(len(pred)-dur_in_days):
-        subset_sum_wind=0
-        subset_sum_clouds=0
+        subset_sum_wind, subset_sum_clouds=0,0
         for day_in_subset in pred[day:day+dur_in_days]:
             subset_sum_wind +=day_in_subset["speed"]
             subset_sum_clouds +=day_in_subset["clouds"]
@@ -102,7 +101,9 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
             min_cloudiness=subset_sum_clouds
     start_day = min(max_wind_day, min_cloud_day)
     surise=datetime.utcfromtimestamp(pred[start_day]["sunrise"]).strftime('%H:%M')
-    return datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00"
+    sug=parser(datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
+    ideal_time=sug if sug>parser(start) else start
+    return ideal_time
 
 if __name__=="__main__":
     print(get_best_start("51.4582235","7.0158171","22/09/2021 21:30:00", "23/09/2021 04:20:00", 2160))
