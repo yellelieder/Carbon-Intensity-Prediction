@@ -78,6 +78,9 @@ def get_forcast(lat, lng, days_from_now, days_total):
     response=requests.get(get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     return response
 
+def convert_date(date):
+    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")
+
 def get_best_start(lat, lon, start:str, end:str, dur:int):
     dur_in_days = math.ceil(dur/(24*60))
     start_in_days = (parser(start)-datetime.now()).days
@@ -103,7 +106,7 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     surise=datetime.utcfromtimestamp(pred[start_day]["sunrise"]).strftime('%H:%M')
     sug=parser(datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
     ideal_time=sug if sug>parser(start) else start
-    return ideal_time
+    return convert_date(ideal_time)
 
 if __name__=="__main__":
     print(get_best_start("51.4582235","7.0158171","22/09/2021 21:30:00", "23/09/2021 04:20:00", 2160))

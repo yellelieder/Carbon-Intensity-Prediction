@@ -20,6 +20,8 @@ def get_url(lat, lng):
     log.info(f"converting {lat} and {lng} to weather api url")
     return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={WEATHER_DATA_API_KEY}"
 
+def convert_date(date):
+    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")
 
 #https://openweathermap.org/api/one-call-api
 def get_forcast(lat, lng):
@@ -52,7 +54,7 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     surise=datetime.utcfromtimestamp(sunrise).strftime('%H:%M')
     sug=parser(datetime.utcfromtimestamp(pred[start_hour]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
     ideal_time=sug if sug>start else start
-    return ideal_time
+    return convert_date(ideal_time)
 
 if __name__=="__main__":
     print(get_best_start("51.4582235","7.0158171","27/09/2021 14:00:00", "29/09/2021 20:00:00", 1500))
