@@ -134,8 +134,7 @@ def scrape(type:str):
 
     '''There is unfortunately no way to make this path relative with selenium.
     But selenium is needed, as the scraped site is build dynamically.'''
-
-    preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI-Project\Ressources\Downloads"+t}
+    preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI\Ressources\Downloads"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(get_url(type,start_period,end_period))

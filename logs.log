@@ -3839,3 +3839,27 @@
 2021-09-27 17:14:32,919:INFO:get_prediction:input valid
 2021-09-27 17:14:32,920:INFO:get_forcast:request weather api
 2021-09-27 17:14:32,920:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-28 08:13:15,738:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-28 08:13:15,739:INFO:get_next_date:calculating date, where to start scraping
+2021-09-28 08:13:18,607:INFO:get_url:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-28 08:13:30,965:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-28 08:13:30,966:INFO:get_next_date:calculating date, where to start scraping
+2021-09-28 08:13:32,397:INFO:get_url:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-28 08:13:40,751:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-28 08:13:42,230:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-28 08:13:52,135:INFO:merge_columns:formatting production data rows
+2021-09-28 08:13:55,047:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-28 08:14:03,808:INFO:merge_columns:formating consumption data rows
+2021-09-28 08:14:04,935:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-28 08:18:12,655:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-28 08:18:12,655:INFO:get_next_date:calculating date, where to start scraping
+2021-09-28 08:18:14,151:INFO:get_url:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-28 08:18:30,433:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-28 08:18:30,434:INFO:get_next_date:calculating date, where to start scraping
+2021-09-28 08:18:32,082:INFO:get_url:creating smard.de url from type: 2, start: 1625954340000, end: 1625954944800
+2021-09-28 08:18:44,445:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-28 08:18:46,095:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-28 08:18:56,415:INFO:merge_columns:formatting production data rows
+2021-09-28 08:18:59,583:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-28 08:19:08,272:INFO:merge_columns:formating consumption data rows
+2021-09-28 08:19:09,365:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
