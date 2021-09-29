@@ -3863,3 +3863,111 @@
 2021-09-28 08:18:59,583:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
 2021-09-28 08:19:08,272:INFO:merge_columns:formating consumption data rows
 2021-09-28 08:19:09,365:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-29 07:25:41,288:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=29%2F09%2F2021&sttime=07:26&endate=29%2F09%2F2021&entime=07:42&dur=15' [GET]>
+2021-09-29 07:25:41,289:INFO:start_after_end:validating user input start and end time
+2021-09-29 07:25:41,292:INFO:start_in_past:validating user input start
+2021-09-29 07:25:41,292:INFO:time_le_dur:validating user input start, end, duration
+2021-09-29 07:25:41,293:INFO:invalid_geo:validation user geo coordinates
+2021-09-29 07:25:41,495:INFO:get_prediction:input valid
+2021-09-29 07:25:41,495:INFO:get_forcast:request weather api
+2021-09-29 07:25:41,496:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-29 07:28:05,738:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=29%2F09%2F2021&sttime=07:29&endate=29%2F09%2F2021&entime=07:45&dur=15' [GET]>
+2021-09-29 07:28:05,739:INFO:start_after_end:validating user input start and end time
+2021-09-29 07:28:05,739:INFO:start_in_past:validating user input start
+2021-09-29 07:28:05,739:INFO:time_le_dur:validating user input start, end, duration
+2021-09-29 07:28:05,739:INFO:invalid_geo:validation user geo coordinates
+2021-09-29 07:28:05,886:INFO:get_prediction:input valid
+2021-09-29 07:28:05,887:INFO:get_forcast:request weather api
+2021-09-29 07:28:05,887:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-29 07:32:28,593:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=29%2F09%2F2021&sttime=07:33&endate=29%2F09%2F2021&entime=07:49&dur=15' [GET]>
+2021-09-29 07:32:28,593:INFO:start_after_end:validating user input start and end time
+2021-09-29 07:32:28,594:INFO:start_in_past:validating user input start
+2021-09-29 07:32:28,594:INFO:time_le_dur:validating user input start, end, duration
+2021-09-29 07:32:28,594:INFO:invalid_geo:validation user geo coordinates
+2021-09-29 07:32:28,741:INFO:get_prediction:input valid
+2021-09-29 07:32:28,742:INFO:get_forcast:request weather api
+2021-09-29 07:32:28,742:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-29 07:35:18,684:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=29%2F09%2F2021&sttime=07:36&endate=29%2F09%2F2021&entime=07:52&dur=15' [GET]>
+2021-09-29 07:35:18,685:INFO:start_after_end:validating user input start and end time
+2021-09-29 07:35:18,685:INFO:start_in_past:validating user input start
+2021-09-29 07:35:18,686:INFO:time_le_dur:validating user input start, end, duration
+2021-09-29 07:35:18,686:INFO:invalid_geo:validation user geo coordinates
+2021-09-29 07:35:18,857:INFO:get_prediction:input valid
+2021-09-29 07:35:18,858:INFO:get_forcast:request weather api
+2021-09-29 07:35:18,858:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-29 07:35:46,014:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=29%2F09%2F2021&sttime=07:36&endate=29%2F09%2F2021&entime=07:52&dur=15' [GET]>
+2021-09-29 07:35:46,015:INFO:start_after_end:validating user input start and end time
+2021-09-29 07:35:46,015:INFO:start_in_past:validating user input start
+2021-09-29 07:35:46,016:INFO:time_le_dur:validating user input start, end, duration
+2021-09-29 07:35:46,016:INFO:invalid_geo:validation user geo coordinates
+2021-09-29 07:35:46,167:INFO:get_prediction:input valid
+2021-09-29 07:35:46,168:INFO:get_forcast:request weather api
+2021-09-29 07:35:46,168:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-29 07:36:16,404:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=29%2F09%2F2021&sttime=07:37&endate=29%2F09%2F2021&entime=07:53&dur=15' [GET]>
+2021-09-29 07:36:16,405:INFO:start_after_end:validating user input start and end time
+2021-09-29 07:36:16,405:INFO:start_in_past:validating user input start
+2021-09-29 07:36:16,405:INFO:time_le_dur:validating user input start, end, duration
+2021-09-29 07:36:16,405:INFO:invalid_geo:validation user geo coordinates
+2021-09-29 07:36:16,578:INFO:get_prediction:input valid
+2021-09-29 07:36:16,578:INFO:get_forcast:request weather api
+2021-09-29 07:36:16,578:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-29 14:07:42,069:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-29 14:08:54,580:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-29 14:09:49,550:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-29 14:10:06,022:INFO:update_ar_model:training ar model with data from file: Ressources\TrainingData\Production.csv
+2021-09-29 15:59:52,883:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 15:59:52,886:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 15:59:55,873:INFO:get_url:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-29 16:00:08,271:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-29 16:00:08,272:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:00:09,717:INFO:get_url:creating smard.de url from type: 2, start: 1609541940000, end: 1609542544800
+2021-09-29 16:00:29,529:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-29 16:00:32,386:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-29 16:01:20,987:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 16:01:20,987:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:01:22,396:INFO:get_url:creating smard.de url from type: 1, start: 1609541940000, end: 1609542544800
+2021-09-29 16:01:34,662:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-29 16:01:34,663:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:01:36,171:INFO:get_url:creating smard.de url from type: 2, start: 1609541940000, end: 1609542544800
+2021-09-29 16:01:48,542:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-29 16:01:50,284:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-29 16:02:02,036:INFO:merge_columns:formatting production data rows
+2021-09-29 16:05:22,350:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 16:05:22,351:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:05:23,789:INFO:get_url:creating smard.de url from type: 1, start: 1630533540000, end: 1630534144800
+2021-09-29 16:05:36,047:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-29 16:05:36,048:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:05:37,809:INFO:get_url:creating smard.de url from type: 2, start: 1630533540000, end: 1630534144800
+2021-09-29 16:05:50,623:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-29 16:05:52,829:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-29 16:06:05,566:INFO:merge_columns:formatting production data rows
+2021-09-29 16:06:09,779:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-29 16:06:21,252:INFO:merge_columns:formating consumption data rows
+2021-09-29 16:06:22,674:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-29 16:08:09,699:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 16:08:09,700:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:08:11,110:INFO:get_url:creating smard.de url from type: 1, start: 1630533540000, end: 1630534144800
+2021-09-29 16:10:07,318:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 16:10:07,318:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:10:08,733:INFO:get_url:creating smard.de url from type: 1, start: 1630533540000, end: 1630534144800
+2021-09-29 16:10:21,116:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-29 16:10:21,117:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:10:22,668:INFO:get_url:creating smard.de url from type: 2, start: 1630533540000, end: 1630534144800
+2021-09-29 16:10:35,142:INFO:merge:merging files from folder: Ressources\Downloads\Production
+2021-09-29 16:10:37,314:INFO:merge:merging files from folder: Ressources\Downloads\Consumption
+2021-09-29 16:10:50,557:INFO:merge_columns:formatting production data rows
+2021-09-29 16:10:54,732:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
+2021-09-29 16:11:04,937:INFO:merge_columns:formating consumption data rows
+2021-09-29 16:11:06,140:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-29 16:12:25,623:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 16:12:25,624:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:12:27,291:INFO:get_url:creating smard.de url from type: 1, start: 1630792740000, end: 1630793344800
+2021-09-29 16:12:39,817:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-29 16:12:39,818:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:12:41,281:INFO:get_url:creating smard.de url from type: 2, start: 1630792740000, end: 1630793344800
+2021-09-29 16:15:26,371:INFO:scrape:scraping new date from smard.de for type 1
+2021-09-29 16:15:26,371:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:15:27,835:INFO:get_url:creating smard.de url from type: 1, start: 1630965540000, end: 1630966144800
+2021-09-29 16:15:40,034:INFO:scrape:scraping new date from smard.de for type 2
+2021-09-29 16:15:40,035:INFO:get_next_date:calculating date, where to start scraping
+2021-09-29 16:15:41,423:INFO:get_url:creating smard.de url from type: 2, start: 1630965540000, end: 1630966144800

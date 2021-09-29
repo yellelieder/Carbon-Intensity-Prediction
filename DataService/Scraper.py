@@ -125,7 +125,7 @@ def scrape(type:str):
     log.info(f"scraping new date from smard.de for type {type}")
     no_of_days_to_get=7
     start_period=get_next_date(type)
-    end_period=str(float(start_period)+(86400*no_of_days_to_get)).split(".")[0]
+    end_period=str(float(start_period)+(86400.00*no_of_days_to_get)).split(".")[0]
     options=webdriver.ChromeOptions()
     if type=="1":
         t="\Production"
@@ -176,16 +176,16 @@ if __name__=="__main__":
     scrape("2")
     end2 = time.time()
     print("second scraping took: ", end2-end1)
-    merge(get_download_path("1"))
-    end3 = time.time()
-    print("first merging took: ", end3-end2)
-    merge(get_download_path("2"))
-    end4 = time.time()
-    print("second merging took: ", end4-end3)
-    PreProcessor.clean_files("1")
-    end5 = time.time()
-    print("first cleaning took: ", end5-end4)
-    PreProcessor.clean_files("2")
-    end6 = time.time()
-    print("second cleaning took: ", end6-end5)
-    print("\ntotal scrapting time: ", end6-start)
+    # merge(get_download_path("1"))
+    # end3 = time.time()
+    # print("first merging took: ", end3-end2)
+    # merge(get_download_path("2"))
+    # end4 = time.time()
+    # print("second merging took: ", end4-end3)
+    # PreProcessor.clean_files("1")
+    # end5 = time.time()
+    # print("first cleaning took: ", end5-end4)
+    # PreProcessor.clean_files("2")
+    # end6 = time.time()
+    # print("second cleaning took: ", end6-end5)
+    # print("\ntotal scrapting time: ", end6-start)

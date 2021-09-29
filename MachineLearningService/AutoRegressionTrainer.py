@@ -59,20 +59,8 @@ def parser(s):
     return datetime.strftime(s,"%d/%m/%Y %H:%M:%S")
 
 def update_ar_model(file_path):
-    '''
-    Trains the AR model based on latest training data.
-
-        Parameters:
-        ----------
-        file_path : str
-            Path of the training data set.
-
-        Returns:
-        ----------
-        Persists trained model in Ressources\Models\ModelsAutoRegression
-    '''
     log.info(f"training ar model with data from file: {file_path}")
-    df=pd.read_csv(file_path, index_col=0, parse_dates=[1],sep=",")
+    df=pd.read_csv(file_path, index_col=1, parse_dates=[1],sep=",")
     col= "Consumption" if ("cons" in file_path.lower()) else "Production"
     data=df[col]
     data=data.apply(lambda y: int((y)))
@@ -82,13 +70,9 @@ def update_ar_model(file_path):
     model=AutoReg(train, lags=LAGS).fit()
     test=data[len(data)-intervalls:]
     pred=model.predict(start=len(train), end=len(data)-1, dynamic=False)
-    pred_mean = df.mean(pred)
-    test_mean = df.mean(test)
     #print(model.summary())
     plt.plot(pred, label="Prediction")
     plt.plot(test, color="red", label="Target")
-    plt.plot(pred_mean, color="skyblue", label="Prediction Mean")
-    plt.plot(test_mean, color="salmon", label="Prediction Mean")
     plt.title("Prediction Evaluation")   
     plt.xlabel("15 min. time frames")
     plt.ylabel("Energy in MWh")
