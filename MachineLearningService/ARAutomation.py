@@ -29,14 +29,14 @@ def update_ar_model(file_path):
     train, test=data[:len(data)-intervalls], data[len(data)-intervalls:]
     target_rmse, target_lags, optimal_prediction = math.inf, 0, None
     change =0
-    for i in range(10):
+    for i in range(100):
         print("Iteration: ",i)
         pred=AutoReg(train, lags=i).fit().predict(start=len(train), end=len(data)-1, dynamic=False)
         if sqrt(mean_squared_error(test,pred))<target_rmse:
             change +=1
             print("Change: ",change)
             target_rmse=sqrt(mean_squared_error(test,pred))
-            target_lags=i
+            target_lags=i+1
             optimal_prediction=pred
             print("tmp lags: ",target_lags," with RMSE: ", target_rmse)
     df['Date'] = pd.to_datetime(df['Date'])
