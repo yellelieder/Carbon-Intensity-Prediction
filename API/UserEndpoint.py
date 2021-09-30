@@ -25,7 +25,7 @@ log.addHandler(handler)
 APP=Flask(__name__)
 API=Api(APP)
 SCHEDULER=APScheduler()
-    
+
 class EPI(Resource):
     def get(self):
         '''

@@ -1,0 +1,36 @@
+Intervall: 1 | Lag: 86 | RMSE: 61.561588540820594 | Tested Lag Range: 1 - 100
+Intervall: 2 | Lag: 86 | RMSE: 123.91858983691327 | Tested Lag Range: 1 - 100
+Intervall: 3 | Lag: 86 | RMSE: 148.31798492566753 | Tested Lag Range: 1 - 100
+Intervall: 4 | Lag: 86 | RMSE: 104.32136051033176 | Tested Lag Range: 1 - 100
+Intervall: 5 | Lag: 86 | RMSE: 150.7160671946879 | Tested Lag Range: 1 - 100
+Intervall: 6 | Lag: 2 | RMSE: 127.2895071071881 | Tested Lag Range: 1 - 100
+Intervall: 7 | Lag: 2 | RMSE: 109.45980548118632 | Tested Lag Range: 1 - 100
+Intervall: 8 | Lag: 99 | RMSE: 116.69395194270658 | Tested Lag Range: 1 - 100
+Intervall: 9 | Lag: 99 | RMSE: 106.34046120594842 | Tested Lag Range: 1 - 100
+Intervall: 10 | Lag: 98 | RMSE: 107.57926840711221 | Tested Lag Range: 1 - 100
+Intervall: 11 | Lag: 98 | RMSE: 103.97170413634682 | Tested Lag Range: 1 - 100
+Intervall: 12 | Lag: 6 | RMSE: 157.51415211957328 | Tested Lag Range: 1 - 100
+Intervall: 13 | Lag: 97 | RMSE: 183.2481124068511 | Tested Lag Range: 1 - 100
+Intervall: 14 | Lag: 5 | RMSE: 116.93110833041881 | Tested Lag Range: 1 - 100
+Intervall: 15 | Lag: 100 | RMSE: 152.02418787018638 | Tested Lag Range: 1 - 100
+Intervall: 16 | Lag: 97 | RMSE: 191.82668075834533 | Tested Lag Range: 1 - 100
+Intervall: 17 | Lag: 100 | RMSE: 955.6705192102283 | Tested Lag Range: 1 - 100
+Intervall: 18 | Lag: 100 | RMSE: 1122.0082463061633 | Tested Lag Range: 1 - 100
+Intervall: 19 | Lag: 100 | RMSE: 1282.2250886506395 | Tested Lag Range: 1 - 100
+Intervall: 20 | Lag: 100 | RMSE: 1441.8390345599132 | Tested Lag Range: 1 - 100
+ID: 1 | Intervall: 21 | Lag: 100 | RMSE: 1490 | Tested Lag Range: 1 - 100
+ID: 2 | Intervall: 22 | Lag: 100 | RMSE: 1527 | Tested Lag Range: 1 - 100
+ID: 3 | Intervall: 23 | Lag: 48 | RMSE: 1576 | Tested Lag Range: 1 - 100
+ID: 4 | Intervall: 24 | Lag: 47 | RMSE: 1315 | Tested Lag Range: 1 - 100
+ID: 5 | Intervall: 25 | Lag: 50 | RMSE: 1139 | Tested Lag Range: 1 - 100
+ID: 6 | Intervall: 26 | Lag: 50 | RMSE: 961 | Tested Lag Range: 1 - 100
+ID: 7 | Intervall: 27 | Lag: 50 | RMSE: 836 | Tested Lag Range: 1 - 100
+ID: 8 | Intervall: 28 | Lag: 50 | RMSE: 717 | Tested Lag Range: 1 - 100
+ID: 9 | Intervall: 29 | Lag: 55 | RMSE: 715 | Tested Lag Range: 1 - 100
+ID: 10 | Intervall: 30 | Lag: 58 | RMSE: 757 | Tested Lag Range: 1 - 100
+ID: 11 | Intervall: 31 | Lag: 60 | RMSE: 779 | Tested Lag Range: 1 - 100
+ID: 12 | Intervall: 32 | Lag: 63 | RMSE: 865 | Tested Lag Range: 1 - 100
+ID: 13 | Intervall: 33 | Lag: 97 | RMSE: 899 | Tested Lag Range: 1 - 100
+ID: 14 | Intervall: 34 | Lag: 97 | RMSE: 871 | Tested Lag Range: 1 - 100
+ID: 15 | Intervall: 35 | Lag: 97 | RMSE: 864 | Tested Lag Range: 1 - 100
+ID: 16 | Intervall: 36 | Lag: 98 | RMSE: 841 | Tested Lag Range: 1 - 100

@@ -4003,3 +4003,61 @@
 2021-09-29 16:27:28,349:INFO:clean_files:input: 1, used to save cleaned df as csv: Production.csv
 2021-09-29 16:27:37,844:INFO:merge_columns:formating consumption data rows
 2021-09-29 16:27:39,117:INFO:clean_files:input: 2, used to save cleaned df as csv: Consumption.csv
+2021-09-30 13:28:40,826:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=30%2F09%2F2021&sttime=13:29&endate=30%2F09%2F2021&entime=13:45&dur=15' [GET]>
+2021-09-30 13:28:40,828:INFO:start_after_end:validating user input start and end time
+2021-09-30 13:28:40,831:INFO:start_in_past:validating user input start
+2021-09-30 13:28:40,832:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 13:28:40,832:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 13:28:41,139:INFO:get_prediction:input valid
+2021-09-30 13:28:41,140:INFO:get_forcast:request weather api
+2021-09-30 13:28:41,141:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-30 13:29:49,337:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-09-30 13:29:49,338:INFO:start_after_end:validating user input start and end time
+2021-09-30 13:29:49,339:INFO:start_in_past:validating user input start
+2021-09-30 13:29:49,339:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 13:29:49,340:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 13:29:49,562:INFO:get_prediction:input valid
+2021-09-30 13:29:49,563:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-30 13:29:49,563:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-30 13:29:50,112:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-30 13:29:50,180:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-30 13:29:50,215:INFO:ar_prediction:prediction successful
+2021-09-30 13:30:12,442:INFO:start_after_end:validating user input start and end time
+2021-09-30 13:30:12,443:INFO:start_in_past:validating user input start
+2021-09-30 13:30:12,443:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 13:30:12,444:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 13:30:12,648:INFO:get_prediction:input valid
+2021-09-30 13:30:12,649:INFO:get_forcast:request weather api
+2021-09-30 13:30:12,649:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-30 14:26:06,356:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=30%2F09%2F2021&sttime=14:27&endate=30%2F09%2F2021&entime=14:43&dur=15' [GET]>
+2021-09-30 14:26:06,357:INFO:start_after_end:validating user input start and end time
+2021-09-30 14:26:06,362:INFO:start_in_past:validating user input start
+2021-09-30 14:26:06,363:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 14:26:06,363:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 14:26:06,604:INFO:get_prediction:input valid
+2021-09-30 14:26:06,604:INFO:get_forcast:request weather api
+2021-09-30 14:26:06,605:INFO:get_url:converting 50.9917119 and 10.2136589 to weather api url
+2021-09-30 14:36:53,690:INFO:start_after_end:validating user input start and end time
+2021-09-30 14:36:53,691:INFO:start_in_past:validating user input start
+2021-09-30 14:36:53,692:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 14:36:53,692:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 14:36:53,923:INFO:get_prediction:input valid
+2021-09-30 14:36:53,923:INFO:get_forcast:request weather api
+2021-09-30 14:36:53,923:INFO:get_url:converting 51.0 and 7.0 to weather api url
+2021-09-30 14:38:09,750:INFO:start_after_end:validating user input start and end time
+2021-09-30 14:38:09,751:INFO:start_in_past:validating user input start
+2021-09-30 14:38:09,751:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 14:38:09,752:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 14:38:36,453:INFO:start_after_end:validating user input start and end time
+2021-09-30 14:38:36,454:INFO:start_in_past:validating user input start
+2021-09-30 14:40:00,414:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-09-30 14:40:00,415:INFO:start_after_end:validating user input start and end time
+2021-09-30 14:40:00,416:INFO:start_in_past:validating user input start
+2021-09-30 14:40:00,416:INFO:time_le_dur:validating user input start, end, duration
+2021-09-30 14:40:00,417:INFO:invalid_geo:validation user geo coordinates
+2021-09-30 14:40:00,598:INFO:get_prediction:input valid
+2021-09-30 14:40:00,599:INFO:get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-09-30 14:40:00,599:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-30 14:40:01,089:INFO:get_predictions:applining pre trained ar model to user input
+2021-09-30 14:40:01,141:INFO:find_optimum:selecting optimal starting time from timeseries
+2021-09-30 14:40:01,182:INFO:ar_prediction:prediction successful
