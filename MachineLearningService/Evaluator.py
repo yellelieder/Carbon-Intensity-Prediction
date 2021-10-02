@@ -69,4 +69,4 @@ def inspect_visual(results, rmse_prediction, rmse_mean, t):
     print(t)
 
 if __name__ == "__main__":
-    print(evaluate_model("Ressources\TrainingData\Production.csv", intervalls=18, model="16.pickles"))
+    print(evaluate_model("Ressources\TrainingData\Production.csv", intervalls=2*96, model="32_865.pickles"))

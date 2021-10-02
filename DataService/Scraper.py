@@ -130,7 +130,7 @@ def scrape(type:str):
     '''
     log.info(f"scraping new date from smard.de for type {type}")
     start_period=get_next_date(type)
-    end_period=get_last_date(type, 14)
+    end_period=get_last_date(type, 30)
     options=webdriver.ChromeOptions()
     if type=="1":
         t="\Production"
