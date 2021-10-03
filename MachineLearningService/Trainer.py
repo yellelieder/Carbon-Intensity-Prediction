@@ -36,31 +36,32 @@ def get_free_id():
     return int(max)+1
 
 
-def update_ar_model(file_path, intervall, start_lag, end_lag, start_skip, end_skip):
+def update_ar_model(type, intervall, start_lag, end_lag, start_skip, end_skip):
     # prepare training data  
-    df = pd.read_csv(file_path, index_col=0,parse_dates=[1], skiprows=range(start_skip, end_skip), sep=",")
-    
+    file_path="Ressources\TrainingData\Production.csv" if type=="1" else "Ressources\TrainingData\Consumption.csv"
+    df = pd.read_csv(file_path, index_col=0,parse_dates=[1], skiprows=range(start_skip, end_skip), sep=",")    
     column_name = "Consumption" if ("cons" in file_path.lower()) else "Production"
     data = df[column_name].apply(lambda y: int((y)))
-    x = None
+    target_model = None
 
     target_rmse, target_lags = math.inf, 0
     train, test = data[:len(data)-intervall], data[len(data)-intervall:]
 
     for lag in range(start_lag, end_lag):
+        print("Lag: ", lag)
         model = AutoReg(train, lags=lag, old_names=False).fit()
         pred = model.predict(
             start=len(train), end=len(data)-1, dynamic=False)
         if sqrt(mean_squared_error(test, pred)) < target_rmse:
             target_rmse = sqrt(mean_squared_error(test, pred))
-            x = model
+            target_model = model
             target_lags=lag
 
     #store best model
     output_folder_path = f"Ressources\Models\ModelsAutoRegression\ModelsAutoRegression{column_name}"
     model_id =get_free_id()
     model_name=str(model_id)+".pickles"
-    x.save(output_folder_path +"\\"+model_name)
+    target_model.save(output_folder_path +"\\"+model_name)
     time.sleep(5)
     evaluation_result=Evaluator.evaluate_model(file_path,intervall,model_name)
     
@@ -73,4 +74,5 @@ def update_ar_model(file_path, intervall, start_lag, end_lag, start_skip, end_sk
 
 if __name__ == "__main__":
     #update_ar_model("Ressources\TrainingData\Production.csv", 4*96,1,288+100,227805, -1)
-    update_ar_model("Ressources\TrainingData\Production.csv",intervall=5*96,start_lag= 1,end_lag= 500,start_skip= 227805,end_skip= -1)
+    update_ar_model(type="Ressources\TrainingData\Production.csv",intervall=5*96,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
+    update_ar_model(type="Ressources\TrainingData\Consumption.csv",intervall=5*96,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)

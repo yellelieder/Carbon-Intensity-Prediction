@@ -16,6 +16,7 @@ import markdown.extensions
 import ValidationHelper
 import PredictionHandler
 from DataService import Scraper, PreProcessor
+from MachineLearningService import Trainer
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -190,12 +191,12 @@ API.add_resource(Technical_Docu,"/api-tech")
 API.add_resource(Imprint,"/imprint")
 
 def refresh_model():
-    Scraper.scrape("1")
-    Scraper.scrape("2")
-    Scraper.merge("Ressources\Downloads\Production")
-    Scraper.merge("Ressources\Downloads\Consumption")
-    PreProcessor.clean_files("1")
-    PreProcessor.clean_files("2")
+    for i in range(1,2):
+        i=str(i)
+        Scraper.scrape(i)
+        Scraper.merge(i)
+        PreProcessor.clean_files(i)
+        Trainer.update_ar_model(i,intervall=5*4*24,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
 
 if __name__=="__main__":
     day_intervall_for_schedule = 35

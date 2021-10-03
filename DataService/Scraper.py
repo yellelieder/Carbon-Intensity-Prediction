@@ -149,7 +149,7 @@ def scrape(type:str):
     driver.close()
     driver.quit()
 
-def merge(dir):
+def merge(type):
     '''
     Merges all existing downloads of same type to single csv.
 
@@ -164,6 +164,7 @@ def merge(dir):
         
         Persists result as single csv at Ressources\RawDataMerged
     '''
+    dir="Ressources\Downloads\Production" if type=="1" else "Ressources\Downloads\Consumption"
     log.info(f"merging files from folder: {dir}")
     data=pd.DataFrame()
     for i in os.listdir(dir):
@@ -172,6 +173,7 @@ def merge(dir):
     df = pd.DataFrame(data)
     #todo: handle existence of multiple files in folder
     df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".csv")
+    df.to_pickle("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".pkl")
 
 if __name__=="__main__":
     start = time.time()

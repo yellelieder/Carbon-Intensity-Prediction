@@ -36,6 +36,7 @@ def clean_files(type:str):
     df["Datum"]= df[['Datum', 'Uhrzeit']].agg(' '.join, axis=1)
     df["Datum"]=df["Datum"].apply(lambda x: re.sub("[.]","/", x)+":00")
     pd.DataFrame(merge_columns(type, df)).to_csv("Ressources\\TrainingData\\"+file_name+".csv")
+    df.to_pickle("Ressources\\TrainingData\\"+file_name+".pkl")
     log.info(f"input: {type}, used to save cleaned df as csv: {file_name}.csv")
 
 def merge_columns(type, df):

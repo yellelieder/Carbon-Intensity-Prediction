@@ -43,7 +43,8 @@ def evaluate_model(training_data_file_path, intervalls, model):
     for key, value in test.items():
         prediction = predictions[key]
         target = value
-        time = str(df.iloc[key, 0])
+        time = parser(datetime.strptime(str(df.iloc[key, 0]), "%Y-%m-%d %H:%M:%S"))
+        print(time)
         hour = int((time.split(" ")[1]).split(":")[0])
         mean = int(last_year_means.iloc[hour, 0])
         dict.append({"Time": time, 'Prediction': prediction, 'Target': target, "Mean": mean,})
@@ -57,16 +58,18 @@ def evaluate_model(training_data_file_path, intervalls, model):
     rmse_mean = sqrt(mean_squared_error(test, results["Mean"]))
 
     #uncomment to see graphs and tables:
-    #inspect_visual(results, rmse_prediction, rmse_mean,table)
+    inspect_visual(results, rmse_prediction, rmse_mean,table, col)
     return rmse_prediction<rmse_mean
 
-def inspect_visual(results, rmse_prediction, rmse_mean, t):
+def inspect_visual(results, rmse_prediction, rmse_mean, table, column_name):
     results.plot(x="Time")
-    plt.title("Prediction RMSE: " + str(int(rmse_prediction)) +" | Mean-Model RMSE: "+str(int(rmse_mean)))
+    plt.title(f"Energy {column_name} | Prediction RMSE: " + str(int(rmse_prediction)) +" | Mean-Model RMSE: "+str(int(rmse_mean)))
     plt.xlabel('Time')
     plt.ylabel('MWh')
     plt.show()
-    print(t)
+    print(table)
 
+#run this for manual evaluation and visualisation of the models, uncomment line 61
 if __name__ == "__main__":
-    print(evaluate_model("Ressources\TrainingData\Production.csv", intervalls=2*96, model="32_865.pickles"))
+    evaluate_model("Ressources\TrainingData\Production.csv", intervalls=7*96, model="3.pickles")
+    evaluate_model("Ressources\TrainingData\Consumption.csv", intervalls=7*96, model="4.pickles")
