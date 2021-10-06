@@ -1,7 +1,7 @@
 import math
 from datetime import datetime
 from types import FrameType
-import Prediction
+import MLPredictor
 import os
 import importlib
 import WeatherService.ClimateForcast
@@ -24,15 +24,18 @@ def parser(s):
     '''
     return datetime.strptime(s,"%d/%m/%Y %H:%M:%S")
 
-def run(lat, lng, start, end, dur):
+def run(lat, lng, start, end, dur, test):
     days_in_future=(parser(start)-datetime.now()).days
+    if test=="test":
+        #due to weather api call restriction
+        return MLPredictor.get_best_start(start, end, dur)
     if(days_in_future<30):
         if(days_in_future<4):
             return WeatherService.WeatherForcast.get_best_start(lat, lng, start, end, dur)
         else:
             if(math.ceil(dur/60))<24:
-                return Prediction.get_best_start(start, end, dur)
+                return MLPredictor.get_best_start(start, end, dur)
             else:
                 return WeatherService.ClimateForcast.get_best_start(lat, lng, start, end, dur)
     else:
-        return Prediction.get_best_start(start, end, dur)
+        return MLPredictor.get_best_start(start, end, dur)

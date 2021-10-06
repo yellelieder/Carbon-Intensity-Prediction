@@ -60,49 +60,16 @@ def get_latest_file(dir):
     '''
     return sorted(os.listdir(dir)).pop()
 
-#todo check if output really is str
-def get_latest_training_date():
-    '''
-    Returns latest date for which training data is available.
+def get_last_date(type:str):
+    path = f"Ressources\TrainingData\{type.capitalize()}.pkl"
+    df=pd.read_pickle(path)
+    return df.iloc[-1,0]
 
-        Returns:
-        ----------
-
-        date : str
-            Latest available date in training data.
-    '''
-    log.info(f"gathering latest training data")
-    '''p=str(pd.read_csv("Ressources\TrainingData\Production.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")
-    c=str(pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",").iloc[-1,0]).replace("-","/")'''
-    p=pd.read_csv("Ressources\TrainingData\Production.csv", index_col=0, parse_dates=[1],sep=",")
-    c=pd.read_csv("Ressources\TrainingData\Consumption.csv", index_col=0, parse_dates=[1],sep=",")
-    timestampA= pd.to_datetime(p.iloc[-1,0]).strftime("%d-%m-%Y %H:%M:%S")
-    timestampB= pd.to_datetime(c.iloc[-1,0]).strftime("%d-%m-%Y %H:%M:%S")
-    return str(str(min(timestampA,timestampB)).replace("-","/"))
-
-def time_to_period(time):
-    '''
-    Converts time to number of 15 min periods since last training data-date.
-
-    Imagine as continuing the row index from the training date up to the requested date.
-
-        Parameters:
-        ----------
-
-        time : str
-            Time to be converted.
-
-        Returns:
-        ----------
-
-        period_id : int
-            The index of the period.
-    '''
+def time_to_period(time,type):
     input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
 
-    #todo: make date dynamic
-    #time = str(get_latest_training_date)
-    base_time_index=datetime.strptime("17/07/2021 23:45:00", '%d/%m/%Y %H:%M:%S')
+    base_time_index = get_last_date(type=type)
+    #base_time_index=datetime.strptime("14/09/2021 23:45:00", '%d/%m/%Y %H:%M:%S')
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
 
 def period_to_time(period, start):
@@ -145,8 +112,8 @@ def get_predictions(start, end, type):
             Containing predictions of elctricity production or consumption.
     '''
     log.info(f"applining pre trained ar model to user input")
-    norm_start=time_to_period(start)
-    norm_end=time_to_period(end)
+    norm_start=time_to_period(start, type)
+    norm_end=time_to_period(end,type)
     folder_path = PRODUCTION_MODEL_FOLDER_PATH if (type=="production") else CONSUMPTION_MODEL_FOLDER_PATH
     model=sm.load(folder_path+get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)

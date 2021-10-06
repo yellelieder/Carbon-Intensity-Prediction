@@ -1,8 +1,7 @@
 from datetime import date, timedelta
 from flask import Flask, request, jsonify,render_template, flash, redirect, make_response
 from flask_restful import Resource, Api
-import Prediction
-import MethodSelector
+import PredictionHandler
 from datetime import datetime
 import regex as re
 import requests

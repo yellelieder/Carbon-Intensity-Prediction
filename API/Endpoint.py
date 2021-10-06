@@ -1,7 +1,6 @@
 from datetime import date, timedelta
 from flask import Flask, request, jsonify,render_template, flash, redirect, make_response
 from flask_restful import Resource, Api
-import Prediction
 from datetime import datetime
 import regex as re
 import requests
@@ -15,8 +14,8 @@ from wtforms.validators import DataRequired
 import markdown.extensions
 import ValidationHelper
 import PredictionHandler
-from DataService import Scraper, PreProcessor
-from MachineLearningService import Trainer
+# from DataService import Scraper, PreProcessor
+# from MachineLearningService import Trainer
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -48,6 +47,18 @@ class EPI(Resource):
         query=request.args 
         return get_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
 
+class TestEndpoint(Resource):
+    def get(self):
+        log.info(f"handling get request in /api/ directory: {request}")
+        query=request.args 
+        return test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+
+def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+    start=to_timestamp(stdate,sttime)
+    end=to_timestamp(enddate,endtime)
+    return {"ideal start":PredictionHandler.run(lat, lng, start, end, dur, "test")}, 200
+
+
 def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     try:
         start=to_timestamp(stdate,sttime)
@@ -68,7 +79,7 @@ def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
             return {"error":"enter german coodrinates"}, 406  
         else:
             log.info(f"input valid")
-            return {"ideal start":MethodSelector.run(lat, lng, start, end, dur)}, 200
+            return {"ideal start":PredictionHandler.run(lat, lng, start, end, dur, test="no")}, 200
     except Exception as e:
         log.info(f"error: {str(e)}")
         traceback.print_exc(e)
@@ -184,22 +195,24 @@ def to_timestamp(date, time):
     return str(re.sub("[.]","/", date)+" "+time+":00")
 
 API.add_resource(EPI,"/api/")
+API.add_resource(TestEndpoint,"/test/")
 API.add_resource(Home,"/")
 API.add_resource(App,"/app")
 API.add_resource(Usage_Docu,"/api-docu")
 API.add_resource(Technical_Docu,"/api-tech")
 API.add_resource(Imprint,"/imprint")
 
-def refresh_model():
-    for i in range(1,2):
-        i=str(i)
-        Scraper.scrape(i)
-        Scraper.merge(i)
-        PreProcessor.clean_files(i)
-        Trainer.update_ar_model(i,intervall=5*4*24,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
+
+# def refresh_model():
+#     for i in range(1,2):
+#         i=str(i)
+#         Scraper.scrape(i)
+#         Scraper.merge(i)
+#         PreProcessor.clean_files(i)
+#         Trainer.update_ar_model(i,intervall=5*4*24,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
 
 if __name__=="__main__":
     day_intervall_for_schedule = 35
-    SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
-    SCHEDULER.start()
+    # SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
+    # SCHEDULER.start()
     APP.run(debug=True)

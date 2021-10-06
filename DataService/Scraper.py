@@ -171,7 +171,6 @@ def merge(type):
         file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
         data=data.append(file, ignore_index=True)
     df = pd.DataFrame(data)
-    #todo: handle existence of multiple files in folder
     df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".csv")
     df.to_pickle("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".pkl")
 
