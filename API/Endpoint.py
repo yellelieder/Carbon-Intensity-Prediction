@@ -15,6 +15,7 @@ from wtforms.validators import DataRequired
 import markdown.extensions
 import ValidationHelper
 from Prediction import PredictionHandler
+
 # from DataService import Scraper, PreProcessor
 # from MachineLearningService import Trainer
 

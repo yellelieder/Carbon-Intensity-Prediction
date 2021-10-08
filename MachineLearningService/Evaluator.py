@@ -20,7 +20,6 @@ def parser(s):
 
 def evaluate_model(training_data_file_path, intervalls, model):
     '''returns True if the model performs better than taking a average'''
-
     #prepare training data
     df = pd.read_csv(training_data_file_path, index_col=0, parse_dates=[1], sep=",")
     col = "Consumption" if ("cons" in training_data_file_path.lower()) else "Production"
