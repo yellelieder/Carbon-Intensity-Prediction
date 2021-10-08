@@ -9,11 +9,12 @@ from flask_apscheduler import APScheduler
 import logging
 import traceback
 from flask_wtf import FlaskForm
+from requests.models import requote_uri
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import markdown.extensions
 import ValidationHelper
-import PredictionHandler
+from Prediction import PredictionHandler
 # from DataService import Scraper, PreProcessor
 # from MachineLearningService import Trainer
 
@@ -56,7 +57,8 @@ class TestEndpoint(Resource):
 def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     start=to_timestamp(stdate,sttime)
     end=to_timestamp(enddate,endtime)
-    return {"ideal start":PredictionHandler.run(lat, lng, start, end, dur, "test")}, 200
+    result=PredictionHandler.run(lat, lng, start, end, dur, "test")
+    return {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
 
 
 def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
@@ -215,4 +217,4 @@ if __name__=="__main__":
     day_intervall_for_schedule = 35
     # SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
     # SCHEDULER.start()
-    APP.run(debug=True)
+    APP.run(debug=False)

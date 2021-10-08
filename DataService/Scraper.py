@@ -144,7 +144,6 @@ def scrape(type:str):
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(get_url(type,start_period,end_period))
     driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
-    #todo: validate incoming col names for variations
     time.sleep(5)
     driver.close()
     driver.quit()
