@@ -1,0 +1,169 @@
+<!doctype html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  {% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>{% block title %}{% endblock %}Energy Prediction Interface</title>
+  {% endblock %}
+  <style>
+    ::selection {
+      background: #00aa0098;
+    }
+    
+    ::-moz-selection {
+      background: #00aa0098;
+    }
+
+    .ss-wrapper {
+      overflow: hidden;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      float: left;
+    }
+
+    .footer {
+      position: fixed;
+      font-size: 14px;
+      left: 0;
+      padding: 0px, 0px, 0px, 0px;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      color: #f2f2f2;
+      text-align: center;
+    }
+
+    .footer a:link {
+      color: #f2f2f2;
+    }
+
+    .footer a:visited {
+      color: #f2f2f2;
+    }
+
+    a:visited {
+      color: black;
+    }
+
+    .footer a:hover {
+      color: #0A0;
+    }
+
+    a:hover {
+      color: #0A0;
+    }
+
+    .footer a:active {
+      color: #f2f2f2;
+    }
+
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+      padding-left: 1em;
+      background-color: #333;
+      overflow: hidden;
+      position: fixed;
+      /* Set the navbar to fixed position */
+      top: 0;
+      /* Position the navbar at the top of the page */
+      width: 100%;
+      /* Full width */
+    }
+
+    .topnav a {
+      text-align: center;
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a:hover {
+      background-color: #ddd;
+      color: #0A0;
+    }
+
+
+    div:not(#menu, #footer) {
+      margin: 0px 1em 0.1em 1em;
+    }
+
+    body {
+      margin-top: 15px;
+      padding-top: 0px;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="menu" class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/app">App</a>
+    <a href="/api-docu">API</a>
+    <a href="/api-tech">Documentation</a>
+  </div>
+  <br>
+  <div class="wrapper" class="text" id="content">{% block content %}
+    <h1>Home</h1>
+    <br>
+
+    Welcome to the <img src="\static\favicon.ico" alt="EPI"> project!<br>
+    The goal of this project is to provide software engineers with a simple solution to concider carbon emission in
+    their application development.<br>
+
+    <h2>Why it is worth it</h2>
+    - software is responsible for at least 3% of world carbon emission<br>
+    - using renevables, if possible has the potential to drastically reduce this<br>
+
+    <h2>How it works</h2>
+    - we have gathered electricity market data (and continue scraping the most current ones)<br>
+    - we concider weather forcasts (for predictions within the next 30 days)<br>
+    - we make predictions for future availability of renevable energy<br>
+    - this way we enable you to run ressource intensive processes when ther is a high probability for an green energy
+    surplus<br>
+
+    <h2>Fields of application</h2>
+    (some inspiration for some processes where this can be used)<br>
+    - database indexing<br>
+    - backups<br>
+    - synchronization<br>
+    - training of machine learning models<br>
+    - mining of crypto currency<br>
+    - executing regression tests <br>
+    - rendering video <br>
+    - running deployment pipelines <br>
+    - automated processes like done with RPA<br>
+    .. basically everything usually done overnight, where you don't really care when it's done <br>
+    {% endblock %}
+  </div>
+  <br>
+  <div class="footer" id="footer">
+    {% block footer %}
+    &ensp;Author: <a href="mailto:lieder@mailbox.org?subject=EPI Project">Yelle Lieder</a>, for the bachelor project at
+    <a target="blank" href="https://www.uni-due.de/">University of Duisburg-Essen</a>, <a target="blank"
+      href="https://se.wiwi.uni-due.de/">Chair for
+      Software Engineering esp. Mobile Applications</a> | <a href="/imprint">Imprint</a> </a>
+    {% endblock %}
+  </div>
+</body>
+
+</html>
