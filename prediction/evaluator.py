@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 from random import randint, seed
 from helpers import common
+import logging
 
 def production_consumption_ratio(start, end):
     dict=[]
@@ -28,4 +29,5 @@ def random_prediction(time_series, start, dur):
 
 def run(start, end, dur):
     time_series = production_consumption_ratio(start, end)
+    logging.info(f"runtime evaluation done")
     return best_start_time(time_series, dur,start), random_prediction(time_series, start, dur)

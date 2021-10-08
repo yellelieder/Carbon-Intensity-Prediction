@@ -12,18 +12,15 @@ from flask_wtf import FlaskForm
 from requests.models import requote_uri
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
-import markdown.extensions
+import markdown
 from helpers import inputvalidation
 from prediction import predictionhandler
 
-# from DataService import Scraper, PreProcessor
-# from MachineLearningService import Trainer
-
-# log=logging.getLogger(__name__)
-# log.setLevel(logging.INFO)
-# handler=logging.FileHandler("logs.log")
-# handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-# log.addHandler(handler)
+log=logging.getLogger(__name__)
+log.setLevel(logging.INFO)
+handler=logging.FileHandler("logs.log")
+handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
+log.addHandler(handler)
 
 APP=Flask(__name__)
 API=Api(APP)
@@ -63,30 +60,25 @@ def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
 
 
 def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
-    try:
-        start=to_timestamp(stdate,sttime)
-        end=to_timestamp(enddate,endtime)
-        if dur<15:
-            return {"error":"duration must be minimum of 15 min"}, 406 
-        elif inputvalidation.start_after_end(start, end):
-            return {"error":"end before start"}, 406 
-        elif inputvalidation.start_in_past(start):
-            return {"error":"enter upcoming timeframe"}, 406  
-        elif inputvalidation.time_le_dur(start, end, dur):
-            return {"error":"duration not fitting in timeframe"}, 406
-        elif lat<-90 or lat>90:
-            return {"error":"lattitude out of rang"}, 406
-        elif lng<-180 or lng>180:
-            return {"error":"longitude out of range"}, 406
-        elif inputvalidation.invalid_geo(lat, lng):  
-            return {"error":"enter german coodrinates"}, 406  
-        else:
-            log.info(f"input valid")
-            return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
-    except Exception as e:
-        log.info(f"error: {str(e)}")
-        traceback.print_exc(e)
-        return {"error":"invalid input"}, 406
+    start=to_timestamp(stdate,sttime)
+    end=to_timestamp(enddate,endtime)
+    if dur<15:
+        return {"error":"duration must be minimum of 15 min"}, 406 
+    elif inputvalidation.start_after_end(start, end):
+        return {"error":"end before start"}, 406 
+    elif inputvalidation.start_in_past(start):
+        return {"error":"enter upcoming timeframe"}, 406  
+    elif inputvalidation.time_le_dur(start, end, dur):
+        return {"error":"duration not fitting in timeframe"}, 406
+    elif lat<-90 or lat>90:
+        return {"error":"lattitude out of rang"}, 406
+    elif lng<-180 or lng>180:
+        return {"error":"longitude out of range"}, 406
+    elif inputvalidation.invalid_geo(lat, lng):  
+        return {"error":"enter german coodrinates"}, 406  
+    else:
+        log.info(f"input valid")
+        return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
 
 class Home(Resource):
     def get(self):
@@ -206,6 +198,7 @@ API.add_resource(Technical_Docu,"/api-tech")
 API.add_resource(Imprint,"/imprint")
 
 
+
 # def refresh_model():
 #     for i in range(1,2):
 #         i=str(i)
@@ -215,11 +208,6 @@ API.add_resource(Imprint,"/imprint")
 #         Trainer.update_ar_model(i,intervall=5*4*24,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
 
 if __name__=="__main__":
-    log=logging.getLogger(__name__)
-    log.setLevel(logging.INFO)
-    handler=logging.FileHandler("logs.log")
-    handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-    log.addHandler(handler)
     day_intervall_for_schedule = 35
     # SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
     # SCHEDULER.start()
