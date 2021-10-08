@@ -4,6 +4,7 @@ import json
 import logging
 from datetime import datetime
 import math
+from app.helpers import common
 
 WEATHER_DATA_API_KEY="89f83e40489b5e87c4cb16463dc68b42"
 
@@ -12,22 +13,6 @@ log.setLevel(logging.INFO)
 handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
-
-def parser(s):
-    '''
-    Parses dates from csv into date object.
-
-        Parameters:
-        ----------
-        s : str
-            Timestapm in csv
-
-        Returns:
-        ----------
-        date : datetime
-            Object of form dd/mm/yyyy hh:mm:ss
-    '''
-    return datetime.strptime(s,"%d/%m/%Y %H:%M:%S")
 
 def get_url(lat, lng):
     '''
@@ -52,8 +37,6 @@ def get_url(lat, lng):
     log.info(f"converting {lat} and {lng} to weather api url")
     return f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={WEATHER_DATA_API_KEY}"
 
-
-#https://openweathermap.org/api/one-call-api
 def get_forcast(lat, lng, days_from_now, days_total):
     '''
     Turns geo-coordinates in weather forcast.
@@ -73,40 +56,30 @@ def get_forcast(lat, lng, days_from_now, days_total):
         response : str
             Weather forcast for wind and sun, for timeframe requested.
     '''
-    #start und ende in unix
     log.info(f"request weather api")
     response=requests.get(get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     return response
 
-def convert_date(date):
-    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")
-
 def get_best_start(lat, lon, start:str, end:str, dur:int):
-    dur_in_days = math.ceil(dur/(24*60))
-    start_in_days = (parser(start)-datetime.now()).days
-    days_total = (parser(end)-parser(start)).days+1
-    pred=get_forcast(lat,lon, start_in_days,days_total+1)
-    max_wind_speed = 0
-    max_wind_day = 0
-    min_cloudiness= math.inf
-    min_cloud_day = 0
-    #a very simple solution in lack of proper domain knowledge
-    for day in range(len(pred)-dur_in_days):
+    dur_days = math.ceil(dur/(24*60))
+    start_days = (common.str_to_datetime(start)-datetime.now()).days
+    total_days = (common.str_to_datetime(end)-common.str_to_datetime(start)).days+1
+    forcast=get_forcast(lat,lon, start_days,total_days+1)
+    max_wind_speed,max_wind_day,min_cloud_day = 0,0,0
+    min_cloud= math.inf
+    for day in range(len(forcast)-dur_days):
         subset_sum_wind, subset_sum_clouds=0,0
-        for day_in_subset in pred[day:day+dur_in_days]:
+        for day_in_subset in forcast[day:day+dur_days]:
             subset_sum_wind +=day_in_subset["speed"]
             subset_sum_clouds +=day_in_subset["clouds"]
         if subset_sum_wind>max_wind_speed:
             max_wind_day=day
             max_wind_speed=subset_sum_wind
-        if subset_sum_wind<min_cloudiness:
+        if subset_sum_wind<min_cloud:
             min_cloud_day=day
-            min_cloudiness=subset_sum_clouds
+            min_cloud=subset_sum_clouds
     start_day = min(max_wind_day, min_cloud_day)
-    surise=datetime.utcfromtimestamp(pred[start_day]["sunrise"]).strftime('%H:%M')
-    sug=parser(datetime.utcfromtimestamp(pred[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
-    ideal_time=sug if sug>parser(start) else start
-    return convert_date(ideal_time)
-
-if __name__=="__main__":
-    print(get_best_start("51.4582235","7.0158171","22/09/2021 21:30:00", "23/09/2021 04:20:00", 2160))
+    surise=datetime.utcfromtimestamp(forcast[start_day]["sunrise"]).strftime('%H:%M')
+    suggestion=common.str_to_datetime(datetime.utcfromtimestamp(forcast[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
+    suggestion=suggestion if suggestion>common.str_to_datetime(start) else start
+    return common.format_date(suggestion)

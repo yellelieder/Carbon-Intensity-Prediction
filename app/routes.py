@@ -13,18 +13,14 @@ from requests.models import requote_uri
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import markdown
-from helpers import inputvalidation
-from prediction import predictionhandler
+from app.helpers import inputvalidation
+from app.prediction import predictionhandler
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
-
-APP=Flask(__name__)
-API=Api(APP)
-SCHEDULER=APScheduler()
 
 class EPI(Resource):
     def get(self):
@@ -44,7 +40,7 @@ class EPI(Resource):
         '''
         log.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
-        return get_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+        return prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
 
 class TestEndpoint(Resource):
     def get(self):
@@ -59,7 +55,7 @@ def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     return {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
 
 
-def get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     start=to_timestamp(stdate,sttime)
     end=to_timestamp(enddate,endtime)
     if dur<15:
@@ -165,7 +161,7 @@ class App(Resource):
         enddate=str(datetime.strptime(request.form["enddate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
         endtime =str(request.form["endtime"])
         dur = int(request.form["dur"])
-        pred=get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
+        pred=prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
 
@@ -189,13 +185,13 @@ def to_timestamp(date, time):
     '''
     return str(re.sub("[.]","/", date)+" "+time+":00")
 
-API.add_resource(EPI,"/api/")
-API.add_resource(TestEndpoint,"/test/")
-API.add_resource(Home,"/")
-API.add_resource(App,"/app")
-API.add_resource(Usage_Docu,"/api-docu")
-API.add_resource(Technical_Docu,"/api-tech")
-API.add_resource(Imprint,"/imprint")
+# API.add_resource(EPI,"/api/")
+# API.add_resource(TestEndpoint,"/test/")
+# API.add_resource(Home,"/")
+# API.add_resource(App,"/app")
+# API.add_resource(Usage_Docu,"/api-docu")
+# API.add_resource(Technical_Docu,"/api-tech")
+# API.add_resource(Imprint,"/imprint")
 
 
 
@@ -207,8 +203,7 @@ API.add_resource(Imprint,"/imprint")
 #         PreProcessor.clean_files(i)
 #         Trainer.update_ar_model(i,intervall=5*4*24,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
 
-if __name__=="__main__":
-    day_intervall_for_schedule = 35
-    # SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
-    # SCHEDULER.start()
-    APP.run(debug=False)
+# if __name__=="__main__":
+#     day_intervall_for_schedule = 35
+#     # SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
+#     # SCHEDULER.start()

@@ -42,3 +42,6 @@ def last_training_date(type:str):
     path = f"Ressources\TrainingData\{type.capitalize()}.pkl"
     df=pd.read_pickle(path)
     return df.iloc[-1,0]
+
+def format_date(date):
+    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")

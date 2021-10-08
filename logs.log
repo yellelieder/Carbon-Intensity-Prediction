@@ -39,3 +39,39 @@
 2021-10-08 17:01:11,397:INFO:time_le_dur:validating user input start, end, duration
 2021-10-08 17:01:11,398:INFO:invalid_geo:validation user geo coordinates
 2021-10-08 17:01:11,608:INFO:get_prediction:input valid
+2021-10-08 17:20:00,750:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-08 17:20:00,751:INFO:start_after_end:validating user input start and end time
+2021-10-08 17:20:00,757:INFO:start_in_past:validating user input start
+2021-10-08 17:20:00,758:INFO:time_le_dur:validating user input start, end, duration
+2021-10-08 17:20:00,759:INFO:invalid_geo:validation user geo coordinates
+2021-10-08 17:20:00,969:INFO:prediction:input valid
+2021-10-08 17:54:55,066:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-08 17:54:55,068:INFO:start_after_end:validating user input start and end time
+2021-10-08 17:54:55,073:INFO:start_in_past:validating user input start
+2021-10-08 17:54:55,074:INFO:time_le_dur:validating user input start, end, duration
+2021-10-08 17:54:55,075:INFO:invalid_geo:validation user geo coordinates
+2021-10-08 17:54:55,278:INFO:prediction:input valid
+2021-10-08 17:55:59,027:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=03.07.2021&sttime=17:00&endate=06.07.2021&entime=05:57&dur=212' [GET]>
+2021-10-08 17:55:59,919:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=12.07.2021&sttime=21:00&endate=13.07.2021&entime=06:59&dur=83' [GET]>
+2021-10-08 17:56:00,778:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=05.07.2021&sttime=14:00&endate=06.07.2021&entime=03:13&dur=43' [GET]>
+2021-10-08 17:56:01,691:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=17.07.2021&sttime=18:00&endate=18.07.2021&entime=14:04&dur=136' [GET]>
+2021-10-08 17:56:02,579:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=06.07.2021&sttime=09:00&endate=08.07.2021&entime=04:39&dur=135' [GET]>
+2021-10-08 17:56:03,492:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=04.08.2021&sttime=22:00&endate=07.08.2021&entime=01:22&dur=145' [GET]>
+2021-10-08 17:56:04,518:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/test/?lat=50.9917119&long=10.2136589&stdate=03.08.2021&sttime=12:00&endate=06.08.2021&entime=07:09&dur=56' [GET]>
+2021-10-08 18:02:36,364:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-08 18:02:36,366:INFO:start_after_end:validating user input start and end time
+2021-10-08 18:02:36,372:INFO:start_in_past:validating user input start
+2021-10-08 18:02:36,373:INFO:time_le_dur:validating user input start, end, duration
+2021-10-08 18:02:36,374:INFO:invalid_geo:validation user geo coordinates
+2021-10-08 18:02:36,542:INFO:prediction:input valid
+2021-10-08 18:04:45,654:INFO:start_after_end:validating user input start and end time
+2021-10-08 18:04:45,655:INFO:start_in_past:validating user input start
+2021-10-08 18:04:45,656:INFO:time_le_dur:validating user input start, end, duration
+2021-10-08 18:04:45,656:INFO:invalid_geo:validation user geo coordinates
+2021-10-08 18:04:45,861:INFO:prediction:input valid
+2021-10-08 18:24:11,985:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-08 18:24:11,987:INFO:start_after_end:validating user input start and end time
+2021-10-08 18:24:11,995:INFO:start_in_past:validating user input start
+2021-10-08 18:24:11,995:INFO:time_le_dur:validating user input start, end, duration
+2021-10-08 18:24:11,996:INFO:invalid_geo:validation user geo coordinates
+2021-10-08 18:24:12,243:INFO:prediction:input valid

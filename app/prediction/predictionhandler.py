@@ -1,13 +1,13 @@
 import math
 from datetime import datetime
 from types import FrameType
-from prediction import predictor
+from app.prediction import predictor
 import os
 import importlib
-from forcast import climate
-from forcast import weather
+from app.forcast import climate
+from app.forcast import weather
 import csv
-from prediction import evaluator
+from app.prediction import evaluator
 
 
 def parser(s):
