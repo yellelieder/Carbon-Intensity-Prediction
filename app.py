@@ -104,7 +104,7 @@ class Home(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('base.html'),200,headers)
+        return make_response(render_template(r'index.html'),200,headers)
 
 class Usage_Docu(Resource):
     def get(self):
@@ -122,7 +122,7 @@ class Usage_Docu(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('api-docu.html'),200,headers)
+        return make_response(render_template(r'api.html'),200,headers)
 
 class Technical_Docu(Resource):
     def get(self):
@@ -140,12 +140,12 @@ class Technical_Docu(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('api-design-docu.html'),200,headers)
+        return make_response(render_template(r'docu.html'),200,headers)
 
 class Imprint(Resource):
     def get(self):
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('imprint.html'),200,headers)
+        return make_response(render_template(r'imprint.html'),200,headers)
 
 class App(Resource):
     def get(self):
@@ -163,7 +163,7 @@ class App(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('visual-app.html'),200,headers)
+        return make_response(render_template(r'form.html'),200,headers)
 
     def post(self):
         lat =float(request.form["lat"])
@@ -175,7 +175,7 @@ class App(Resource):
         dur = int(request.form["dur"])
         pred=get_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
+        return make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
 
 
 def to_timestamp(date, time):

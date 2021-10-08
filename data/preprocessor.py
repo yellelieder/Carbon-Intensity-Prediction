@@ -5,18 +5,11 @@ import os
 import numpy as np
 import logging
 
-RAW_PRODUCTION_FILE = r"Ressources\RawDataMerged\raw_production.csv"
-RAW_CONSUMPTION_FILE = r"Ressources\RawDataMerged\raw_consumption.csv"
-TARGET_PRODUCTION_FOLDER="Ressources\\Training Data Production\\"
-TARGET_CONSUMPTION_FOLDER="Ressources\\Training Data Consumption\\"
-TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
-
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
-
 
 def clean_files(type:str):
     '''
