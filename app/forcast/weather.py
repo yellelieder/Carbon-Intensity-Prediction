@@ -6,20 +6,14 @@ from datetime import datetime
 import math
 import config
 from app.helpers import common
-
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
+import logger as log
 
 def get_url(lat, lng):
-    log.info(f"converting {lat} and {lng} to weather api url")
+    log.add.info(f"converting {lat} and {lng} to weather api url")
     return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
 
 def get_forcast(lat, lng):
-    log.info(f"request weather api")
+    log.add.info(f"request weather api")
     return requests.get(get_url(lat,lng)).json()
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
@@ -48,6 +42,3 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     sug=common.str_to_datetime(datetime.utcfromtimestamp(pred[start_hour]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
     ideal_time=sug if sug>start else start
     return common.format_date(ideal_time)
-
-if __name__=="__main__":
-    print(get_best_start("51.4582235","7.0158171","27/09/2021 14:00:00", "29/09/2021 20:00:00", 1500))

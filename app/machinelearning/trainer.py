@@ -11,13 +11,15 @@ from math import sqrt
 import math
 import os
 from wtforms.fields.core import Label
-import backtesting
+from app.machinelearning import backtesting
 import time
 import csv  
+import config
+import logger as log
 
 
 def parser(s):
-    return datetime.strftime(s, "%d/%m/%Y %H:%M:%S")
+    return datetime.strftime(s, config.dateformat)
 
 def get_free_id():
     df=pd.read_csv("Ressources\Models\Models.csv",sep=",", dtype={

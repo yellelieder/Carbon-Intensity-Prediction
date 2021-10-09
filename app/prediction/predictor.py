@@ -14,18 +14,8 @@ import numpy as np
 import sys
 import logging
 from app.helpers import common
-
-
-PRODUCTION_MODEL_FOLDER_PATH="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\\"
-PRODUCTION_DATA_FOLDER_PATH="Ressources\\Training Data Production\\"
-CONSUMPTION_MODEL_FOLDER_PATH ="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\\"
-CONSUMPTION_DATA_FOLDER_PATH="Ressources\\Training Data Consumption\\"
-
-# log=logging.getLogger(__name__)
-# log.setLevel(logging.INFO)
-# handler=logging.FileHandler("logs.log")
-# handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-# log.addHandler(handler)
+import config
+import logger as log
 
 def get_predictions(start, end, type):
     '''
@@ -51,7 +41,7 @@ def get_predictions(start, end, type):
     '''
     norm_start=common.time_str_to_lag(start, type)
     norm_end=common.time_str_to_lag(end,type)
-    folder_path = PRODUCTION_MODEL_FOLDER_PATH if (type=="production") else CONSUMPTION_MODEL_FOLDER_PATH
+    folder_path = config.production_model_folder_path if (type=="production") else config.comsumption_model_folder_path
     model=sm.load(folder_path+common.get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 
@@ -72,7 +62,7 @@ def get_production_consumption_ratio(start, end):
         frame : pd.DataFrame
             Data frame with predicted ratios of energy marked data.
     '''
-    logging.info(f"calculating production/consumption ratios for user input")
+    log.add.info(f"calculating production/consumption ratios for user input")
     production_prediction=get_predictions(start, end, "production")
     consumption_prediction=get_predictions(start, end, "consumption")
     return production_prediction.divide(other=consumption_prediction).to_frame()
@@ -97,7 +87,7 @@ def find_optimum(time_series, duration, start):
         time : str
             Time when the process should be started.
     '''
-    logging.info(f"selecting optimal starting time from timeseries")
+    log.add.info(f"selecting optimal starting time from timeseries")
     norm_duration=int(duration/15)
     max_cummulative_ratio=0
     optimal_period=0
@@ -111,7 +101,7 @@ def find_optimum(time_series, duration, start):
 def ar_prediction(start, end, duration):
     time_series=get_production_consumption_ratio(start, end)
     point_in_time =find_optimum(time_series,duration, start)
-    logging.info(f"prediction successful")
+    log.add.info(f"prediction successful")
     return point_in_time
 
 #cut

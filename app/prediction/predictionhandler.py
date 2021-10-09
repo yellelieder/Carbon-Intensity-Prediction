@@ -9,6 +9,7 @@ from app.forcast import weather
 import csv
 from app.prediction import evaluator
 from app.helpers import common
+import logger as log
 
 def run(lat, lng, start, end, dur, test):
     days_in_future=(common.str_to_datetime(start)-datetime.now()).days

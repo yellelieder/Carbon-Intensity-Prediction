@@ -13,9 +13,11 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.ar_model import AutoReg
 from statsmodels.tsa.stattools import adfuller
 from wtforms.fields.core import Label
+import config
+import logger as log
 
 def parser(s):
-    return datetime.strftime(s, "%d/%m/%Y %H:%M:%S")
+    return datetime.strftime(s, config.dateformat)
 
 
 def evaluate_model(training_data_file_path, intervalls, model):

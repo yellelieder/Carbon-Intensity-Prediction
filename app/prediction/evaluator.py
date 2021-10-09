@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 from random import randint, seed
 from app.helpers import common
-import logging
+import logger as log
 
 def production_consumption_ratio(start, end):
     dict=[]

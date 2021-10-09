@@ -6,12 +6,7 @@ from datetime import datetime
 import math
 from app.helpers import common
 import config
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
+import logger as log
 
 def get_url(lat, lng):
     '''
@@ -33,7 +28,7 @@ def get_url(lat, lng):
             Url with correct parameter for requesting weather data.yoy
     '''
 
-    log.info(f"converting {lat} and {lng} to weather api url")
+    log.add.info(f"converting {lat} and {lng} to weather api url")
     return f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
 
 def get_forcast(lat, lng, days_from_now, days_total):
@@ -55,7 +50,7 @@ def get_forcast(lat, lng, days_from_now, days_total):
         response : str
             Weather forcast for wind and sun, for timeframe requested.
     '''
-    log.info(f"request weather api")
+    log.add.info(f"request weather api")
     response=requests.get(get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     return response
 

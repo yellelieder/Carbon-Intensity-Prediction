@@ -1,24 +1,22 @@
 import pandas as pd
-from datetime import datetime
 import regex as re
 import os
 import numpy as np
-import logging
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
+import logger as log
 
 def clean_files(type:str):
     '''
-    Cleans data for auto regression.
+    Cleans raw data for machine learning training.
 
         Parameters:
         ----------
         type : str
             The type of data. 1=production, 2=consumption
+
+        Returns:
+        ----------
+             
+            Stores cleaned data as .csv and dataframe .pkl
     '''
     file_index=1 if type=="1" else 0
     file_name="Production" if type=="1" else "Consumption"
@@ -28,7 +26,7 @@ def clean_files(type:str):
     df["Datum"]=df["Datum"].apply(lambda x: re.sub("[.]","/", x)+":00")
     pd.DataFrame(merge_columns(type, df)).to_csv("Ressources\\TrainingData\\"+file_name+".csv")
     df.to_pickle("Ressources\\TrainingData\\"+file_name+".pkl")
-    log.info(f"input: {type}, used to save cleaned df as csv: {file_name}.csv")
+    log.add.info(f"input: {type}, used to save cleaned df as csv: {file_name}.csv")
 
 def merge_columns(type, df):
     '''
@@ -48,7 +46,7 @@ def merge_columns(type, df):
             Containing data ready for auto regression.
     '''
     if type=="1":
-        log.info(f"formatting production data rows")
+        log.add.info(f"formatting production data rows")
 
         col = ["Biomasse[MWh]","Wasserkraft[MWh]","Wind Offshore[MWh]","Wind Onshore[MWh]","Photovoltaik[MWh]","Sonstige Erneuerbare[MWh]"]
         for c in col:
@@ -65,7 +63,7 @@ def merge_columns(type, df):
             df["Sonstige Erneuerbare[MWh]"])}
         df["Production"]=(df["Production"].apply(lambda y: int(float(str(y)))))
     else:
-        log.info(f"formating consumption data rows")
+        log.add.info(f"formating consumption data rows")
         df["Gesamt (Netzlast)[MWh]"]=(df["Gesamt (Netzlast)[MWh]"].apply(lambda x: str(x).replace(".",""))).apply(lambda x: str(x).replace(",",".")).apply(lambda y: int(float(str(y))))
         df["Gesamt (Netzlast)[MWh]"==0]=np.nan
         mean=df["Gesamt (Netzlast)[MWh]"].mean(skipna=True)

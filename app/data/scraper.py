@@ -6,15 +6,12 @@ from datetime import datetime
 import regex as re
 import time
 import pandas as pd
-import preprocessor
+from app.data import preprocessor
 import logging
 from app.helpers import common
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
+from app.machinelearning import trainer
+import config
+import logger as log
 
 def get_url(type:str, start:str, end:str):
     '''
@@ -38,7 +35,7 @@ def get_url(type:str, start:str, end:str):
         url : str
             Url with correct parameter for requesting electricity market data.
     '''
-    log.info(f"creating smard.de url from type: {type}, start: {start}, end: {end}")
+    log.add.info(f"creating smard.de url from type: {type}, start: {start}, end: {end}")
     if type=="1":
         sub="1"
     else:
@@ -61,7 +58,7 @@ def get_next_date(type:str):
         date : str
             Date for which market data is missing. 
     '''
-    log.info(f"calculating date, where to start scraping")
+    log.add.info(f"calculating date, where to start scraping")
     path = get_download_path(type)
     filename = common.get_latest_file(path)
     x= filename.split("_")[3]
@@ -89,10 +86,7 @@ def get_download_path(type:str):
         path : str
             Relative folder path for downloaded data.
     '''
-    if type=="1":
-        return "Ressources\Downloads\Production"
-    else:
-        return "Ressources\Downloads\Consumption"
+    return "Ressources\Downloads\Production" if type=="1" else "Ressources\Downloads\Consumption"
 
 def scrape(type:str):
     '''
@@ -109,18 +103,12 @@ def scrape(type:str):
         
         Persists data as csv in projects download folder.
     '''
-    log.info(f"scraping new date from smard.de for type {type}")
+    log.add.info(f"scraping new date from smard.de for type {type}")
     start_period=get_next_date(type)
-    end_period=get_last_date(type, 30)
+    end_period=get_last_date(type, config.scrape_days)
     options=webdriver.ChromeOptions()
-    if type=="1":
-        t="\Production"
-    else: 
-        t= "\Consumption"
-
-    '''There is unfortunately no way to make this path relative with selenium.
-    But selenium is needed, as the scraped site is build dynamically.'''
-    preferences={"download.default_directory":r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project\EPI\Ressources\Downloads"+t}
+    t="\Production" if type=="1" else"\Consumption"
+    preferences={"download.default_directory":config.local_path+r"\EPI\Ressources\Downloads"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(get_url(type,start_period,end_period))
@@ -145,7 +133,7 @@ def merge(type):
         Persists result as single csv at Ressources\RawDataMerged
     '''
     dir="Ressources\Downloads\Production" if type=="1" else "Ressources\Downloads\Consumption"
-    log.info(f"merging files from folder: {dir}")
+    log.add.info(f"merging files from folder: {dir}")
     data=pd.DataFrame()
     for i in os.listdir(dir):
         file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
@@ -155,9 +143,10 @@ def merge(type):
     df.to_pickle("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".pkl")
 
 def run():
-    scrape("1")
-    scrape("2")
-    merge(get_download_path("1"))
-    merge(get_download_path("2"))
-    preprocessor.clean_files("1")
-    preprocessor.clean_files("2")
+    for i in range(1,2):
+        lag = config.production_training_lags if i==1 else config.consumption_training_lags
+        i=str(i)
+        scrape(i)
+        merge(i)
+        preprocessor.clean_files(i)
+        trainer.update_ar_model(i,intervall=config.rmse_intervall,start_lag= lag-1,end_lag= lag+1,start_skip= config.model_skip_row_start,end_skip= -1)

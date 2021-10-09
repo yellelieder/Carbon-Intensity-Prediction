@@ -15,26 +15,18 @@ from wtforms.validators import DataRequired
 import markdown.extensions
 import pandas as pd
 import os
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
-
-def log(x:str):
-    log.info(x)
+import config
+import logger as log
 
 def datetime_to_str(s):
-    return datetime.strftime(s, "%d/%m/%Y %H:%M:%S")
+    return datetime.strftime(s, config.dateformat)
 
 def str_to_datetime(s):
-    return datetime.strptime(s, "%d/%m/%Y %H:%M:%S")
+    return datetime.strptime(s, config.dateformat)
 
 def time_str_to_lag(time,type):
-    input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
+    input_time_index=datetime.strptime(time, config.dateformat)
     base_time_index = last_training_date(type=type)
-    #base_time_index=datetime.strptime("14/09/2021 23:45:00", '%d/%m/%Y %H:%M:%S')
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
 
 def lag_to_datetime(period, start):
@@ -83,3 +75,22 @@ def get_latest_file(dir):
             Name of the last file from the folder in alphabetical order.
     '''
     return sorted(os.listdir(dir)).pop()
+
+def merge_data_and_time(date, time):
+    '''
+    Converts data and time to timestamp.
+
+        Parameters:
+        ----------
+
+        date : str        
+        time : str
+            User input when process can start.
+
+        Returns:
+        ----------
+
+        date_time : str
+            In form dd/mm/yyy hh:mm:ss
+    '''
+    return str(re.sub("[.]","/", date)+" "+time+":00")

@@ -13,12 +13,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import markdown.extensions.fenced_code
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
+import config
+import logger as log
 
 def start_after_end(start, end):
     '''
@@ -38,8 +34,8 @@ def start_after_end(start, end):
         valitation : bool
             False if input is valid, True if input is invalid.
     '''
-    log.info(f"validating user input start and end time")
-    return datetime.strptime(start, '%d/%m/%Y %H:%M:%S')>datetime.strptime(end, '%d/%m/%Y %H:%M:%S')
+    log.add.info(f"validating user input start and end time")
+    return datetime.strptime(start, config.dateformat)>datetime.strptime(end, config.dateformat)
 
 def start_in_past(start):
     '''
@@ -55,8 +51,8 @@ def start_in_past(start):
         validation : bool
             False if input is valid, True if input is in the past.
     '''
-    log.info(f"validating user input start")
-    return datetime.strptime(start, '%d/%m/%Y %H:%M:%S')<datetime.now()
+    log.add.info(f"validating user input start")
+    return datetime.strptime(start, config.dateformat)<datetime.now()
 
 def time_le_dur(start, end, dur):
     '''
@@ -78,8 +74,8 @@ def time_le_dur(start, end, dur):
         validation : bool
             False if input is valid, true if duration does not fit between start and end.
     '''
-    log.info(f"validating user input start, end, duration")
-    return not int(divmod((datetime.strptime(end, '%d/%m/%Y %H:%M:%S')-datetime.strptime(start, '%d/%m/%Y %H:%M:%S')).total_seconds(),900)[0])>=int(dur/15)
+    log.add.info(f"validating user input start, end, duration")
+    return not int(divmod((datetime.strptime(end, config.dateformat)-datetime.strptime(start, config.dateformat)).total_seconds(),900)[0])>=int(dur/15)
 
 def invalid_geo(lat, lng):
     '''
@@ -98,9 +94,9 @@ def invalid_geo(lat, lng):
         validation : bool
             False if coordinates are in Germany, true if they are outside germany.
     '''
-    log.info(f"validation user geo coordinates")
+    log.add.info(f"validation user geo coordinates")
     try:
-        response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key=AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8").json()["results"][0]["formatted_address"]
+        response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key={config.googlemaps_api_key}").json()["results"][0]["formatted_address"]
     except Exception as e:
         return True
     if response=="Germany":

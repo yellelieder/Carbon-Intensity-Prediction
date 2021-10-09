@@ -5,7 +5,7 @@ from datetime import datetime
 import regex as re
 import requests
 import json
-from flask_apscheduler import APScheduler
+from flask_apscheduler import APScheduler, scheduler
 import logging
 import traceback
 from flask_wtf import FlaskForm
@@ -15,12 +15,9 @@ from wtforms.validators import DataRequired
 import markdown
 from app.helpers import inputvalidation
 from app.prediction import predictionhandler
-
-log=logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-handler=logging.FileHandler("logs.log")
-handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
-log.addHandler(handler)
+from app.helpers import common
+import config
+import logger as log
 
 class EPI(Resource):
     def get(self):
@@ -38,44 +35,16 @@ class EPI(Resource):
         response : json
             response to the request
         '''
-        log.info(f"handling get request in /api/ directory: {request}")
+        log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
         return prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
 
 class TestEndpoint(Resource):
     def get(self):
-        log.info(f"handling get request in /api/ directory: {request}")
+        log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
         return test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
-
-def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
-    start=to_timestamp(stdate,sttime)
-    end=to_timestamp(enddate,endtime)
-    result=predictionhandler.run(lat, lng, start, end, dur, "test")
-    return {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
-
-
-def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
-    start=to_timestamp(stdate,sttime)
-    end=to_timestamp(enddate,endtime)
-    if dur<15:
-        return {"error":"duration must be minimum of 15 min"}, 406 
-    elif inputvalidation.start_after_end(start, end):
-        return {"error":"end before start"}, 406 
-    elif inputvalidation.start_in_past(start):
-        return {"error":"enter upcoming timeframe"}, 406  
-    elif inputvalidation.time_le_dur(start, end, dur):
-        return {"error":"duration not fitting in timeframe"}, 406
-    elif lat<-90 or lat>90:
-        return {"error":"lattitude out of rang"}, 406
-    elif lng<-180 or lng>180:
-        return {"error":"longitude out of range"}, 406
-    elif inputvalidation.invalid_geo(lat, lng):  
-        return {"error":"enter german coodrinates"}, 406  
-    else:
-        log.info(f"input valid")
-        return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
-
+    
 class Home(Resource):
     def get(self):
         '''
@@ -165,45 +134,30 @@ class App(Resource):
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
 
-
-def to_timestamp(date, time):
-    '''
-    Converts data and time to timestamp.
-
-        Parameters:
-        ----------
-
-        date : str        
-        time : str
-            User input when process can start.
-
-        Returns:
-        ----------
-
-        date_time : str
-            In form dd/mm/yyy hh:mm:ss
-    '''
-    return str(re.sub("[.]","/", date)+" "+time+":00")
-
-# API.add_resource(EPI,"/api/")
-# API.add_resource(TestEndpoint,"/test/")
-# API.add_resource(Home,"/")
-# API.add_resource(App,"/app")
-# API.add_resource(Usage_Docu,"/api-docu")
-# API.add_resource(Technical_Docu,"/api-tech")
-# API.add_resource(Imprint,"/imprint")
+def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+    start=common.merge_data_and_time(stdate,sttime)
+    end=common.merge_data_and_time(enddate,endtime)
+    result=predictionhandler.run(lat, lng, start, end, dur, "test")
+    return {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
 
 
-
-# def refresh_model():
-#     for i in range(1,2):
-#         i=str(i)
-#         Scraper.scrape(i)
-#         Scraper.merge(i)
-#         PreProcessor.clean_files(i)
-#         Trainer.update_ar_model(i,intervall=5*4*24,start_lag= 1,end_lag= 680,start_skip= 227805,end_skip= -1)
-
-# if __name__=="__main__":
-#     day_intervall_for_schedule = 35
-#     # SCHEDULER.add_job(id="Scheduled task", func=refresh_model, trigger="interval", seconds=day_intervall_for_schedule*86400)
-#     # SCHEDULER.start()
+def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+    start=common.merge_data_and_time(stdate,sttime)
+    end=common.merge_data_and_time(enddate,endtime)
+    if dur<15:
+        return {"error":"duration must be minimum of 15 min"}, 406 
+    elif inputvalidation.start_after_end(start, end):
+        return {"error":"end before start"}, 406 
+    elif inputvalidation.start_in_past(start):
+        return {"error":"enter upcoming timeframe"}, 406  
+    elif inputvalidation.time_le_dur(start, end, dur):
+        return {"error":"duration not fitting in timeframe"}, 406
+    elif lat<-90 or lat>90:
+        return {"error":"lattitude out of rang"}, 406
+    elif lng<-180 or lng>180:
+        return {"error":"longitude out of range"}, 406
+    elif inputvalidation.invalid_geo(lat, lng):  
+        return {"error":"enter german coodrinates"}, 406  
+    else:
+        log.add.add.info(f"input valid")
+        return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
