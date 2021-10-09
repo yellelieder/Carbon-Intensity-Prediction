@@ -13,7 +13,7 @@ from app.machinelearning import trainer
 import config
 import logger as log
 
-def get_url(type:str, start:str, end:str):
+def _get_url(type:str, start:str, end:str):
     '''
     Turns start and end time into electricity marked data api url.
 
@@ -35,14 +35,14 @@ def get_url(type:str, start:str, end:str):
         url : str
             Url with correct parameter for requesting electricity market data.
     '''
-    log.add.info(f"creating smard.de url from type: {type}, start: {start}, end: {end}")
     if type=="1":
         sub="1"
     else:
         sub="5"
+    log.add.info(f"smard.de url type {type} created, start: {start}, end: {end}")
     return f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{type},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
 
-def get_next_date(type:str):
+def _get_next_date(type:str):
     '''
     Returns first date for which market data is not already persistet. 
 
@@ -58,37 +58,20 @@ def get_next_date(type:str):
         date : str
             Date for which market data is missing. 
     '''
-    log.add.info(f"calculating date, where to start scraping")
-    path = get_download_path(type)
+    path = config.download_production_folder if type=="1" else config.download_consumption_folder
     filename = common.get_latest_file(path)
     x= filename.split("_")[3]
+    log.add.info(f"calculated last date where training date exists")
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
 
-def get_last_date(type:str, days):
-    path = get_download_path(type)
+def _get_last_date(type:str, days):
+    path = config.download_production_folder if type=="1" else config.download_consumption_folder
     filename = common.get_latest_file(path)
     x= filename.split("_")[3]
+    log.add.info(f"calculated date up to which should be scraped")
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+days*86400).split(".")[0]+"000"
 
-def get_download_path(type:str):
-    '''
-    Returns folder path for downloaded files by data type. 
-
-        Parameters:
-        ----------
-
-        type : str
-            The type of data. 1=production, 2=consumption
-
-        Returns:
-        ----------
-
-        path : str
-            Relative folder path for downloaded data.
-    '''
-    return "Ressources\Downloads\Production" if type=="1" else "Ressources\Downloads\Consumption"
-
-def scrape(type:str):
+def _scrape(type:str):
     '''
     Scrapes most recent electricity market data.
 
@@ -103,21 +86,21 @@ def scrape(type:str):
         
         Persists data as csv in projects download folder.
     '''
-    log.add.info(f"scraping new date from smard.de for type {type}")
-    start_period=get_next_date(type)
-    end_period=get_last_date(type, config.scrape_days)
+    start_period=_get_next_date(type)
+    end_period=_get_last_date(type, config.scrape_days)
     options=webdriver.ChromeOptions()
-    t="\Production" if type=="1" else"\Consumption"
-    preferences={"download.default_directory":config.local_path+r"\EPI\Ressources\Downloads"+t}
+    t=config.download_production_folder if type=="1" else config.download_consumption_folder
+    preferences={"download.default_directory":config.local_path+"\EPI\\"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
-    driver.get(get_url(type,start_period,end_period))
+    driver.get(_get_url(type,start_period,end_period))
     driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
     time.sleep(5)
     driver.close()
     driver.quit()
+    log.add.info(f"scraping for type {type} completed")
 
-def merge(type):
+def _merge(type):
     '''
     Merges all existing downloads of same type to single csv.
 
@@ -132,21 +115,23 @@ def merge(type):
         
         Persists result as single csv at Ressources\RawDataMerged
     '''
-    dir="Ressources\Downloads\Production" if type=="1" else "Ressources\Downloads\Consumption"
-    log.add.info(f"merging files from folder: {dir}")
+    dir=config.download_production_folder if type=="1" else config.download_consumption_folder
     data=pd.DataFrame()
     for i in os.listdir(dir):
         file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
         data=data.append(file, ignore_index=True)
     df = pd.DataFrame(data)
-    df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".csv")
-    df.to_pickle("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".pkl")
+    file_name=config.merged_data_folder+dir.split("\\")[2]
+    df.to_csv(file_name+".csv")
+    df.to_pickle(file_name+".pkl")
+    log.add.info(f"files from {dir} merged and persisted at {file_name}")
 
 def run():
     for i in range(1,2):
         lag = config.production_training_lags if i==1 else config.consumption_training_lags
         i=str(i)
-        scrape(i)
-        merge(i)
-        preprocessor.clean_files(i)
+        _scrape(i)
+        _merge(i)
+        preprocessor.clean_file(i)
         trainer.update_ar_model(i,intervall=config.rmse_intervall,start_lag= lag-1,end_lag= lag+1,start_skip= config.model_skip_row_start,end_skip= -1)
+        log.add.info(f"scraping, cleaning, merging, training done for type {i}")

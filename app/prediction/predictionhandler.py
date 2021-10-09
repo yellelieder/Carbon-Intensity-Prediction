@@ -14,7 +14,7 @@ import logger as log
 def run(lat, lng, start, end, dur, test):
     days_in_future=(common.str_to_datetime(start)-datetime.now()).days
     if test=="test":
-        prediction = predictor.get_best_start(start, end, dur)
+        prediction = predictor.ar_prediction(start, end, dur)
         target = evaluator.run(start, end, dur)[0]
         randome = evaluator.run(start, end, dur)[1]
         result=(prediction==target)
@@ -22,11 +22,11 @@ def run(lat, lng, start, end, dur, test):
         return prediction, result, randome
     if(days_in_future<30):
         if(days_in_future<4):
-            return weather.get_best_start(lat, lng, start, end, dur)
+            return weather.ar_prediction(lat, lng, start, end, dur)
         else:
             if(math.ceil(dur/60))<24:
-                return predictor.get_best_start(start, end, dur)
+                return predictor.ar_prediction(start, end, dur)
             else:
-                return climate.get_best_start(lat, lng, start, end, dur)
+                return climate.ar_prediction(lat, lng, start, end, dur)
     else:
-        return predictor.get_best_start(start, end, dur)
+        return predictor.ar_prediction(start, end, dur)

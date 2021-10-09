@@ -21,7 +21,7 @@ import logger as log
 def parser(s):
     return datetime.strftime(s, config.dateformat)
 
-def get_free_id():
+def _get_free_id():
     df=pd.read_csv("Ressources\Models\Models.csv",sep=",", dtype={
                      'ID': int,
                      "Type":str, 
@@ -60,8 +60,8 @@ def update_ar_model(type, intervall, start_lag, end_lag, start_skip, end_skip):
             target_lags=lag
 
     #store best model
-    output_folder_path = f"Ressources\Models\ModelsAutoRegression\ModelsAutoRegression{column_name}"
-    model_id =get_free_id()
+    output_folder_path = f"{config.model_folder}ModelsAutoRegression{column_name}"
+    model_id =_get_free_id()
     model_name=str(model_id)+".pickles"
     target_model.save(output_folder_path +"\\"+model_name)
     time.sleep(5)

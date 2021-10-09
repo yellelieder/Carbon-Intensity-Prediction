@@ -8,7 +8,7 @@ from app.helpers import common
 import config
 import logger as log
 
-def get_url(lat, lng):
+def _get_url(lat, lng):
     '''
     Turns geo-coordinates in weather api url.
 
@@ -31,7 +31,7 @@ def get_url(lat, lng):
     log.add.info(f"converting {lat} and {lng} to weather api url")
     return f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
 
-def get_forcast(lat, lng, days_from_now, days_total):
+def _get_forcast(lat, lng, days_from_now, days_total):
     '''
     Turns geo-coordinates in weather forcast.
 
@@ -50,15 +50,15 @@ def get_forcast(lat, lng, days_from_now, days_total):
         response : str
             Weather forcast for wind and sun, for timeframe requested.
     '''
+    response=requests.get(_get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     log.add.info(f"request weather api")
-    response=requests.get(get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     return response
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
     dur_days = math.ceil(dur/(24*60))
     start_days = (common.str_to_datetime(start)-datetime.now()).days
     total_days = (common.str_to_datetime(end)-common.str_to_datetime(start)).days+1
-    forcast=get_forcast(lat,lon, start_days,total_days+1)
+    forcast=_get_forcast(lat,lon, start_days,total_days+1)
     max_wind_speed,max_wind_day,min_cloud_day = 0,0,0
     min_cloud= math.inf
     for day in range(len(forcast)-dur_days):

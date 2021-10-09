@@ -1,4 +1,7 @@
 #api key to access paid weather forcast service, they offer a free students access
+from werkzeug.wrappers import response
+
+
 openweathermap_org_api_key="89f83e40489b5e87c4cb16463dc68b42"
 
 #google maps api key
@@ -17,9 +20,14 @@ model_skip_row_start = 227805
 #path where EPI project is located ..\EPI\.., excluding last backslash
 local_path=r"C:\Users\liede\OneDrive\Studium\BP - Bachelor Project"
 
-#folder pahts
-production_model_folder_path="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\\"
-comsumption_model_folder_path ="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\\"
+#project folder pahts
+model_production_folder="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\\"
+model_consumption_folder ="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\\"
+model_folder ="Ressources\Models\ModelsAutoRegression\\"
+training_data_folder="Ressources\TrainingData\\"
+merged_data_folder="Ressources\RawDataMerged\\"
+download_production_folder="Ressources\Downloads\Production" 
+download_consumption_folder="Ressources\Downloads\Consumption" 
 
 #default date format to be used in the system
 dateformat='%d/%m/%Y %H:%M:%S'

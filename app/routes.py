@@ -43,7 +43,7 @@ class TestEndpoint(Resource):
     def get(self):
         log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
-        return test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+        return _test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
     
 class Home(Resource):
     def get(self):
@@ -134,7 +134,7 @@ class App(Resource):
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
 
-def test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     start=common.merge_data_and_time(stdate,sttime)
     end=common.merge_data_and_time(enddate,endtime)
     result=predictionhandler.run(lat, lng, start, end, dur, "test")
@@ -159,5 +159,5 @@ def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     elif inputvalidation.invalid_geo(lat, lng):  
         return {"error":"enter german coodrinates"}, 406  
     else:
-        log.add.add.info(f"input valid")
+        log.add.info(f"input valid")
         return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200

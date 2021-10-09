@@ -27,7 +27,7 @@ def evaluate_model(training_data_file_path, intervalls, model):
     col = "Consumption" if ("cons" in training_data_file_path.lower()) else "Production"
     data = df[col].apply(lambda y: int((y)))
     norm_start, norm_end = len(data)-intervalls, len(data)
-    model = sm.load(f"Ressources\Models\ModelsAutoRegression\ModelsAutoRegression{col}\\{model}")
+    model = sm.load(f"{config.model_folder}{col}\\{model}")
     predictions = model.predict(start=norm_start, end=norm_end, dynamic=False)
     test = data[len(data)-intervalls:]
 
@@ -59,10 +59,10 @@ def evaluate_model(training_data_file_path, intervalls, model):
     rmse_mean = sqrt(mean_squared_error(test, results["Mean"]))
 
     #uncomment to see graphs and tables:
-    inspect_visual(results, rmse_prediction, rmse_mean,table, col)
+    #_inspect_visual(results, rmse_prediction, rmse_mean,table, col)
     return rmse_prediction<rmse_mean
 
-def inspect_visual(results, rmse_prediction, rmse_mean, table, column_name):
+def _inspect_visual(results, rmse_prediction, rmse_mean, table, column_name):
     results.plot(x="Time")
     plt.title(f"Energy {column_name} | Prediction RMSE: " + str(int(rmse_prediction)) +" | Mean-Model RMSE: "+str(int(rmse_mean)))
     plt.xlabel('Time')

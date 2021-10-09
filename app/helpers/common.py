@@ -43,20 +43,21 @@ def lag_to_datetime(period, start):
         date_time : datetime
             Exact time, accurate to 15 minutes.
     '''
-    return (str_to_datetime(start)+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
+    return (str_to_datetime(start)+timedelta(seconds=period*900)).strftime(config.dateformat)
 
 def datetime_str_to_lag(time,type):
-    input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
+    input_time_index=datetime.strptime(time, config.dateformat)
     base_time_index = last_training_date(type=type)
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])-1
 
 def last_training_date(type:str):
-    path = f"Ressources\TrainingData\{type.capitalize()}.pkl"
+    
+    path = f"{config.training_data_folder}{type.capitalize()}.pkl"
     df=pd.read_pickle(path)
     return df.iloc[-1,0]
 
 def format_date(date):
-    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")
+    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), config.dateformat)
 
 def get_latest_file(dir):
     '''
