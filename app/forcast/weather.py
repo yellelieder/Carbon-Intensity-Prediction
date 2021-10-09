@@ -4,7 +4,9 @@ import json
 import logging
 from datetime import datetime
 import math
-WEATHER_DATA_API_KEY="89f83e40489b5e87c4cb16463dc68b42"
+import config
+from app.helpers import common
+
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -12,26 +14,17 @@ handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
 
-def parser(s):
-    return datetime.strptime(s,"%d/%m/%Y %H:%M:%S")
-
 def get_url(lat, lng):
-    #starts at last full hour, if it is 7:30 now, first return is 6
     log.info(f"converting {lat} and {lng} to weather api url")
-    return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={WEATHER_DATA_API_KEY}"
+    return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
 
-def convert_date(date):
-    return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")
-
-#https://openweathermap.org/api/one-call-api
 def get_forcast(lat, lng):
     log.info(f"request weather api")
     return requests.get(get_url(lat,lng)).json()
 
-
 def get_best_start(lat, lon, start:str, end:str, dur:int):
-    start = parser(start)
-    end = parser(end)
+    start = common.str_to_datetime(start)
+    end = common.str_to_datetime(end)
     dur_in_hours = math.ceil(dur/60)
     start_in_hours = math.ceil((start-datetime.now()).seconds/3600)
     hours_total = math.ceil((end-start).seconds/3600) 
@@ -52,9 +45,9 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
             min_cloudiness=subset_sum_clouds
     start_hour = min(max_wind_day, min_cloud_day)
     surise=datetime.utcfromtimestamp(sunrise).strftime('%H:%M')
-    sug=parser(datetime.utcfromtimestamp(pred[start_hour]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
+    sug=common.str_to_datetime(datetime.utcfromtimestamp(pred[start_hour]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
     ideal_time=sug if sug>start else start
-    return convert_date(ideal_time)
+    return common.format_date(ideal_time)
 
 if __name__=="__main__":
     print(get_best_start("51.4582235","7.0158171","27/09/2021 14:00:00", "29/09/2021 20:00:00", 1500))

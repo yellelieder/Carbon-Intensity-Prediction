@@ -8,32 +8,13 @@ import time
 import pandas as pd
 import preprocessor
 import logging
-
-TIME_STAMP = re.sub('[-:. ]', '_', str(datetime.now().strftime("%Y-%m-%d %H:%M")))
+from app.helpers import common
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 handler=logging.FileHandler("logs.log")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 log.addHandler(handler)
-
-def get_latest_file(dir):
-    '''
-    Returns last file form folder by alphabetical order.
-
-        Parameters:
-        ----------
-
-        dir : str
-            Folder to search from.
-
-        Returns:
-        ----------
-
-        file_name : str
-            Name of the last file from the folder in alphabetical order.
-    '''
-    return sorted(os.listdir(dir)).pop()
 
 def get_url(type:str, start:str, end:str):
     '''
@@ -82,13 +63,13 @@ def get_next_date(type:str):
     '''
     log.info(f"calculating date, where to start scraping")
     path = get_download_path(type)
-    filename = get_latest_file(path)
+    filename = common.get_latest_file(path)
     x= filename.split("_")[3]
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
 
 def get_last_date(type:str, days):
     path = get_download_path(type)
-    filename = get_latest_file(path)
+    filename = common.get_latest_file(path)
     x= filename.split("_")[3]
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+days*86400).split(".")[0]+"000"
 
@@ -173,16 +154,10 @@ def merge(type):
     df.to_csv("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".csv")
     df.to_pickle("Ressources\\RawDataMerged\\"+dir.split("\\")[2]+".pkl")
 
-if __name__=="__main__":
-    start = time.time()
+def run():
     scrape("1")
     scrape("2")
     merge(get_download_path("1"))
-    end3 = time.time()
     merge(get_download_path("2"))
-    end4 = time.time()
     preprocessor.clean_files("1")
-    end5 = time.time()
     preprocessor.clean_files("2")
-    end6 = time.time()
-    print("..done")

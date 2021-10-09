@@ -13,6 +13,7 @@ from math import sqrt
 import numpy as np
 import sys
 import logging
+from app.helpers import common
 
 
 PRODUCTION_MODEL_FOLDER_PATH="Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\\"
@@ -25,71 +26,6 @@ CONSUMPTION_DATA_FOLDER_PATH="Ressources\\Training Data Consumption\\"
 # handler=logging.FileHandler("logs.log")
 # handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(funcName)s:%(message)s"))
 # log.addHandler(handler)
-
-def parser(s):
-    '''
-    Parses dates from csv into date object.
-
-        Parameters:
-        ----------
-        s : str
-            Timestapm in csv
-
-        Returns:
-        ----------
-        date : datetime
-            Object of form dd/mm/yyyy hh:mm:ss
-    '''
-
-    return datetime.strptime(s,"%d/%m/%Y %H:%M:%S")
-
-def get_latest_file(dir):
-    '''
-    Returns last file form folder by alphabetical order.
-
-        Parameters:
-        ----------
-
-        dir : str
-            Folder to search from.
-
-        Returns:
-        ----------
-
-        file_name : str
-            Name of the last file from the folder in alphabetical order.
-    '''
-    return sorted(os.listdir(dir)).pop()
-
-def get_last_date(type:str):
-    path = f"Ressources\TrainingData\{type.capitalize()}.pkl"
-    df=pd.read_pickle(path)
-
-    return df.iloc[-1,0]
-
-def time_to_period(time,type):
-    input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
-
-    base_time_index = get_last_date(type=type)
-    #base_time_index=datetime.strptime("14/09/2021 23:45:00", '%d/%m/%Y %H:%M:%S')
-    return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
-
-def period_to_time(period, start):
-    '''
-    Turns row index from training data into human readable time.
-
-        Parameters:
-        ----------
-        period : int
-            n-th row in training set, if one woult continue conting. 
-
-        Returns:
-        ----------
-        date_time : datetime
-            Exact time, accurate to 15 minutes.
-    '''
-    #returns datetime based on n.th 15 min period since last row in training date
-    return (datetime.strptime(start, '%d/%m/%Y %H:%M:%S')+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
 
 def get_predictions(start, end, type):
     '''
@@ -113,11 +49,10 @@ def get_predictions(start, end, type):
         prediction : pd.Series
             Containing predictions of elctricity production or consumption.
     '''
-    logging.info(f"applining pre trained ar model to user input-----------------------------------------------------")
-    norm_start=time_to_period(start, type)
-    norm_end=time_to_period(end,type)
+    norm_start=common.time_str_to_lag(start, type)
+    norm_end=common.time_str_to_lag(end,type)
     folder_path = PRODUCTION_MODEL_FOLDER_PATH if (type=="production") else CONSUMPTION_MODEL_FOLDER_PATH
-    model=sm.load(folder_path+get_latest_file(folder_path))
+    model=sm.load(folder_path+common.get_latest_file(folder_path))
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 
 def get_production_consumption_ratio(start, end):
@@ -171,7 +106,7 @@ def find_optimum(time_series, duration, start):
         if subset_sum>max_cummulative_ratio:
             max_cummulative_ratio=subset_sum
             optimal_period=period
-    return period_to_time(optimal_period, start)
+    return common.lag_to_datetime(optimal_period, start)
 
 def ar_prediction(start, end, duration):
     time_series=get_production_consumption_ratio(start, end)
@@ -179,5 +114,6 @@ def ar_prediction(start, end, duration):
     logging.info(f"prediction successful")
     return point_in_time
 
+#cut
 def get_best_start(start, end, duration):
     return ar_prediction(start, end, duration)

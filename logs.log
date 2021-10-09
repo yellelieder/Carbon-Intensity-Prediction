@@ -75,3 +75,16 @@
 2021-10-08 18:24:11,995:INFO:time_le_dur:validating user input start, end, duration
 2021-10-08 18:24:11,996:INFO:invalid_geo:validation user geo coordinates
 2021-10-08 18:24:12,243:INFO:prediction:input valid
+2021-10-09 09:07:13,672:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-09 09:07:13,675:INFO:start_after_end:validating user input start and end time
+2021-10-09 09:07:13,681:INFO:start_in_past:validating user input start
+2021-10-09 09:07:13,681:INFO:time_le_dur:validating user input start, end, duration
+2021-10-09 09:07:13,682:INFO:invalid_geo:validation user geo coordinates
+2021-10-09 09:07:13,932:INFO:prediction:input valid
+2021-10-09 09:07:35,952:INFO:start_after_end:validating user input start and end time
+2021-10-09 09:07:35,953:INFO:start_in_past:validating user input start
+2021-10-09 09:07:35,953:INFO:time_le_dur:validating user input start, end, duration
+2021-10-09 09:07:35,954:INFO:invalid_geo:validation user geo coordinates
+2021-10-09 09:07:36,140:INFO:prediction:input valid
+2021-10-09 09:07:36,141:INFO:get_forcast:request weather api
+2021-10-09 09:07:36,141:INFO:get_url:converting 51.0 and 7.0 to weather api url

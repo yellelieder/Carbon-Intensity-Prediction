@@ -5,8 +5,7 @@ import logging
 from datetime import datetime
 import math
 from app.helpers import common
-
-WEATHER_DATA_API_KEY="89f83e40489b5e87c4cb16463dc68b42"
+import config
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -35,7 +34,7 @@ def get_url(lat, lng):
     '''
 
     log.info(f"converting {lat} and {lng} to weather api url")
-    return f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={WEATHER_DATA_API_KEY}"
+    return f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
 
 def get_forcast(lat, lng, days_from_now, days_total):
     '''

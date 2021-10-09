@@ -14,6 +14,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import markdown.extensions
 import pandas as pd
+import os
 
 log=logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -30,7 +31,26 @@ def datetime_to_str(s):
 def str_to_datetime(s):
     return datetime.strptime(s, "%d/%m/%Y %H:%M:%S")
 
+def time_str_to_lag(time,type):
+    input_time_index=datetime.strptime(time, '%d/%m/%Y %H:%M:%S')
+    base_time_index = last_training_date(type=type)
+    #base_time_index=datetime.strptime("14/09/2021 23:45:00", '%d/%m/%Y %H:%M:%S')
+    return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])
+
 def lag_to_datetime(period, start):
+    '''
+        Turns row index from training data into human readable time.
+
+        Parameters:
+        ----------
+        period : int
+            n-th row in training set, if one woult continue conting. 
+
+        Returns:
+        ----------
+        date_time : datetime
+            Exact time, accurate to 15 minutes.
+    '''
     return (str_to_datetime(start)+timedelta(seconds=period*900)).strftime('%d/%m/%Y %H:%M:%S')
 
 def datetime_str_to_lag(time,type):
@@ -45,3 +65,21 @@ def last_training_date(type:str):
 
 def format_date(date):
     return datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), "%d/%m/%Y %H:%M:%S")
+
+def get_latest_file(dir):
+    '''
+    Returns last file form folder by alphabetical order.
+
+        Parameters:
+        ----------
+
+        dir : str
+            Folder to search from.
+
+        Returns:
+        ----------
+
+        file_name : str
+            Name of the last file from the folder in alphabetical order.
+    '''
+    return sorted(os.listdir(dir)).pop()
