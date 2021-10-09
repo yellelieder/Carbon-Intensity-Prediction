@@ -7,7 +7,7 @@ import config
 
 def _production_consumption_ratio(start, end):
     dict=[]
-    for type in ["Production", "Consumption"]:
+    for type in [config.p, config.c]:
         dict.append(pd.read_pickle(f"{config.training_data_folder}{type}.pkl")[common.datetime_str_to_lag(start,type):common.datetime_str_to_lag(end,type)+1][type])
     return dict[0].divide(other=dict[1]).to_frame()
 

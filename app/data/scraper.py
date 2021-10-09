@@ -35,7 +35,7 @@ def _get_url(type:str, start:str, end:str):
         url : str
             Url with correct parameter for requesting electricity market data.
     '''
-    if type=="1":
+    if type==config.p_id:
         sub="1"
     else:
         sub="5"
@@ -58,14 +58,14 @@ def _get_next_date(type:str):
         date : str
             Date for which market data is missing. 
     '''
-    path = config.download_production_folder if type=="1" else config.download_consumption_folder
+    path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
     filename = common.get_latest_file(path)
     x= filename.split("_")[3]
     log.add.info(f"calculated last date where training date exists")
     return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
 
 def _get_last_date(type:str, days):
-    path = config.download_production_folder if type=="1" else config.download_consumption_folder
+    path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
     filename = common.get_latest_file(path)
     x= filename.split("_")[3]
     log.add.info(f"calculated date up to which should be scraped")
@@ -89,15 +89,19 @@ def _scrape(type:str):
     start_period=_get_next_date(type)
     end_period=_get_last_date(type, config.scrape_days)
     options=webdriver.ChromeOptions()
-    t=config.download_production_folder if type=="1" else config.download_consumption_folder
+    t=config.download_production_folder if type==config.p_id else config.download_consumption_folder
     preferences={"download.default_directory":config.local_path+"\EPI\\"+t}
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(_get_url(type,start_period,end_period))
-    driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
-    time.sleep(5)
-    driver.close()
-    driver.quit()
+    try:
+        driver.find_element(By.XPATH,"//*[@id=\"help-download\"]/button").click()
+    except Exception:
+        print("Element on smard.de could not be found, please readjust XPATH element and check website manually.")
+    finally:
+        time.sleep(5)
+        driver.close()
+        driver.quit()
     log.add.info(f"scraping for type {type} completed")
 
 def _merge(type):
@@ -115,11 +119,14 @@ def _merge(type):
         
         Persists result as single csv at Ressources\RawDataMerged
     '''
-    dir=config.download_production_folder if type=="1" else config.download_consumption_folder
+    dir=config.download_production_folder if type==config.p_id else config.download_consumption_folder
     data=pd.DataFrame()
-    for i in os.listdir(dir):
-        file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
-        data=data.append(file, ignore_index=True)
+    try:
+        for i in os.listdir(dir):
+            file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
+            data=data.append(file, ignore_index=True)
+    except FileNotFoundError:
+        common.print_fnf(dir)
     df = pd.DataFrame(data)
     file_name=config.merged_data_folder+dir.split("\\")[2]
     df.to_csv(file_name+".csv")

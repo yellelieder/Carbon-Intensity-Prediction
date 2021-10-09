@@ -2,6 +2,7 @@ import math
 import os
 from datetime import datetime, time, timedelta
 from math import sqrt
+from app.helpers import common
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -23,8 +24,11 @@ def parser(s):
 def evaluate_model(training_data_file_path, intervalls, model):
     '''returns True if the model performs better than taking a average'''
     #prepare training data
-    df = pd.read_csv(training_data_file_path, index_col=0, parse_dates=[1], sep=",")
-    col = "Consumption" if ("cons" in training_data_file_path.lower()) else "Production"
+    try:
+        df = pd.read_csv(training_data_file_path, index_col=0, parse_dates=[1], sep=",")
+    except FileNotFoundError:
+        common.print_fnf(training_data_file_path)
+    col = config.c if ("cons" in training_data_file_path.lower()) else config.p
     data = df[col].apply(lambda y: int((y)))
     norm_start, norm_end = len(data)-intervalls, len(data)
     model = sm.load(f"{config.model_folder}{col}\\{model}")

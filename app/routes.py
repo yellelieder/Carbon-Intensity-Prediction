@@ -142,22 +142,23 @@ def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
 
 
 def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+    error_key_name="error"
     start=common.merge_data_and_time(stdate,sttime)
     end=common.merge_data_and_time(enddate,endtime)
     if dur<15:
-        return {"error":"duration must be minimum of 15 min"}, 406 
+        return {error_key_name:"duration must be minimum of 15 min"}, 406 
     elif inputvalidation.start_after_end(start, end):
-        return {"error":"end before start"}, 406 
+        return {error_key_name:"end before start"}, 406 
     elif inputvalidation.start_in_past(start):
-        return {"error":"enter upcoming timeframe"}, 406  
+        return {error_key_name:"enter upcoming timeframe"}, 406  
     elif inputvalidation.time_le_dur(start, end, dur):
-        return {"error":"duration not fitting in timeframe"}, 406
+        return {error_key_name:"duration not fitting in timeframe"}, 406
     elif lat<-90 or lat>90:
-        return {"error":"lattitude out of rang"}, 406
+        return {error_key_name:"lattitude out of rang"}, 406
     elif lng<-180 or lng>180:
-        return {"error":"longitude out of range"}, 406
+        return {error_key_name:"longitude out of range"}, 406
     elif inputvalidation.invalid_geo(lat, lng):  
-        return {"error":"enter german coodrinates"}, 406  
+        return {error_key_name:"enter german coodrinates"}, 406  
     else:
         log.add.info(f"input valid")
         return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200

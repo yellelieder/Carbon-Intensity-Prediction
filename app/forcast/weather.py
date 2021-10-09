@@ -22,7 +22,10 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     dur_in_hours = math.ceil(dur/60)
     start_in_hours = math.ceil((start-datetime.now()).seconds/3600)
     hours_total = math.ceil((end-start).seconds/3600) 
-    pred=_get_forcast(lat,lon)
+    try:
+        pred=_get_forcast(lat,lon)
+    except requests.exceptions.RequestException:
+        print("openweathermap.org request was not succefull, first check api keys")
     sunrise=pred["city"]["sunrise"]
     pred= pred["list"][start_in_hours:start_in_hours+hours_total]
     max_wind_speed, max_wind_day, min_cloud_day, min_cloudiness = 0,0,0,math.inf

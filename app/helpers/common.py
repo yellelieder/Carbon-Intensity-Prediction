@@ -51,9 +51,11 @@ def datetime_str_to_lag(time,type):
     return int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])-1
 
 def last_training_date(type:str):
-    
     path = f"{config.training_data_folder}{type.capitalize()}.pkl"
-    df=pd.read_pickle(path)
+    try:
+        df=pd.read_pickle(path)
+    except FileNotFoundError:
+        print_fnf(path)
     return df.iloc[-1,0]
 
 def format_date(date):
@@ -95,3 +97,6 @@ def merge_data_and_time(date, time):
             In form dd/mm/yyy hh:mm:ss
     '''
     return str(re.sub("[.]","/", date)+" "+time+":00")
+
+def print_fnf(file_type):
+    print(f"ERROR: {file_type} file could not be found!\n Please restore file form git and try again.")

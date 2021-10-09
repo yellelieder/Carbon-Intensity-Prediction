@@ -386,3 +386,12 @@
 2021-10-09 15:18:11,146:INFO:_get_production_consumption_ratio:calculating production/consumption ratios for user input
 2021-10-09 15:18:12,064:INFO:_find_optimum:selecting optimal starting time from timeseries
 2021-10-09 15:18:12,078:INFO:ar_prediction:prediction successful
+2021-10-09 15:41:27,044:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-09 15:41:27,046:INFO:start_after_end:validating user input start and end time
+2021-10-09 15:41:27,054:INFO:start_in_past:validating user input start
+2021-10-09 15:41:27,054:INFO:time_le_dur:validating user input start, end, duration
+2021-10-09 15:41:27,055:INFO:invalid_geo:validation user geo coordinates
+2021-10-09 15:41:27,273:INFO:prediction:input valid
+2021-10-09 15:41:27,274:INFO:_get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-10-09 15:41:28,528:INFO:_find_optimum:selecting optimal starting time from timeseries
+2021-10-09 15:41:28,540:INFO:ar_prediction:prediction successful

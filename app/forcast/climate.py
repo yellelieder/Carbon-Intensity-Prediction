@@ -4,6 +4,8 @@ import json
 import logging
 from datetime import datetime
 import math
+
+from requests.models import Request
 from app.helpers import common
 import config
 import logger as log
@@ -50,7 +52,10 @@ def _get_forcast(lat, lng, days_from_now, days_total):
         response : str
             Weather forcast for wind and sun, for timeframe requested.
     '''
-    response=requests.get(_get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
+    try:
+        response=requests.get(_get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
+    except requests.exceptions.RequestException:
+        print("openweathermap.org request was not succefull, first check api keys")
     log.add.info(f"request weather api")
     return response
 

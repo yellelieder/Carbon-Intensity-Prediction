@@ -4,6 +4,7 @@ import os
 import numpy as np
 import logger as log
 import config
+from app.helpers import common
 
 def clean_file(type:str):
     '''
@@ -20,10 +21,14 @@ def clean_file(type:str):
             Stores cleaned data as .csv and dataframe .pkl
     '''
     #order of files in folder
-    file_index=1 if type=="1" else 0
-    file_name="Production" if type=="1" else "Consumption"
+    file_index=1 if type==config.p_id else 0
+    file_name=config.p if type==config.p_id else config.c
     #reading raw data
-    df=pd.read_csv(config.merged_data_folder+sorted(os.listdir(config.merged_data_folder))[file_index], sep=",", index_col=0, dtype=object)
+    file=config.merged_data_folder+sorted(os.listdir(config.merged_data_folder))[file_index]
+    try:
+        df=pd.read_csv(file, sep=",", index_col=0, dtype=object)
+    except FileNotFoundError:
+        common.print_fnf(file)
     df=df.replace("-",0)
     #formatting datetime
     df["Datum"]= df[['Datum', 'Uhrzeit']].agg(' '.join, axis=1)
@@ -52,21 +57,21 @@ def _process_cols(type, df):
         df : pd.DataFrame
             Containing data ready for auto regression.
     '''
-    if type=="1":
+    if type==config.p_id:
         columns = ["Biomasse[MWh]","Wasserkraft[MWh]","Wind Offshore[MWh]","Wind Onshore[MWh]","Photovoltaik[MWh]","Sonstige Erneuerbare[MWh]"]
         for column in columns:
             df[column]=(df[column].apply(lambda x: str(x).replace(".",""))).apply(lambda x: str(x).replace(",",".")).apply(lambda y: int(float(str(y))))
             df[column==0]=np.nan
             mean=df[column].mean(skipna=True)
             df=df.replace({column: {0: mean}})
-        df={"Date":df["Datum"], "Production":
-            (df["Biomasse[MWh]"]+
-            df["Wasserkraft[MWh]"]+
-            df["Wind Offshore[MWh]"]+
-            df["Wind Onshore[MWh]"]+
-            df["Photovoltaik[MWh]"]+
-            df["Sonstige Erneuerbare[MWh]"])}
-        df["Production"]=(df["Production"].apply(lambda y: int(float(str(y)))))
+        df={"Date":df["Datum"], config.p:
+            (df[columns[0]]+
+            df[columns[1]]+
+            df[columns[2]]+
+            df[columns[3]]+
+            df[columns[4]]+
+            df[columns[5]])}
+        df[config.p]=(df[config.p].apply(lambda y: int(float(str(y)))))
         log.add.info(f"Production data merged")
     else:
         mwh="Gesamt (Netzlast)[MWh]"
@@ -74,7 +79,7 @@ def _process_cols(type, df):
         df[mwh==0]=np.nan
         mean=df[mwh].mean(skipna=True)
         df=df.replace({mwh: {0: mean}})
-        df={"Date":df["Datum"], "Consumption":df[mwh]}
-        df["Consumption"]=(df["Consumption"].apply(lambda y: int(float(str(y)))))    
+        df={"Date":df["Datum"], config.c:df[mwh]}
+        df[config.c]=(df[config.c].apply(lambda y: int(float(str(y)))))    
         log.add.info(f"Consumption data merged")
     return df
