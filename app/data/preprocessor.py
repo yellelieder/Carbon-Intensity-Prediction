@@ -29,6 +29,7 @@ def clean_file(type:str):
         df=pd.read_csv(file, sep=",", index_col=0, dtype=object)
     except FileNotFoundError:
         common.print_fnf(file)
+        log.add.info(f"ERROR: file {file} not found")
     df=df.replace("-",0)
     #formatting datetime
     df["Datum"]= df[['Datum', 'Uhrzeit']].agg(' '.join, axis=1)

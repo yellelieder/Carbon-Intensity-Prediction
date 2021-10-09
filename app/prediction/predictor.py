@@ -39,10 +39,11 @@ def _get_predictions(start, end, type):
         prediction : pd.Series
             Containing predictions of elctricity production or consumption.
     '''
-    norm_start=common.time_str_to_lag(start, type)
-    norm_end=common.time_str_to_lag(end,type)
+    norm_start=common.datetime_str_to_lag(start, type)
+    norm_end=common.datetime_str_to_lag(end,type)
     folder_path = config.model_production_folder if (type=="production") else config.model_consumption_folder
     model=sm.load(folder_path+common.get_latest_file(folder_path))
+    log.add.info(f"ar model prediction type {type} created")
     return model.predict(start=norm_start, end=norm_end, dynamic=False)
 
 def _get_production_consumption_ratio(start, end):

@@ -13,8 +13,13 @@ def _get_url(lat, lng):
     return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
 
 def _get_forcast(lat, lng):
-    log.add.info(f"request weather api")
-    return requests.get(_get_url(lat,lng)).json()
+    try:
+        response=requests.get(_get_url(lat,lng)).json()
+    except requests.exceptions.RequestException:
+        print("openweathermap.org weather forcast was not succefull, first check api keys")
+        log.add.info(f"weather forcast failed")
+    log.add.info(f"requested climate api lat {lat}, lng {lng}")
+    return response
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
     start = common.str_to_datetime(start)
@@ -22,10 +27,7 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     dur_in_hours = math.ceil(dur/60)
     start_in_hours = math.ceil((start-datetime.now()).seconds/3600)
     hours_total = math.ceil((end-start).seconds/3600) 
-    try:
-        pred=_get_forcast(lat,lon)
-    except requests.exceptions.RequestException:
-        print("openweathermap.org request was not succefull, first check api keys")
+    pred=_get_forcast(lat,lon)
     sunrise=pred["city"]["sunrise"]
     pred= pred["list"][start_in_hours:start_in_hours+hours_total]
     max_wind_speed, max_wind_day, min_cloud_day, min_cloudiness = 0,0,0,math.inf
@@ -44,4 +46,6 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     surise=datetime.utcfromtimestamp(sunrise).strftime('%H:%M')
     sug=common.str_to_datetime(datetime.utcfromtimestamp(pred[start_hour]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
     ideal_time=sug if sug>start else start
-    return common.format_date(ideal_time)
+    result=common.format_date(ideal_time)
+    log.add.info(f"weather forcast successfull, result: {result}")
+    return result

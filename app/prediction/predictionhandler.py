@@ -22,11 +22,11 @@ def run(lat, lng, start, end, dur, test):
         return prediction, result, randome
     if(days_in_future<30):
         if(days_in_future<4):
-            return weather.ar_prediction(lat, lng, start, end, dur)
+            return weather.get_best_start(lat, lng, start, end, dur)
         else:
             if(math.ceil(dur/60))<24:
                 return predictor.ar_prediction(start, end, dur)
             else:
-                return climate.ar_prediction(lat, lng, start, end, dur)
+                return climate.get_best_start(lat, lng, start, end, dur)
     else:
         return predictor.ar_prediction(start, end, dur)

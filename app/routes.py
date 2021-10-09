@@ -135,16 +135,16 @@ class App(Resource):
         return make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
 
 def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
-    start=common.merge_data_and_time(stdate,sttime)
-    end=common.merge_data_and_time(enddate,endtime)
+    start=common.merge_date_and_time(stdate,sttime)
+    end=common.merge_date_and_time(enddate,endtime)
     result=predictionhandler.run(lat, lng, start, end, dur, "test")
     return {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
 
 
 def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     error_key_name="error"
-    start=common.merge_data_and_time(stdate,sttime)
-    end=common.merge_data_and_time(enddate,endtime)
+    start=common.merge_date_and_time(stdate,sttime)
+    end=common.merge_date_and_time(enddate,endtime)
     if dur<15:
         return {error_key_name:"duration must be minimum of 15 min"}, 406 
     elif inputvalidation.start_after_end(start, end):

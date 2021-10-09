@@ -5,7 +5,7 @@ import logging
 from datetime import datetime
 import math
 
-from requests.models import Request
+from requests.models import Request, requote_uri, to_native_string
 from app.helpers import common
 import config
 import logger as log
@@ -29,9 +29,9 @@ def _get_url(lat, lng):
         url : str
             Url with correct parameter for requesting weather data.yoy
     '''
-
-    log.add.info(f"converting {lat} and {lng} to weather api url")
-    return f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
+    url = f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
+    log.add.info(f"converted {lat} and {lng} to climate api url: {url}")
+    return url
 
 def _get_forcast(lat, lng, days_from_now, days_total):
     '''
@@ -55,8 +55,9 @@ def _get_forcast(lat, lng, days_from_now, days_total):
     try:
         response=requests.get(_get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
     except requests.exceptions.RequestException:
-        print("openweathermap.org request was not succefull, first check api keys")
-    log.add.info(f"request weather api")
+        print("openweathermap.org climate forcast was not succefull, first check api keys")
+        log.add.info(f"climate forcast failed")
+    log.add.info(f"requested climate api lat {lat}, lng {lng}, start in {days_from_now} days, {days_total} total days, result: {response}")
     return response
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
@@ -81,4 +82,6 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
     surise=datetime.utcfromtimestamp(forcast[start_day]["sunrise"]).strftime('%H:%M')
     suggestion=common.str_to_datetime(datetime.utcfromtimestamp(forcast[start_day]["dt"]).strftime('%d/%m/%Y')+" "+surise +":00")
     suggestion=suggestion if suggestion>common.str_to_datetime(start) else start
-    return common.format_date(suggestion)
+    result= common.format_date(suggestion)
+    log.add.info(f"climate forcast successfull, result: {result}")
+    return result
