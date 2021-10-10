@@ -21,14 +21,23 @@ def run(lat, lng, start, end, dur, test):
         prediction_direct_hit=(prediction==target)
         randome_direct_hit=(randome_direct_hit==target)
         result=prediction, prediction_direct_hit, randome_direct_hit
+        log.add.info(f"returned evaluation results")
         return result
     if(days_in_future<30):
         if(days_in_future<4):
-            return weather.get_best_start(lat, lng, start, end, dur)
+            result=weather.get_best_start(lat, lng, start, end, dur)
+            log.add.info(f"returned weather forcast-based suggestion ({result})")
+            return result
         else:
             if(math.ceil(dur/60))<24:
-                return predictor.ar_prediction(start, end, dur)
+                result= predictor.ar_prediction(start, end, dur)
+                log.add.info(f"returned machine learning-based suggestion ({result})")
+                return result
             else:
-                return climate.get_best_start(lat, lng, start, end, dur)
+                result = climate.get_best_start(lat, lng, start, end, dur)
+                log.add.info(f"returned climate forcast-based suggestion ({result})")
+                return result
     else:
-        return predictor.ar_prediction(start, end, dur)
+        result= predictor.ar_prediction(start, end, dur)
+        log.add.info(f"returned machine learning-based suggestion ({result})")
+        return result

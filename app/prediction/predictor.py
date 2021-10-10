@@ -43,8 +43,9 @@ def _get_predictions(start, end, type):
     norm_end=common.datetime_str_to_lag(end,type)
     folder_path = config.model_production_folder if (type=="production") else config.model_consumption_folder
     model=sm.load(folder_path+common.get_latest_file(folder_path))
+    result = model.predict(start=norm_start, end=norm_end, dynamic=False)
     log.add.info(f"ar model prediction type {type} created")
-    return model.predict(start=norm_start, end=norm_end, dynamic=False)
+    return result
 
 def _get_production_consumption_ratio(start, end):
     '''
@@ -66,7 +67,9 @@ def _get_production_consumption_ratio(start, end):
     log.add.info(f"calculating production/consumption ratios for user input")
     production_prediction=_get_predictions(start, end, "production")
     consumption_prediction=_get_predictions(start, end, "consumption")
-    return production_prediction.divide(other=consumption_prediction).to_frame()
+    result= production_prediction.divide(other=consumption_prediction).to_frame()
+    log.add.info(f"production/consumption ratio from {start} to {end} calculated")
+    return result
 
 def _find_optimum(time_series, duration, start):
     '''
@@ -97,10 +100,12 @@ def _find_optimum(time_series, duration, start):
         if subset_sum>max_cummulative_ratio:
             max_cummulative_ratio=subset_sum
             optimal_period=period
-    return common.lag_to_datetime(optimal_period, start)
+    result= common.lag_to_datetime(optimal_period, start)
+    log.add.info(f"found optimal time from timeseries to start consuming energy: {result}")
+    return result
 
 def ar_prediction(start, end, duration):
     time_series=_get_production_consumption_ratio(start, end)
     point_in_time =_find_optimum(time_series,duration, start)
-    log.add.info(f"prediction successful")
+    log.add.info(f"ar model prediction done")
     return point_in_time

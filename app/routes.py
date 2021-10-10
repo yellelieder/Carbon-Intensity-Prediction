@@ -37,14 +37,17 @@ class EPI(Resource):
         '''
         log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
-        return prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
-
+        result= prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+        log.add.info(f"send response for API call: {result}")
+        return result
 class TestEndpoint(Resource):
     def get(self):
         log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
-        return _test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
-    
+        result= _test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+        log.add.info(f"send response for API TEST call: {result}")
+        return result
+
 class Home(Resource):
     def get(self):
         '''
@@ -61,7 +64,9 @@ class Home(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template(r'index.html'),200,headers)
+        result= make_response(render_template(r'index.html'),200,headers)
+        log.add.info(f"displayed index.html webapp screen")
+        return result
 
 class Usage_Docu(Resource):
     def get(self):
@@ -79,7 +84,9 @@ class Usage_Docu(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template(r'api.html'),200,headers)
+        result=  make_response(render_template(r'api.html'),200,headers)
+        log.add.info(f"displayed api.html explaination screen")
+        return result
 
 class Technical_Docu(Resource):
     def get(self):
@@ -97,12 +104,16 @@ class Technical_Docu(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template(r'docu.html'),200,headers)
+        result= make_response(render_template(r'docu.html'),200,headers)
+        log.add.info(f"displayed docu.html documentation")
+        return result
 
 class Imprint(Resource):
     def get(self):
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template(r'imprint.html'),200,headers)
+        result= make_response(render_template(r'imprint.html'),200,headers)
+        log.add.info(f"displayed imprint.html screen")
+        return result
 
 class App(Resource):
     def get(self):
@@ -120,7 +131,9 @@ class App(Resource):
         GUI
         '''
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template(r'form.html'),200,headers)
+        result= make_response(render_template(r'form.html'),200,headers)
+        log.add.info(f"displayed form.html visual input App")
+        return result
 
     def post(self):
         lat =float(request.form["lat"])
@@ -132,13 +145,17 @@ class App(Resource):
         dur = int(request.form["dur"])
         pred=prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
+        result= make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
+        log.add.info(f"received input from visual form")
+        return result
 
 def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     start=common.merge_date_and_time(stdate,sttime)
     end=common.merge_date_and_time(enddate,endtime)
     result=predictionhandler.run(lat, lng, start, end, dur, "test")
-    return {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
+    result = {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
+    log.add.info(f"returned test prediction")
+    return result
 
 
 def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
@@ -160,5 +177,6 @@ def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     elif inputvalidation.invalid_geo(lat, lng):  
         return {error_key_name:"enter german coodrinates"}, 406  
     else:
-        log.add.info(f"input valid")
-        return {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
+        result = {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
+        log.add.info(f"all validations successfull, returned prediction")
+        return result
