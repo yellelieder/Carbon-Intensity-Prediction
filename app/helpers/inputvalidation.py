@@ -34,8 +34,9 @@ def start_after_end(start, end):
         valitation : bool
             False if input is valid, True if input is invalid.
     '''
-    log.add.info(f"validating user input start and end time")
-    return datetime.strptime(start, config.dateformat)>datetime.strptime(end, config.dateformat)
+    result=datetime.strptime(start, config.dateformat)>datetime.strptime(end, config.dateformat)
+    log.add.info(f"validation, {start} is after {end} = {result}")
+    return result
 
 def start_in_past(start):
     '''
@@ -51,8 +52,9 @@ def start_in_past(start):
         validation : bool
             False if input is valid, True if input is in the past.
     '''
-    log.add.info(f"validating user input start")
-    return datetime.strptime(start, config.dateformat)<datetime.now()
+    result=datetime.strptime(start, config.dateformat)<datetime.now()
+    log.add.info(f"validation: {start} is before now = {not result}")
+    return result
 
 def time_le_dur(start, end, dur):
     '''
@@ -74,8 +76,9 @@ def time_le_dur(start, end, dur):
         validation : bool
             False if input is valid, true if duration does not fit between start and end.
     '''
-    log.add.info(f"validating user input start, end, duration")
-    return not int(divmod((datetime.strptime(end, config.dateformat)-datetime.strptime(start, config.dateformat)).total_seconds(),900)[0])>=int(dur/15)
+    result = not int(divmod((datetime.strptime(end, config.dateformat)-datetime.strptime(start, config.dateformat)).total_seconds(),900)[0])>=int(dur/15)
+    log.add.info(f"validation: {dur}min. fits between {start} and {end} = {not result}")
+    return result
 
 def invalid_geo(lat, lng):
     '''
@@ -98,8 +101,11 @@ def invalid_geo(lat, lng):
     try:
         response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key={config.googlemaps_api_key}").json()["results"][0]["formatted_address"]
     except Exception as e:
+        log.add.info(f"google geo valiadation failed, please check api key first, {str(e)}")
         return True
     if response=="Germany":
+        log.add.info(f"geo validation: ({lat}/{lng}) is a german location")
         return False
     else:
+        log.add.info(f"geo validation: ({lat}/{lng}) is not a german location")
         return True

@@ -1,26 +1,28 @@
-2021-10-09 18:58:42,432:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
-2021-10-09 18:58:42,433:INFO:merge_date_and_time:merged 28.10.2021 and 06:45 to 28/10/2021 06:45:00
-2021-10-09 18:58:42,433:INFO:merge_date_and_time:merged 29.10.2021 and 23:59 to 29/10/2021 23:59:00
-2021-10-09 18:58:42,433:INFO:start_after_end:validating user input start and end time
-2021-10-09 18:58:42,437:INFO:start_in_past:validating user input start
-2021-10-09 18:58:42,438:INFO:time_le_dur:validating user input start, end, duration
-2021-10-09 18:58:42,438:INFO:invalid_geo:validation user geo coordinates
-2021-10-09 18:58:42,617:INFO:prediction:input valid
-2021-10-09 18:58:42,617:INFO:str_to_datetime:converted string (28/10/2021 06:45:00) to datetime object (2021-10-28 06:45:00)
-2021-10-09 18:58:42,617:INFO:_get_production_consumption_ratio:calculating production/consumption ratios for user input
-2021-10-09 18:58:42,622:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type production
-2021-10-09 18:58:42,622:INFO:datetime_str_to_lag:converted datetime as string (28/10/2021 06:45:00) into 4155. lag timeframe
-2021-10-09 18:58:42,627:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type production
-2021-10-09 18:58:42,629:INFO:datetime_str_to_lag:converted datetime as string (29/10/2021 23:59:00) into 4319. lag timeframe
-2021-10-09 18:58:42,629:INFO:get_latest_file:returned name of newest file (3.pickles) from Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\
-2021-10-09 18:58:42,933:INFO:_get_predictions:ar model prediction type production created
-2021-10-09 18:58:43,074:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type consumption
-2021-10-09 18:58:43,075:INFO:datetime_str_to_lag:converted datetime as string (28/10/2021 06:45:00) into 4155. lag timeframe
-2021-10-09 18:58:43,081:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type consumption
-2021-10-09 18:58:43,083:INFO:datetime_str_to_lag:converted datetime as string (29/10/2021 23:59:00) into 4319. lag timeframe
-2021-10-09 18:58:43,084:INFO:get_latest_file:returned name of newest file (4.pickles) from Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\
-2021-10-09 18:58:43,831:INFO:_get_predictions:ar model prediction type consumption created
-2021-10-09 18:58:44,046:INFO:_find_optimum:selecting optimal starting time from timeseries
-2021-10-09 18:58:44,056:INFO:str_to_datetime:converted string (28/10/2021 06:45:00) to datetime object (2021-10-28 06:45:00)
-2021-10-09 18:58:44,056:INFO:lag_to_datetime:converted 75. lag of training data into datetime object (29/10/2021 01:30:00)
-2021-10-09 18:58:44,057:INFO:ar_prediction:prediction successful
+
+2021-10-09 19:15:02,200:INFO:get:handling get request in /api/ directory: <Request 'http://127.0.0.1:5000/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180' [GET]>
+2021-10-09 19:15:02,201:INFO:merge_date_and_time:merged 28.10.2021 and 06:45 to 28/10/2021 06:45:00
+2021-10-09 19:15:02,201:INFO:merge_date_and_time:merged 29.10.2021 and 23:59 to 29/10/2021 23:59:00
+2021-10-09 19:15:02,207:INFO:start_after_end:validation, 28/10/2021 06:45:00 after 29/10/2021 23:59:00 = False
+2021-10-09 19:15:02,207:INFO:start_in_past:validation: 28/10/2021 06:45:00 is before now = False
+2021-10-09 19:15:02,208:INFO:time_le_dur:validation: 180min. fits between 28/10/2021 06:45:00 and 29/10/2021 23:59:00 = False
+2021-10-09 19:15:02,208:INFO:invalid_geo:validation user geo coordinates
+2021-10-09 19:15:02,461:INFO:invalid_geo:geo validation: (50.9917119/10.2136589) is a german location
+2021-10-09 19:15:02,461:INFO:prediction:input valid
+2021-10-09 19:15:02,462:INFO:str_to_datetime:converted string (28/10/2021 06:45:00) to datetime object (2021-10-28 06:45:00)
+2021-10-09 19:15:02,462:INFO:_get_production_consumption_ratio:calculating production/consumption ratios for user input
+2021-10-09 19:15:02,466:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type production
+2021-10-09 19:15:02,467:INFO:datetime_str_to_lag:converted datetime as string (28/10/2021 06:45:00) into 4155. lag timeframe
+2021-10-09 19:15:02,470:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type production
+2021-10-09 19:15:02,471:INFO:datetime_str_to_lag:converted datetime as string (29/10/2021 23:59:00) into 4319. lag timeframe
+2021-10-09 19:15:02,471:INFO:get_latest_file:returned name of newest file (3.pickles) from Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionProduction\
+2021-10-09 19:15:02,711:INFO:_get_predictions:ar model prediction type production created
+2021-10-09 19:15:02,828:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type consumption
+2021-10-09 19:15:02,830:INFO:datetime_str_to_lag:converted datetime as string (28/10/2021 06:45:00) into 4155. lag timeframe
+2021-10-09 19:15:02,835:INFO:last_training_date:returnes last available date (2021-09-14 23:45:00) for training date type consumption
+2021-10-09 19:15:02,836:INFO:datetime_str_to_lag:converted datetime as string (29/10/2021 23:59:00) into 4319. lag timeframe
+2021-10-09 19:15:02,836:INFO:get_latest_file:returned name of newest file (4.pickles) from Ressources\Models\ModelsAutoRegression\ModelsAutoRegressionConsumption\
+2021-10-09 19:15:03,391:INFO:_get_predictions:ar model prediction type consumption created
+2021-10-09 19:15:03,557:INFO:_find_optimum:selecting optimal starting time from timeseries
+2021-10-09 19:15:03,572:INFO:str_to_datetime:converted string (28/10/2021 06:45:00) to datetime object (2021-10-28 06:45:00)
+2021-10-09 19:15:03,572:INFO:lag_to_datetime:converted 75. lag of training data into datetime object (29/10/2021 01:30:00)
+2021-10-09 19:15:03,572:INFO:ar_prediction:prediction successful

@@ -25,7 +25,7 @@ def parser(s):
 
 def _get_free_id():
     try:
-        df=pd.read_csv(common.training_log_folder_path,sep=",", dtype={
+        df=pd.read_csv(config.training_log_folder_path,sep=",", dtype={
                         'ID': int,
                         "Type":str, 
                         "intervalls for training":str, 
@@ -37,10 +37,12 @@ def _get_free_id():
                         "rmse":str, 
                         "evaluationresult":str
                     })
-    except FileNotFoundError:
-        common.print_fnf(common.training_log_folder_path)
+    except FileNotFoundError as exception:
+        common.print_fnf(config.training_log_folder_path, exception)
     max= df.loc[df['ID'].idxmax()][0]
-    return int(max)+1
+    result = int(max)+1
+    log.add.info(f"returned next free id ({result}) in {config.training_log_folder_path}")
+    return result
 
 
 def update_ar_model(type, intervall, start_lag, end_lag, start_skip, end_skip):
@@ -67,13 +69,14 @@ def update_ar_model(type, intervall, start_lag, end_lag, start_skip, end_skip):
     model_id =_get_free_id()
     model_name=str(model_id)+".pickles"
     target_model.save(output_folder_path +"\\"+model_name)
+    log.add.info(f"persisted model of type {type} with name: {model_name}")
     time.sleep(5)
     evaluation_result=backtesting.evaluate_model(file_path,intervall,model_name)
-    
     csv_output = [str(model_id),column_name,str(intervall),str(df.iloc[0,0]).split(" ")[0],str(df.iloc[start_skip-1,0]).split(" ")[0],str(target_lags),str(start_lag), str(end_lag), int(target_rmse), str(evaluation_result) ]
     try:
-        with open(common.training_log_folder_path, 'a') as f:
+        with open(config.training_log_folder_path, 'a') as f:
             writer = csv.writer(f)
             writer.writerow(csv_output)
-    except FileNotFoundError:
-        common.print_fnf(common.training_log_folder_path)
+            log.add.info(f"documented model creation in {config.training_log_folder_path}")
+    except FileNotFoundError as exception:
+        common.print_fnf(config.training_log_folder_path, exception)

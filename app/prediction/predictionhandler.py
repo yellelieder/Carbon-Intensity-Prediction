@@ -12,14 +12,16 @@ from app.helpers import common
 import logger as log
 
 def run(lat, lng, start, end, dur, test):
+    #no logging, to avoide redundancy
     days_in_future=(common.str_to_datetime(start)-datetime.now()).days
     if test=="test":
         prediction = predictor.ar_prediction(start, end, dur)
         target = evaluator.run(start, end, dur)[0]
-        randome = evaluator.run(start, end, dur)[1]
-        result=(prediction==target)
-        randome=(randome==target)
-        return prediction, result, randome
+        randome_direct_hit = evaluator.run(start, end, dur)[1]
+        prediction_direct_hit=(prediction==target)
+        randome_direct_hit=(randome_direct_hit==target)
+        result=prediction, prediction_direct_hit, randome_direct_hit
+        return result
     if(days_in_future<30):
         if(days_in_future<4):
             return weather.get_best_start(lat, lng, start, end, dur)

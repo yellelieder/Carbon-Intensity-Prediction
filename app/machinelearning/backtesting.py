@@ -26,8 +26,8 @@ def evaluate_model(training_data_file_path, intervalls, model):
     #prepare training data
     try:
         df = pd.read_csv(training_data_file_path, index_col=0, parse_dates=[1], sep=",")
-    except FileNotFoundError:
-        common.print_fnf(training_data_file_path)
+    except FileNotFoundError as exception:
+        common.print_fnf(training_data_file_path, exception)
     col = config.c if ("cons" in training_data_file_path.lower()) else config.p
     data = df[col].apply(lambda y: int((y)))
     norm_start, norm_end = len(data)-intervalls, len(data)
@@ -38,6 +38,7 @@ def evaluate_model(training_data_file_path, intervalls, model):
     #calculate hourly mean for last year
     last_year = df[-(365*24*4):-1] 
     last_year_means = last_year.groupby(last_year['Date'].dt.hour).mean()
+    log.add.info(f"calculated yearly hourly mean in given dataset")
 
     #prepare visual outputs
     table = PrettyTable(["Time", 'Prediction', 'Target', "Mean", "Prediction/Target Dif",
@@ -64,6 +65,8 @@ def evaluate_model(training_data_file_path, intervalls, model):
 
     #uncomment to see graphs and tables:
     #_inspect_visual(results, rmse_prediction, rmse_mean,table, col)
+    result =rmse_prediction<rmse_mean
+    log.add.info(f"model evaluation successfull, intervalls: {intervalls}, model: {model}, performs better than taking a mean: {result}")
     return rmse_prediction<rmse_mean
 
 def _inspect_visual(results, rmse_prediction, rmse_mean, table, column_name):
@@ -73,6 +76,7 @@ def _inspect_visual(results, rmse_prediction, rmse_mean, table, column_name):
     plt.ylabel('MWh')
     plt.show()
     print(table)
+    log.add.info(f"displayed visual evaluation of {column_name} prediction with rmse: {rmse_prediction}")
 
 #run this for manual evaluation and visualisation of the models, uncomment line 61
 if __name__ == "__main__":

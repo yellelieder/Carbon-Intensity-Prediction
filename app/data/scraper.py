@@ -125,8 +125,8 @@ def _merge(type):
         for i in os.listdir(dir):
             file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
             data=data.append(file, ignore_index=True)
-    except FileNotFoundError:
-        common.print_fnf(dir)
+    except FileNotFoundError as exception:
+        common.print_fnf(dir, exception)
     df = pd.DataFrame(data)
     file_name=config.merged_data_folder+dir.split("\\")[2]
     df.to_csv(file_name+".csv")

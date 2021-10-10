@@ -57,9 +57,8 @@ def last_training_date(type:str):
     path = f"{config.training_data_folder}{type.capitalize()}.pkl"
     try:
         df=pd.read_pickle(path)
-    except FileNotFoundError:
-        print_fnf(path)
-        log.add.info(f"file {path} not found")
+    except FileNotFoundError as exception:
+        print_fnf(path, exception)
     date = df.iloc[-1,0]
     log.add.info(f"returnes last available date ({date}) for training date type {type}")
     return date
@@ -110,5 +109,6 @@ def merge_date_and_time(date, time):
     log.add.info(f"merged {date} and {time} to {date_time}")
     return date_time
 
-def print_fnf(file_type):
-    print(f"ERROR: {file_type} file could not be found!\n Please restore file form git and try again.")
+def print_fnf(file_details, exception):
+    print(f"ERROR: {file_details} file could not be found!\n Please restore file form git and try again.")
+    log.add.info(f"file ({file_details})) not found exception: {str(exception)}")
