@@ -4,6 +4,7 @@ from app import routes
 from flask_apscheduler import APScheduler, scheduler
 import config
 import logger as log
+from app.data import scraper
 
 
 APP = Flask(__name__)
@@ -21,10 +22,13 @@ API.add_resource(routes.Imprint,"/imprint")
 log.add.info(f"handlers added")
 
 #setup scheduler for scraping and re-training of machine learning models
-# SCHEDULER=APScheduler()
-# from app.data import scraper
-# SCHEDULER.add_job(id="Scheduled task", func=scraper.run(), trigger="interval", seconds=config.day_intervall_for_schedule*86400)
-# SCHEDULER.start()
+SCHEDULER=APScheduler()
+SCHEDULER.add_job(id="Scheduled task", func=scraper.run, trigger="interval", seconds=120)#config.day_intervall_for_schedule*86400)
+SCHEDULER.start()
 log.add.info(f"scheduler started")
 
 APP.run(debug=False)
+
+
+
+

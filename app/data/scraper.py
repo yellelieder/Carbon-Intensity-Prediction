@@ -20,27 +20,28 @@ def _get_url(type:str, start:str, end:str):
         Parameters:
         ----------
 
-        start : str
-            First date for which data must be scraped.
+            start : str
+                First date for which data must be scraped.
 
-        end : str
-            Last data from which data must be scraped.
+            end : str
+                Last data from which data must be scraped.
 
-        type : str
-            The type of data. 1=production, 2=consumption
+            type : str
+                The type of data. 1=production, 2=consumption
 
         Returns:
         ----------
 
-        url : str
-            Url with correct parameter for requesting electricity market data.
+            url : str
+                Url with correct parameter for requesting electricity market data.
     '''
     if type==config.p_id:
         sub="1"
     else:
         sub="5"
+    url=f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{type},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
     log.add.info(f"smard.de url type {type} created, start: {start}, end: {end}")
-    return f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{type},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
+    return url
 
 def _get_next_date(type:str):
     '''
@@ -49,27 +50,44 @@ def _get_next_date(type:str):
         Parameters:
         ----------
 
-        type : str
-            The type of data. 1=production, 2=consumption
+            type : str
+                The type of data 1=Production, 2=Consumption.
 
         Returns:
         ----------
 
-        date : str
-            Date for which market data is missing. 
+            date : str
+                Date for which market data is missing. 
+    '''
+    path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
+    filename = common.get_latest_file(path)
+    file_name_last_element= filename.split("_")[3]
+    date=str(time.mktime(datetime.strptime(file_name_last_element.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
+    log.add.info(f"calculated last date where training date exists: {date}")
+    return date
+
+def _get_last_date(type:str):
+    '''
+    Returns date up to which new data should be scrapet.
+
+        Parameters:
+        ----------
+
+            type : str
+                The type of data 1=Production, 2=Consumption.
+
+        Returns:
+        ----------
+
+            date : str 
+                Date which should still be included in next scraping activity. 
     '''
     path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
     filename = common.get_latest_file(path)
     x= filename.split("_")[3]
-    log.add.info(f"calculated last date where training date exists")
-    return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+86400).split(".")[0]+"000"
-
-def _get_last_date(type:str, days):
-    path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
-    filename = common.get_latest_file(path)
-    x= filename.split("_")[3]
-    log.add.info(f"calculated date up to which should be scraped")
-    return str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+days*86400).split(".")[0]+"000"
+    date=str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+config.scrape_days*86400).split(".")[0]+"000"
+    log.add.info(f"calculated date up to which should be scraped: {date}")
+    return date
 
 def _scrape(type:str):
     '''
@@ -79,15 +97,15 @@ def _scrape(type:str):
         ----------
 
         type : str
-            The type of data. 1=production, 2=consumption
+            The type of data 1=Production, 2=Consumption.
 
         Returns:
         ----------
         
-        Persists data as csv in projects download folder.
+            None : Persists data as csv in projects download folder.
     '''
     start_period=_get_next_date(type)
-    end_period=_get_last_date(type, config.scrape_days)
+    end_period=_get_last_date(type)
     options=webdriver.ChromeOptions()
     t=config.download_production_folder if type==config.p_id else config.download_consumption_folder
     preferences={"download.default_directory":config.local_path+"\EPI\\"+t}
@@ -104,20 +122,20 @@ def _scrape(type:str):
         driver.quit()
     log.add.info(f"scraping for type {type} completed")
 
-def _merge(type):
+def _merge(type:str):
     '''
-    Merges all existing downloads of same type to single csv.
+    Merges all existing downloads of same type to single file.
 
         Parameters:
         ----------
         
-        dir : str
-            Folder path from where to merge files.
+            type : str
+                Type of the date to be merged 1=Production, 2=Consumption.
 
         Returns:
         ----------
         
-        Persists result as single csv at Ressources\RawDataMerged
+            None : Persists result as csv and pkl at Ressources\RawDataMerged
     '''
     dir=config.download_production_folder if type==config.p_id else config.download_consumption_folder
     data=pd.DataFrame()
@@ -134,7 +152,22 @@ def _merge(type):
     log.add.info(f"files from {dir} merged and persisted at {file_name}")
 
 def run():
-    for i in range(1,2):
+    '''
+    Initializes the machine learning pipeline.
+
+    Runs the scraper, merges no data into existing, cleans data and re-trains models for production and consumption.
+
+        Parameters:
+        ----------
+
+            None : Uses files in static directories.
+
+        Returns:
+        ----------
+
+            None : Stores models in static directories.
+    '''
+    for i in range(1,3):
         lag = config.production_training_lags if i==1 else config.consumption_training_lags
         i=str(i)
         _scrape(i)

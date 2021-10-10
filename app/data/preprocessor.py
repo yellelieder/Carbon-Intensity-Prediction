@@ -1,4 +1,5 @@
 import pandas as pd
+from pandas.core.frame import DataFrame
 import regex as re
 import os
 import numpy as np
@@ -12,13 +13,14 @@ def clean_file(type:str):
 
         Parameters:
         ----------
-        type : str
-            The type of data. 1=production, 2=consumption
+
+            type : str
+                The type of data to be cleaned 1=Production, 2=Consumption.
 
         Returns:
         ----------
 
-            Stores cleaned data as .csv and dataframe .pkl
+            None : Stores cleaned data as csv and pkl file.
     '''
     #order of files in folder
     file_index=1 if type==config.p_id else 0
@@ -40,22 +42,25 @@ def clean_file(type:str):
     df.to_pickle(config.training_data_folder+file_name+".pkl")
     log.add.info(f"cleaned date persisted as {file_name}.csv/.pkl")
 
-def _process_cols(type, df):
+def _process_cols(type, df) -> DataFrame:
     '''
     Pre-processes the rows of a dataframe.
+    Merges date and time column, replaces decimal signs and merges renevables into a single column.
 
         Parameters:
         ----------
-        type : str
-            The type of data. 1=production, 2=consumption
 
-        df : pf.DataFrame
-            Dataframe containing production or consumption data.
+            type : str
+                The type of data. 1=production, 2=consumption
+
+            df : pf.DataFrame
+                Dataframe containing production or consumption data.
 
         Returns:
         ----------
-        df : pd.DataFrame
-            Containing data ready for auto regression.
+
+            df : pd.DataFrame
+                Containing data ready for auto regression.
     '''
     if type==config.p_id:
         columns = ["Biomasse[MWh]","Wasserkraft[MWh]","Wind Offshore[MWh]","Wind Onshore[MWh]","Photovoltaik[MWh]","Sonstige Erneuerbare[MWh]"]

@@ -17,17 +17,17 @@ def _get_url(lat, lng):
         Parameters:
         ----------
 
-        lat : str
-            Lattitude of the place where energy is going to be consumed.
+            lat : str
+                Lattitude of the place where energy is going to be consumed.
 
-        lng : str
-            Longitude of the place where energy is going to be consumed.
+            lng : str
+                Longitude of the place where energy is going to be consumed.
 
         Returns:
         ----------
 
-        url : str
-            Url with correct parameter for requesting weather data.yoy
+            url : str
+                Url with correct parameter for requesting weather data.yoy
     '''
     url = f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
     log.add.info(f"converted {lat} and {lng} to climate api url: {url}")
@@ -40,17 +40,17 @@ def _get_forcast(lat, lng, days_from_now, days_total):
         Parameters:
         ----------
 
-        lat : str
-            Lattitude of the place where energy is going to be consumed.
+            lat : str
+                Lattitude of the place where energy is going to be consumed.
 
-        lng : str
-            Longitude of the place where energy is going to be consumed.
+            lng : str
+                Longitude of the place where energy is going to be consumed.
 
         Returns:
         ----------
 
-        response : str
-            Weather forcast for wind and sun, for timeframe requested.
+            response : str
+                Weather forcast for wind and sun, for timeframe requested.
     '''
     try:
         response=requests.get(_get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
@@ -61,6 +61,33 @@ def _get_forcast(lat, lng, days_from_now, days_total):
     return response
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
+    '''
+    Turns request parameters into climate forcast-based prediction.
+
+        Parameters:
+        ----------
+
+            lat : str
+                Lattitude of the place where energy is going to be consumed.
+
+            lng : str
+                Longitude of the place where energy is going to be consumed.
+
+            start : str
+                Start date and time when process can be started.
+
+            end : str
+                End date and time when process must be finished.
+
+            dur : string
+                Duration how long the computation approximately takes.
+
+        Returns:
+        ----------
+
+            response : str
+                Weather forcast for wind and sun, for timeframe requested.
+    '''
     dur_days = math.ceil(dur/(24*60))
     start_days = (common.str_to_datetime(start)-datetime.now()).days
     total_days = (common.str_to_datetime(end)-common.str_to_datetime(start)).days+1

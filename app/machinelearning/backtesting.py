@@ -31,7 +31,7 @@ def evaluate_model(training_data_file_path, intervalls, model):
     col = config.c if ("cons" in training_data_file_path.lower()) else config.p
     data = df[col].apply(lambda y: int((y)))
     norm_start, norm_end = len(data)-intervalls, len(data)
-    model = sm.load(f"{config.model_folder}{col}\\{model}")
+    model = sm.load(f"{config.model_folder}ModelsAutoRegression{col}\\{model}")
     predictions = model.predict(start=norm_start, end=norm_end, dynamic=False)
     test = data[len(data)-intervalls:]
 

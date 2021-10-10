@@ -47,15 +47,14 @@ def _get_free_id():
 
 def update_ar_model(type, intervall, start_lag, end_lag, start_skip, end_skip):
     # prepare training data  
-    file_path=config.training_data_folder+({config.p} if type==config.p_id else {config.c})+".csv"
+    file_path=config.training_data_folder+(config.p if type==config.p_id else config.c)+".csv"
     df = pd.read_csv(file_path, index_col=0,parse_dates=[1], skiprows=range(start_skip, end_skip), sep=",")    
-    column_name = config.c if type==config.p_id else config.p
+    column_name = config.c if type==config.c_id else config.p
     data = df[column_name].apply(lambda y: int((y)))
     target_model = None
     target_rmse, target_lags = math.inf, 0
     train, test = data[:len(data)-intervall], data[len(data)-intervall:]
     for lag in range(start_lag, end_lag):
-        print("Lag: ", lag)
         model = AutoReg(train, lags=lag, old_names=False).fit()
         pred = model.predict(
             start=len(train), end=len(data)-1, dynamic=False)
