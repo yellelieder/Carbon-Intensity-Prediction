@@ -12,7 +12,7 @@ import logger as log
 
 def _get_url(lat, lng):
     '''
-    Turns geo-coordinates in weather api url.
+    Turns geo-coordinates in climate api url.
 
         Parameters:
         ----------
@@ -27,15 +27,15 @@ def _get_url(lat, lng):
         ----------
 
             url : str
-                Url with correct parameter for requesting weather data.yoy
+                Url with correct parameter for requesting climate data.
     '''
     url = f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
     log.add.info(f"converted {lat} and {lng} to climate api url: {url}")
     return url
 
-def _get_forcast(lat, lng, days_from_now, days_total):
+def _get_forcast(lat, lng, days_from_now, days_total)->json:
     '''
-    Turns geo-coordinates in weather forcast.
+    Turns geo-coordinates in climate forcast.
 
         Parameters:
         ----------
@@ -49,8 +49,8 @@ def _get_forcast(lat, lng, days_from_now, days_total):
         Returns:
         ----------
 
-            response : str
-                Weather forcast for wind and sun, for timeframe requested.
+            response : json
+                Climate forcast for wind and sun, for timeframe requested.
     '''
     try:
         response=requests.get(_get_url(lat,lng)).json()["list"][days_from_now:days_from_now+days_total]
@@ -86,7 +86,7 @@ def get_best_start(lat, lon, start:str, end:str, dur:int):
         ----------
 
             response : str
-                Weather forcast for wind and sun, for timeframe requested.
+                Suggestion when process should be started.
     '''
     dur_days = math.ceil(dur/(24*60))
     start_days = (common.str_to_datetime(start)-datetime.now()).days

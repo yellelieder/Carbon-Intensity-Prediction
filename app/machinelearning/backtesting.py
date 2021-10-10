@@ -17,12 +17,48 @@ from wtforms.fields.core import Label
 import config
 import logger as log
 
-def parser(s):
-    return datetime.strftime(s, config.dateformat)
+def parser(datetime_object):
+    '''
+    Converts datetime object to string dd/mm/yyyy hh:mm:ss.
+
+    Redundant to common.datetime_to_str() but must be located in this file.
+        Implicitly used in evaluate_model() -> parse_dates.
+
+        Parameters:
+        ----------
+
+            datetime_object : datetime
+
+        Returns:
+        ----------
+
+            date_time : str
+    '''
+    return datetime.strftime(datetime_object, config.dateformat)
 
 
 def evaluate_model(training_data_file_path, intervalls, model):
-    '''returns True if the model performs better than taking a average'''
+    '''
+    Returns True if the input model performs better than taking a average.
+
+        Parameters:
+        ----------
+
+            training_data_file_path : str
+                File paht where training date is located.
+
+            intervalls : int 
+                Number of intervalls to be used for validation/rmse.
+
+            model : str
+                Name of the file that contains the model to be evaluated.
+
+        Returns:
+        ----------
+
+            result : bool
+                True is model outperforms a standard mean model.
+    '''
     #prepare training data
     try:
         df = pd.read_csv(training_data_file_path, index_col=0, parse_dates=[1], sep=",")
@@ -67,9 +103,33 @@ def evaluate_model(training_data_file_path, intervalls, model):
     #_inspect_visual(results, rmse_prediction, rmse_mean,table, col)
     result =rmse_prediction<rmse_mean
     log.add.info(f"model evaluation successfull, intervalls: {intervalls}, model: {model}, performs better than taking a mean: {result}")
-    return rmse_prediction<rmse_mean
+    return result
 
 def _inspect_visual(results, rmse_prediction, rmse_mean, table, column_name):
+    '''
+    Plots graphs for model evaluation and prints table with acutal numbers.
+
+        Parameters:
+        ----------
+
+            results : dataframe
+                Containing all values for plotting.
+
+            rmse_prediction : float
+
+            rmse_mean : float
+
+            table : PrettyTable
+                Table with relevant numbers.
+
+            comumn_name : str
+                Type of the date (Production/Consumption).
+
+        Returns:
+        ----------
+
+            None : mathplotlib Plot and Table to consol.
+    '''
     results.plot(x="Time")
     plt.title(f"Energy {column_name} | Prediction RMSE: " + str(int(rmse_prediction)) +" | Mean-Model RMSE: "+str(int(rmse_mean)))
     plt.xlabel('Time')

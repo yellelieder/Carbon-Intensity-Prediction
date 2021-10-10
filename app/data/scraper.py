@@ -173,5 +173,5 @@ def run():
         _scrape(i)
         _merge(i)
         preprocessor.clean_file(i)
-        trainer.update_ar_model(i,intervall=config.rmse_intervall,start_lag= lag-1,end_lag= lag+1,start_skip= config.model_skip_row_start,end_skip= -1)
+        trainer.update_ar_model(i,intervall=config.rmse_intervall,start_lag= lag-1,end_lag= lag+1,start_skip= config.model_skip_row_start)
         log.add.info(f"scraping, cleaning, merging, training done for type {i}")

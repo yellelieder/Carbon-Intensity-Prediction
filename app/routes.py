@@ -26,22 +26,38 @@ class EPI(Resource):
 
         Parameters:
         ----------
-        self : object of type EPI
-            basically the app
+
+            self : object of type EPI
+                basically the app
 
         Returns:
         ----------
 
-        response : json
-            response to the request
+            response : json
+                response to the request
         '''
         log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
         result= prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
         log.add.info(f"send response for API call: {result}")
         return result
+
 class TestEndpoint(Resource):
     def get(self):
+        '''
+        Handles request for testing purposes.
+        Uses same mechanics under the hood, but skips validation and weather forcasts.
+
+        Parameters:
+        ----------
+            self : object of type TestEndPoint  
+
+        Returns:
+        ----------
+
+            response : json
+                response to the request
+        '''
         log.add.info(f"handling get request in /api/ directory: {request}")
         query=request.args 
         result= _test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
@@ -51,17 +67,17 @@ class TestEndpoint(Resource):
 class Home(Resource):
     def get(self):
         '''
-        Shows forms for inputs to user.
+        Shows home page to the user.
 
         Parameters:
         ----------
 
-        self : object of type home
+            self : object of type Home
 
         Returns:
         ----------
 
-        GUI
+            result : html
         '''
         headers = {'Content-Type': 'text/html'}
         result= make_response(render_template(r'index.html'),200,headers)
@@ -71,17 +87,17 @@ class Home(Resource):
 class Usage_Docu(Resource):
     def get(self):
         '''
-        Shows forms for inputs to user.
+        Shows api deatils page to the user.
 
         Parameters:
         ----------
 
-        self : object of type home
+            self : object of type Home
 
         Returns:
         ----------
 
-        GUI
+            result : html
         '''
         headers = {'Content-Type': 'text/html'}
         result=  make_response(render_template(r'api.html'),200,headers)
@@ -91,17 +107,17 @@ class Usage_Docu(Resource):
 class Technical_Docu(Resource):
     def get(self):
         '''
-        Shows forms for inputs to user.
+        Shows technical documentation page to the user.
 
         Parameters:
         ----------
 
-        self : object of type home
+            self : object of type Home
 
         Returns:
         ----------
 
-        GUI
+            result : html
         '''
         headers = {'Content-Type': 'text/html'}
         result= make_response(render_template(r'docu.html'),200,headers)
@@ -118,17 +134,17 @@ class Imprint(Resource):
 class App(Resource):
     def get(self):
         '''
-        Shows forms for inputs to user.
+        Shows input form page to the user.
 
         Parameters:
         ----------
 
-        self : object of type home
+            self : object of type Home
 
         Returns:
         ----------
 
-        GUI
+            result : html
         '''
         headers = {'Content-Type': 'text/html'}
         result= make_response(render_template(r'form.html'),200,headers)
@@ -136,6 +152,19 @@ class App(Resource):
         return result
 
     def post(self):
+        '''
+        Converts user form inputs to prediction.
+
+        Parameters:
+        ----------
+
+            self : object of type Home
+
+        Returns:
+        ----------
+
+            result : html
+        '''
         lat =float(request.form["lat"])
         lng =float(request.form["lng"])
         stdate=str(datetime.strptime(request.form["stdate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
@@ -149,7 +178,22 @@ class App(Resource):
         log.add.info(f"received input from visual form")
         return result
 
-def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
+    '''
+    Handles test prediction but skips input validation.
+
+    Input validation must be skipped to be able to backtest.
+
+    Parameters:
+    ----------
+
+        self : object of type Home
+
+    Returns:
+    ----------
+
+        result : json
+    '''
     start=common.merge_date_and_time(stdate,sttime)
     end=common.merge_date_and_time(enddate,endtime)
     result=predictionhandler.run(lat, lng, start, end, dur, "test")
@@ -158,7 +202,20 @@ def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
     return result
 
 
-def prediction(lat, lng, stdate, sttime, enddate, endtime, dur):
+def prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
+    '''
+    Performs input validation.
+
+    Parameters:
+    ----------
+
+        self : object of type Home
+
+    Returns:
+    ----------
+
+        result : json
+    '''
     error_key_name="error"
     start=common.merge_date_and_time(stdate,sttime)
     end=common.merge_date_and_time(enddate,endtime)

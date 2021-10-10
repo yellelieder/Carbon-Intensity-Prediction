@@ -19,24 +19,25 @@ import logger as log
 def start_after_end(start, end):
     '''
     Checks if start and end time are compatible.
+    Dates are not copatible if end is before start.
 
         Parameters:
         ----------
-        start : str
-            Ealiest time process can be started.
-        
-        end : str
-            Latest time process must be finished.            
+            start : str
+                Ealiest time process can be started.
+            
+            end : str
+                Latest time process must be finished.            
 
         Returns:
         ----------
 
-        valitation : bool
-            False if input is valid, True if input is invalid.
+            valitation : bool
+                False if input is valid, True if input is invalid.
     '''
-    result=datetime.strptime(start, config.dateformat)>datetime.strptime(end, config.dateformat)
-    log.add.info(f"validation, {start} is after {end} = {result}")
-    return result
+    validation=datetime.strptime(start, config.dateformat)>datetime.strptime(end, config.dateformat)
+    log.add.info(f"validation, {start} is after {end} = {validation}")
+    return validation
 
 def start_in_past(start):
     '''
@@ -44,17 +45,17 @@ def start_in_past(start):
 
         Parameters:
         ----------
-        start : str
-            Date to be validated. 
+            start : str
+                Date to be validated. 
 
         Returns:
         ----------
-        validation : bool
-            False if input is valid, True if input is in the past.
+            validation : bool
+                False if input is valid, True if input is in the past.
     '''
-    result=datetime.strptime(start, config.dateformat)<datetime.now()
-    log.add.info(f"validation: {start} is before now = {not result}")
-    return result
+    validation=datetime.strptime(start, config.dateformat)<datetime.now()
+    log.add.info(f"validation: {start} is before now = {not validation}")
+    return validation
 
 def time_le_dur(start, end, dur):
     '''
@@ -62,23 +63,25 @@ def time_le_dur(start, end, dur):
 
         Parameters:
         ----------
-        start : str
-            Where duration can start.
-        
-        end : str
-            Where duration must end.
 
-        dur : int
-            Duration in minutes.
+            start : str
+                Where duration can start.
+            
+            end : str
+                Where duration must end.
+
+            dur : int
+                Duration in minutes.
 
         Returns:
         ----------
-        validation : bool
-            False if input is valid, true if duration does not fit between start and end.
+
+            validation : bool
+                False if input is valid, true if duration does not fit between start and end.
     '''
-    result = not int(divmod((datetime.strptime(end, config.dateformat)-datetime.strptime(start, config.dateformat)).total_seconds(),900)[0])>=int(dur/15)
-    log.add.info(f"validation: {dur}min. fits between {start} and {end} = {not result}")
-    return result
+    validation = not int(divmod((datetime.strptime(end, config.dateformat)-datetime.strptime(start, config.dateformat)).total_seconds(),900)[0])>=int(dur/15)
+    log.add.info(f"validation: {dur}min. fits between {start} and {end} = {not validation}")
+    return validation
 
 def invalid_geo(lat, lng):
     '''
@@ -86,16 +89,18 @@ def invalid_geo(lat, lng):
 
         Parameters:
         ----------
-        lat : str
-            Geographical lattitude.
-        
-        lng : str 
-            Geographical longitude.
+
+            lat : str
+                Geographical lattitude.
+            
+            lng : str 
+                Geographical longitude.
 
         Returns:
         ----------
-        validation : bool
-            False if coordinates are in Germany, true if they are outside germany.
+        
+            validation : bool
+                False if coordinates are in Germany, true if they are outside germany.
     '''
     log.add.info(f"validation user geo coordinates")
     try:

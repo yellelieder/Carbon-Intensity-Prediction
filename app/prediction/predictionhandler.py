@@ -12,9 +12,50 @@ from app.helpers import common
 import logger as log
 
 def run(lat, lng, start, end, dur, test):
-    #no logging, to avoide redundancy
+    '''
+    Selects the appropriate prediction mehtod.
+
+        Parameters:
+        ----------
+
+            lat : float
+                Lattitude.
+
+            lng : float
+                Longitude. 
+
+            start : str
+                Earliest start-date.
+
+            end : str
+                Latest end-date.
+
+            dur : int
+                Duration in minutes.
+
+            test : bool
+                True if the request is for testing purposes.
+
+        Returns:
+        ----------
+
+            result : str
+                Prediction result.
+            
+            if test==True
+
+                prediction : str
+
+                prediction_direct_hit : bool
+                    If prediction matches the real ideal time.
+
+                randome_direct_hit : boole
+                    If randome selction matches the real ideal time.
+
+    '''
     days_in_future=(common.str_to_datetime(start)-datetime.now()).days
     if test=="test":
+    #distinction relevant to not exceed the max. weather api calls
         prediction = predictor.ar_prediction(start, end, dur)
         target = evaluator.run(start, end, dur)[0]
         randome_direct_hit = evaluator.run(start, end, dur)[1]

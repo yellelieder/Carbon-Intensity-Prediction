@@ -1,4 +1,5 @@
 import logging
+from types import resolve_bases
 import requests
 import json
 import logging
@@ -9,19 +10,83 @@ from app.helpers import common
 import logger as log
 
 def _get_url(lat, lng):
-    log.add.info(f"converting {lat} and {lng} to weather api url")
-    return f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
+    '''
+    Turns geo-coordinates in weather api url.
 
-def _get_forcast(lat, lng):
+        Parameters:
+        ----------
+
+            lat : str
+                Lattitude of the place where energy is going to be consumed.
+
+            lng : str
+                Longitude of the place where energy is going to be consumed.
+
+        Returns:
+        ----------
+
+            url : str
+                Url with correct parameter for requesting weather data.
+    '''
+    result=f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
+    log.add.info(f"converting {lat} and {lng} to weather api url")
+    return result
+
+def _get_forcast(lat, lng)->json:
+    '''
+    Turns geo-coordinates in weather forcast.
+
+        Parameters:
+        ----------
+
+            lat : str
+                Lattitude of the place where energy is going to be consumed.
+
+            lng : str
+                Longitude of the place where energy is going to be consumed.
+
+        Returns:
+        ----------
+
+            response : json
+                Weather forcast for wind and sun, for timeframe requested.
+    '''
     try:
         response=requests.get(_get_url(lat,lng)).json()
     except requests.exceptions.RequestException:
         print("openweathermap.org weather forcast was not succefull, first check api keys")
         log.add.info(f"weather forcast failed")
-    log.add.info(f"requested climate api lat {lat}, lng {lng}")
+    log.add.info(f"requested weather api lat {lat}, lng {lng}")
     return response
 
 def get_best_start(lat, lon, start:str, end:str, dur:int):
+    '''
+    Turns request parameters into weather forcast-based prediction.
+
+        Parameters:
+        ----------
+
+            lat : str
+                Lattitude of the place where energy is going to be consumed.
+
+            lng : str
+                Longitude of the place where energy is going to be consumed.
+
+            start : str
+                Start date and time when process can be started.
+
+            end : str
+                End date and time when process must be finished.
+
+            dur : string
+                Duration how long the computation approximately takes.
+
+        Returns:
+        ----------
+
+            response : str
+                Suggestion when process should be started.
+    '''
     start = common.str_to_datetime(start)
     end = common.str_to_datetime(end)
     dur_in_hours = math.ceil(dur/60)

@@ -21,9 +21,38 @@ from app.helpers import common
 
 
 def parser(s):
+    '''
+    Converts datetime object to string dd/mm/yyyy hh:mm:ss.
+
+    Redundant to common.datetime_to_str() but must be located in this file.
+        Implicitly used in evaluate_model() -> parse_dates.
+
+        Parameters:
+        ----------
+
+            datetime_object : datetime
+
+        Returns:
+        ----------
+
+            date_time : str
+    '''
     return datetime.strftime(s, config.dateformat)
 
 def _get_free_id():
+    '''
+    Returns next free model ID.
+
+        Parameters:
+        ----------
+
+            None
+
+        Returns:
+        ----------
+
+            result : int
+    '''
     try:
         df=pd.read_csv(config.training_log_folder_path,sep=",", dtype={
                         'ID': int,
@@ -45,10 +74,36 @@ def _get_free_id():
     return result
 
 
-def update_ar_model(type, intervall, start_lag, end_lag, start_skip, end_skip):
+def update_ar_model(type, intervall, start_lag, end_lag, start_skip) -> None:
+    '''
+    Returns next free model ID.
+
+        Parameters:
+        ----------
+
+            type : str
+                Data type 1 = Production, 2 = Consumption
+            
+            intervall : int
+                Number of lags to be excluded from training / included in test set.
+            
+            start_lag : int
+                Minimum number of lags to be concidered for AR-Model training.
+            
+            end_lag : int
+                Maximum number of lags to be concidered for AR-Model training.
+            
+            start_skip :int 
+                First row to be excluded from training AND testing set.
+
+        Returns:
+        ----------
+
+            None : Persists model as [id].pickles and training log as models.csv.
+    '''
     # prepare training data  
     file_path=config.training_data_folder+(config.p if type==config.p_id else config.c)+".csv"
-    df = pd.read_csv(file_path, index_col=0,parse_dates=[1], skiprows=range(start_skip, end_skip), sep=",")    
+    df = pd.read_csv(file_path, index_col=0,parse_dates=[1], skiprows=range(start_skip, -1), sep=",")    
     column_name = config.c if type==config.c_id else config.p
     data = df[column_name].apply(lambda y: int((y)))
     target_model = None
