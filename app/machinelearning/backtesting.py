@@ -59,7 +59,6 @@ def evaluate_model(training_data_file_path, intervalls, model):
             result : bool
                 True is model outperforms a standard mean model.
     '''
-    #prepare training data
     try:
         df = pd.read_csv(training_data_file_path, index_col=0, parse_dates=[1], sep=",")
     except FileNotFoundError as exception:

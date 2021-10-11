@@ -17,14 +17,14 @@ API.add_resource(routes.TestEndpoint,"/test/")
 API.add_resource(routes.Home,"/")
 API.add_resource(routes.App,"/app")
 API.add_resource(routes.Usage_Docu,"/api-docu")
-API.add_resource(routes.Technical_Docu,"/api-tech")
 API.add_resource(routes.Imprint,"/imprint")
 log.add.info(f"handlers added")
 
 #setup scheduler for scraping and re-training of machine learning models
 SCHEDULER=APScheduler()
-SCHEDULER.add_job(id="Scheduled task", func=scraper.run, trigger="interval", seconds=120)#config.day_intervall_for_schedule*86400)
-SCHEDULER.start()
+#everything afer "seconds=" can just be set to ~120 for testing purposes
+SCHEDULER.add_job(id="Scheduled task", func=scraper.run, trigger="interval", seconds=config.day_intervall_for_schedule*86400) 
+SCHEDULER.start() #first execution always after itervall passed first time
 log.add.info(f"scheduler started")
 
 APP.run(debug=False)

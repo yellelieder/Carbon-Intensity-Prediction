@@ -1,0 +1,58 @@
+2021-10-11 15:45:50,278:app.py:<module>:app is booted
+2021-10-11 15:45:50,283:app.py:<module>:handlers added
+2021-10-11 15:45:50,343:app.py:<module>:scheduler started
+2021-10-11 15:46:56,479:app.py:<module>:app is booted
+2021-10-11 15:46:56,483:app.py:<module>:handlers added
+2021-10-11 15:46:56,529:app.py:<module>:scheduler started
+2021-10-11 15:46:57,773:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:47:59,436:routes.py:get:displayed form.html visual input App
+2021-10-11 15:48:00,340:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:48:01,053:routes.py:get:displayed docu.html documentation
+2021-10-11 15:48:02,472:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:48:02,939:routes.py:get:displayed form.html visual input App
+2021-10-11 15:48:04,135:routes.py:get:displayed docu.html documentation
+2021-10-11 15:48:54,911:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:49:15,143:routes.py:get:displayed docu.html documentation
+2021-10-11 15:54:10,090:app.py:<module>:app is booted
+2021-10-11 15:54:10,094:app.py:<module>:handlers added
+2021-10-11 15:54:10,130:app.py:<module>:scheduler started
+2021-10-11 15:54:12,948:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:54:16,018:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:55:22,748:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:55:27,279:routes.py:get:displayed form.html visual input App
+2021-10-11 15:55:28,005:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:55:33,992:routes.py:get:displayed docu.html documentation
+2021-10-11 15:55:34,510:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:55:36,177:routes.py:get:displayed docu.html documentation
+2021-10-11 15:55:36,526:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:55:37,489:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:55:47,033:routes.py:get:displayed form.html visual input App
+2021-10-11 15:55:47,925:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:55:50,295:routes.py:get:displayed docu.html documentation
+2021-10-11 15:55:50,819:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:57:43,640:app.py:<module>:app is booted
+2021-10-11 15:57:43,644:app.py:<module>:handlers added
+2021-10-11 15:57:43,684:app.py:<module>:scheduler started
+2021-10-11 15:57:46,477:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:58:09,024:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:58:52,000:routes.py:get:displayed form.html visual input App
+2021-10-11 15:58:55,159:routes.py:get:displayed docu.html documentation
+2021-10-11 15:58:57,213:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:58:57,729:routes.py:get:displayed form.html visual input App
+2021-10-11 15:58:58,362:routes.py:get:displayed index.html webapp screen
+2021-10-11 15:58:59,378:routes.py:get:displayed form.html visual input App
+2021-10-11 15:58:59,832:routes.py:get:displayed api.html explaination screen
+2021-10-11 15:59:00,257:routes.py:get:displayed docu.html documentation
+2021-10-11 15:59:15,228:routes.py:get:displayed docu.html documentation
+2021-10-11 16:01:01,571:app.py:<module>:app is booted
+2021-10-11 16:01:01,575:app.py:<module>:handlers added
+2021-10-11 16:01:01,616:app.py:<module>:scheduler started
+2021-10-11 16:01:04,216:routes.py:get:displayed index.html webapp screen
+2021-10-11 16:01:07,065:routes.py:get:displayed form.html visual input App
+2021-10-11 16:01:09,316:routes.py:get:displayed api.html explaination screen
+2021-10-11 16:01:11,593:routes.py:get:displayed form.html visual input App
+2021-10-11 16:01:12,269:routes.py:get:displayed index.html webapp screen
+2021-10-11 16:01:12,991:routes.py:get:displayed form.html visual input App
+2021-10-11 16:01:13,712:routes.py:get:displayed api.html explaination screen
+2021-10-11 16:01:16,019:routes.py:get:displayed form.html visual input App
+2021-10-11 16:02:45,033:routes.py:get:displayed api.html explaination screen

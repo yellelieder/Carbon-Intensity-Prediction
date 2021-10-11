@@ -119,40 +119,44 @@
     <a class="active" href="/">Home</a>
     <a href="/app">App</a>
     <a href="/api-docu">API</a>
-    <a href="/api-tech">Documentation</a>
   </div>
   <br>
   <div class="wrapper" class="text" id="content">{% block content %}
     <h1>Home</h1>
     <br>
+    <h1 id="epi">EPI</h1>
+    <p>Electricity Prediction Interface</p>
+    <p>Welcome to the EPI project!</p>
+    <p>The goal of this project is to provide software engineers with a simple solution to concider carbon emission in their application development.</p>
+    <h2 id="how-it-works-">HOW IT WORKS:</h2>
+    <ul>
+    <li>we have gathered german* electricity market data (the system continues scraping current data)</li>
+    <li>the system conciders weather forcasts (for predictions within the next 30 days)</li>
+    <li>and makes predictions for future availability of renevable energy</li>
+    <li>this enables you to run ressource intensive processes when ther is a high probability for an green energy surplus</li>
+    </ul>
+    <h2 id="why-it-s-worth-it">WHY IT&#39;S WORTH IT</h2>
+    <ul>
+    <li>software is responsible for at least 3% of world carbon emission</li>
+    <li>using renevables, if possible has the potential to drastically reduce this</li>
+    </ul>
 
-    Welcome to the <img src="\static\favicon.ico" alt="EPI"> project!<br>
-    The goal of this project is to provide software engineers with a simple solution to concider carbon emission in
-    their application development.<br>
-
-    <h2>Why it is worth it</h2>
-    - software is responsible for at least 3% of world carbon emission<br>
-    - using renevables, if possible has the potential to drastically reduce this<br>
-
-    <h2>How it works</h2>
-    - we have gathered electricity market data (and continue scraping the most current ones)<br>
-    - we concider weather forcasts (for predictions within the next 30 days)<br>
-    - we make predictions for future availability of renevable energy<br>
-    - this way we enable you to run ressource intensive processes when ther is a high probability for an green energy
-    surplus<br>
-
-    <h2>Fields of application</h2>
-    (some inspiration for some processes where this can be used)<br>
-    - database indexing<br>
-    - backups<br>
-    - synchronization<br>
-    - training of machine learning models<br>
-    - mining of crypto currency<br>
-    - executing regression tests <br>
-    - rendering video <br>
-    - running deployment pipelines <br>
-    - automated processes like done with RPA<br>
-    .. basically everything usually done overnight, where you don't really care when it's done <br>
+    <h2 id="fields-of-application">FIELDS OF APPLICATION</h2>
+    <p>(just some inspiration for some processes where this can be used)</p>
+    <ul>
+    <li>database indexing</li>
+    <li>backups</li>
+    <li>synchronization</li>
+    <li>training of machine learning models</li>
+    <li>mining of crypto currency</li>
+    <li>executing regression tests </li>
+    <li>rendering video </li>
+    <li>running deployment pipelines </li>
+    <li>automated processes like done with RPA
+    .. basically everything usually done overnight, where you don&#39;t really care when it&#39;s done </li>
+    </ul>
+    <p>*The system is only trained on german energy market data and therefore restricted to predictions for locations in Germany. Let me know if you have access to data for other locations.</p>
+    
     {% endblock %}
   </div>
   <br>

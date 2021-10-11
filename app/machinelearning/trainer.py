@@ -109,10 +109,12 @@ def update_ar_model(type, intervall, start_lag, end_lag, start_skip) -> None:
     target_model = None
     target_rmse, target_lags = math.inf, 0
     train, test = data[:len(data)-intervall], data[len(data)-intervall:]
+    #train and evaluate model for each given lag
     for lag in range(start_lag, end_lag):
         model = AutoReg(train, lags=lag, old_names=False).fit()
         pred = model.predict(
             start=len(train), end=len(data)-1, dynamic=False)
+        #persist if model outperforms
         if sqrt(mean_squared_error(test, pred)) < target_rmse:
             target_rmse = sqrt(mean_squared_error(test, pred))
             target_model = model
@@ -126,6 +128,7 @@ def update_ar_model(type, intervall, start_lag, end_lag, start_skip) -> None:
     log.add.info(f"persisted model of type {type} with name: {model_name}")
     time.sleep(5)
     evaluation_result=backtesting.evaluate_model(file_path,intervall,model_name)
+    #write details to training log
     csv_output = [str(model_id),column_name,str(intervall),str(df.iloc[0,0]).split(" ")[0],str(df.iloc[start_skip-1,0]).split(" ")[0],str(target_lags),str(start_lag), str(end_lag), int(target_rmse), str(evaluation_result) ]
     try:
         with open(config.training_log_folder_path, 'a') as f:

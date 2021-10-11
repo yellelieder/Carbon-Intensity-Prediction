@@ -47,7 +47,7 @@ def _get_prediction(start, end, type):
     log.add.info(f"ar model prediction type {type} created")
     return result
 
-def _production_consumption_ratio(start, end):
+def _production_consumption_ratio_prediction(start, end):
     '''
     Calculates predicted ratio of renevables and energy consumption for given timeframe.
 
@@ -64,14 +64,13 @@ def _production_consumption_ratio(start, end):
             result : dataframe
                 Single timeseries with predicted ratios.
     '''
-    log.add.info(f"calculating production/consumption ratios for user input")
     production_prediction=_get_prediction(start, end, "production")
     consumption_prediction=_get_prediction(start, end, "consumption")
     result= production_prediction.divide(other=consumption_prediction).to_frame()
     log.add.info(f"production/consumption ratio from {start} to {end} calculated")
     return result
 
-def _find_optimum(time_series, duration, start):
+def find_optimum(time_series, duration, start):
     '''
     Selects optimal time to start consuming energy within limitations.
 
@@ -89,17 +88,15 @@ def _find_optimum(time_series, duration, start):
 
             result : str
     '''
-    log.add.info(f"selecting optimal starting time from timeseries")
-    norm_duration=int(duration/15)
-    max_cummulative_ratio=0
-    optimal_period=0
-    for period in range(time_series.size-norm_duration):
-        subset_sum=sum(time_series.iloc[period: period+norm_duration].values)
+    duration_in_lags=int(duration/15)
+    max_cummulative_ratio,optimal_period=0,0
+    for period in range(time_series.size-duration_in_lags):
+        subset_sum=sum(time_series.iloc[period: period+duration_in_lags].values)
         if subset_sum>max_cummulative_ratio:
             max_cummulative_ratio=subset_sum
             optimal_period=period
     result= common.lag_to_datetime(optimal_period, start)
-    log.add.info(f"found optimal time from timeseries to start consuming energy: {result}")
+    log.add.info(f"found best start time ({result}) after {start} with duration {duration}")
     return result
 
 def ar_prediction(start, end, duration):
@@ -120,7 +117,7 @@ def ar_prediction(start, end, duration):
 
             point_in_time : str
     '''
-    time_series=_production_consumption_ratio(start, end)
-    point_in_time =_find_optimum(time_series,duration, start)
+    time_series=_production_consumption_ratio_prediction(start, end)
+    point_in_time =find_optimum(time_series,duration, start)
     log.add.info(f"ar model prediction done")
     return point_in_time

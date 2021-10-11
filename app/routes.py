@@ -104,26 +104,6 @@ class Usage_Docu(Resource):
         log.add.info(f"displayed api.html explaination screen")
         return result
 
-class Technical_Docu(Resource):
-    def get(self):
-        '''
-        Shows technical documentation page to the user.
-
-        Parameters:
-        ----------
-
-            self : object of type Home
-
-        Returns:
-        ----------
-
-            result : html
-        '''
-        headers = {'Content-Type': 'text/html'}
-        result= make_response(render_template(r'docu.html'),200,headers)
-        log.add.info(f"displayed docu.html documentation")
-        return result
-
 class Imprint(Resource):
     def get(self):
         headers = {'Content-Type': 'text/html'}
@@ -219,9 +199,7 @@ def prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
     error_key_name="error"
     start=common.merge_date_and_time(stdate,sttime)
     end=common.merge_date_and_time(enddate,endtime)
-    if dur<15:
-        return {error_key_name:"duration must be minimum of 15 min"}, 406 
-    elif inputvalidation.start_after_end(start, end):
+    if inputvalidation.start_after_end(start, end):
         return {error_key_name:"end before start"}, 406 
     elif inputvalidation.start_in_past(start):
         return {error_key_name:"enter upcoming timeframe"}, 406  

@@ -107,7 +107,7 @@ def invalid_geo(lat, lng):
         response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key={config.googlemaps_api_key}").json()["results"][0]["formatted_address"]
     except Exception as e:
         log.add.info(f"google geo valiadation failed, please check api key first, {str(e)}")
-        return True
+        return True #as something is defenitly wrong
     if response=="Germany":
         log.add.info(f"geo validation: ({lat}/{lng}) is a german location")
         return False
