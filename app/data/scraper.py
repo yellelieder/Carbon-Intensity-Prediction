@@ -35,11 +35,12 @@ def _get_url(type:str, start:str, end:str):
             url : str
                 Url with correct parameter for requesting electricity market data.
     '''
+    #sub-typed distinct between smard.de prognose and actual numbers
     if type==config.p_id:
-        sub="1"
+        sub_type="1"
     else:
-        sub="5"
-    url=f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{type},%22selectedSubCategory%22:{sub},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
+        sub_type="5"
+    url=f"https://www.smard.de/home/downloadcenter/download-marktdaten#!?downloadAttributes=%7B%22selectedCategory%22:{type},%22selectedSubCategory%22:{sub_type},%22selectedRegion%22:%22DE%22,%22from%22:{start},%22to%22:{end},%22selectedFileType%22:%22CSV%22%7D"
     log.add.info(f"smard.de url type {type} created, start: {start}, end: {end}")
     return url
 
@@ -84,8 +85,8 @@ def _get_last_date(type:str):
     '''
     path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
     filename = common.get_latest_file(path)
-    x= filename.split("_")[3]
-    date=str(time.mktime(datetime.strptime(x.split(".")[0], "%Y%m%d%H%M").timetuple())+config.scrape_days*86400).split(".")[0]+"000"
+    file_name_last_element= filename.split("_")[3]
+    date=str(time.mktime(datetime.strptime(file_name_last_element.split(".")[0], "%Y%m%d%H%M").timetuple())+config.scrape_days*86400).split(".")[0]+"000"
     log.add.info(f"calculated date up to which should be scraped: {date}")
     return date
 
@@ -106,9 +107,11 @@ def _scrape(type:str):
     '''
     start_period=_get_next_date(type)
     end_period=_get_last_date(type)
+    #selenium/XPATH as page is single page applikation and buttons got no css IDs
     options=webdriver.ChromeOptions()
-    t=config.download_production_folder if type==config.p_id else config.download_consumption_folder
-    preferences={"download.default_directory":config.local_path+"\EPI\\"+t}
+    local_project_path=config.download_production_folder if type==config.p_id else config.download_consumption_folder
+    preferences={"download.default_directory":config.local_path+"\EPI\\"+local_project_path}
+    #experimental options to not use default download folder
     options.add_experimental_option("prefs", preferences)
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get(_get_url(type,start_period,end_period))
@@ -140,9 +143,9 @@ def _merge(type:str):
     dir=config.download_production_folder if type==config.p_id else config.download_consumption_folder
     data=pd.DataFrame()
     try:
-        for i in os.listdir(dir):
-            file=pd.read_csv(dir+"\\"+i, sep=";", dtype=str)
-            data=data.append(file, ignore_index=True)
+        for file in os.listdir(dir):
+            content=pd.read_csv(dir+"\\"+file, sep=";", dtype=str)
+            data=data.append(content, ignore_index=True)
     except FileNotFoundError as exception:
         common.print_fnf(dir, exception)
     df = pd.DataFrame(data)
@@ -167,11 +170,11 @@ def run():
 
             None : Stores models in static directories.
     '''
-    for i in range(1,3):
-        lag = config.production_training_lags if i==1 else config.consumption_training_lags
-        i=str(i)
-        _scrape(i)
-        _merge(i)
-        preprocessor.clean_file(i)
-        trainer.update_ar_model(i,intervall=config.rmse_intervall,start_lag= lag-1,end_lag= lag+1,start_skip= config.model_skip_row_start)
-        log.add.info(f"scraping, cleaning, merging, training done for type {i}")
+    for type in range(1,3):
+        lag = config.production_training_lags if type==1 else config.consumption_training_lags
+        type=str(type)
+        _scrape(type)
+        _merge(type)
+        preprocessor.clean_file(type)
+        trainer.update_ar_model(type,intervall=config.rmse_intervall,start_lag= lag-1,end_lag= lag+1,start_skip= config.model_skip_row_start)
+        log.add.info(f"scraping, cleaning, merging, training done for type {type}")

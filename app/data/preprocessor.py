@@ -64,11 +64,13 @@ def _process_cols(type, df) -> DataFrame:
     '''
     if type==config.p_id:
         columns = ["Biomasse[MWh]","Wasserkraft[MWh]","Wind Offshore[MWh]","Wind Onshore[MWh]","Photovoltaik[MWh]","Sonstige Erneuerbare[MWh]"]
+        #removing thousand seperators and replacing decimal colons with points
         for column in columns:
-            df[column]=(df[column].apply(lambda x: str(x).replace(".",""))).apply(lambda x: str(x).replace(",",".")).apply(lambda y: int(float(str(y))))
+            df[column]=(df[column].apply(lambda outer_value: str(outer_value).replace(".",""))).apply(lambda inner_value: str(inner_value).replace(",",".")).apply(lambda y: int(float(str(y))))
             df[column==0]=np.nan
             mean=df[column].mean(skipna=True)
             df=df.replace({column: {0: mean}})
+        #merging all renevable columns
         df={"Date":df["Datum"], config.p:
             (df[columns[0]]+
             df[columns[1]]+
@@ -80,9 +82,11 @@ def _process_cols(type, df) -> DataFrame:
         log.add.info(f"Production data merged")
     else:
         mwh="Gesamt (Netzlast)[MWh]"
-        df[mwh]=(df[mwh].apply(lambda x: str(x).replace(".",""))).apply(lambda x: str(x).replace(",",".")).apply(lambda y: int(float(str(y))))
+        #removing thousand seperators and replacing decimal colons with points
+        df[mwh]=(df[mwh].apply(lambda outer_value: str(outer_value).replace(".",""))).apply(lambda inner_value: str(inner_value).replace(",",".")).apply(lambda y: int(float(str(y))))
         df[mwh==0]=np.nan
         mean=df[mwh].mean(skipna=True)
+        #replacing empty cells with mean of the column
         df=df.replace({mwh: {0: mean}})
         df={"Date":df["Datum"], config.c:df[mwh]}
         df[config.c]=(df[config.c].apply(lambda y: int(float(str(y)))))    
