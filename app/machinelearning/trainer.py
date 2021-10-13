@@ -1,15 +1,9 @@
 import pandas as pd
 from datetime import datetime
-import regex as re
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.ar_model import AutoReg
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 import math
-import os
 from webdriver_manager.utils import File
 from wtforms.fields.core import Label
 from app.machinelearning import backtesting

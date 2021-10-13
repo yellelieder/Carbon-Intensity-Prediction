@@ -3,11 +3,9 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import os
 from datetime import datetime
-import regex as re
 import time
 import pandas as pd
 from app.data import preprocessor
-import logging
 from app.helpers import common
 from app.machinelearning import trainer
 import config

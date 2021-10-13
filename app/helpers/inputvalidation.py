@@ -1,18 +1,5 @@
-from datetime import date, timedelta
-from flask import Flask, request, jsonify,render_template, flash, redirect, make_response
-from flask_restful import Resource, Api
-from app.prediction import predictionhandler
 from datetime import datetime
-import regex as re
 import requests
-import json
-from flask_apscheduler import APScheduler
-import logging
-import traceback
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired
-import markdown.extensions.fenced_code
 import config
 import logger as log
 
@@ -112,5 +99,6 @@ def invalid_geo(lat, lng):
         log.add.info(f"geo validation: ({lat}/{lng}) is a german location")
         return False
     else:
+        print("hier unten")
         log.add.info(f"geo validation: ({lat}/{lng}) is not a german location")
         return True

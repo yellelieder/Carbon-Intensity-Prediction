@@ -1,12 +1,8 @@
 import math
 from datetime import datetime
-from types import FrameType
 from app.prediction import predictor
-import os
-import importlib
 from app.forcast import climate
 from app.forcast import weather
-import csv
 from app.prediction import evaluator
 from app.helpers import common
 import logger as log

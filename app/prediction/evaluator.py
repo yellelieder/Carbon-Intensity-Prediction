@@ -1,4 +1,3 @@
-from datetime import datetime, timedelta
 import pandas as pd
 from random import randint, seed
 from app.helpers import common
