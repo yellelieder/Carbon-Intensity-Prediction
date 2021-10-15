@@ -1,4 +1,3 @@
-Ressources/Models
-logs.log
-API/WeatherService/__pycache__/ClimateForcast.cpython-38.pyc
-API/WeatherService/__pycache__/WeatherForcast.cpython-38.pyc
+epi/ressources/Models
+epi/logs.log
+

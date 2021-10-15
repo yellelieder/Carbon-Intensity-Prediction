@@ -1,6 +1,14 @@
-import requests
-import config
+from datetime import datetime, timedelta
+from epi import config
+from epi.helpers import common
+import regex as re
+import pandas as pd
+import os
+from epi import logger as log
+from epi.data import preprocessor
 
-response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng=50.9917119,10.2136589&result_type=country&key={config.googlemaps_api_key}").json()
-print(response)
-#["results"][0]["formatted_address"]
+last_production_as_dt=common.str_to_datetime(common.last_training_date(config.p))
+last_consumption_as_dt=common.str_to_datetime(common.last_training_date(config.c))
+scraping_threshold_date=(datetime.now()-timedelta(days=(config.scrape_days)+1))
+if last_production_as_dt< scraping_threshold_date and last_consumption_as_dt<scraping_threshold_date:
+    print(True)

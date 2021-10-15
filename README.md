@@ -1,5 +1,5 @@
 # EPI
-Electricity Prediction Interface
+Energy Prediction Interface
 
 Welcome to the EPI project!
 
@@ -7,7 +7,7 @@ The goal of this project is to provide software engineers with a simple solution
 
 ## HOW IT WORKS:
 - we have gathered german* electricity market data (the system continues scraping current data)
-- the system conciders weather forcasts (for predictions within the next 30 days)
+- the system considers weather forcasts (for predictions within the next 30 days)
 - and makes predictions for future availability of renevable energy
 - this enables you to run ressource intensive processes when ther is a high probability for an green energy surplus
 

@@ -1,0 +1,28 @@
+{% extends "index.html"%}
+{%block content%}
+<h1>API User Manual</h1>
+<form action="#" method="post">
+    <h2>How to use it</h2><br>
+
+    <ul>
+        <li>make a call to <a target="blank" href="/api/?lat=50.9917119&long=10.2136589&stdate=28.10.2021&sttime=06:45&endate=29.10.2021&entime=23:59&dur=180">/api/?lat={lattitude}&long={longitude}&stdate={start date}&sttime={start time}&endate={end date}&entime={end time}&dur={duration}</a></li> (click for test run)
+        <li>lat = lattitue of where the electricity is going to be consumed (must be between -90 and +90)*</li>
+        <li>lng = longitude (must be between -180 and +180)*</li>
+        <li>stdate = earliest possible date for the process to be started (Format: DD.MM.YYYY)</li>
+        <li>sttime = the time (Format: HH:MM)</li>
+        <li>endate = date when the process latest must be finished</li>
+        <li>entime = latest time</li>
+        <li>dur = approximate duration of your process in minutes</li>
+        </ul>
+    <br>
+    Response will be a json like this: <br>
+    <br>
+    {<br>
+        &ensp; "ideal start" : "01/01/2023 18:37:00"<br>
+    }<br>
+    <br>
+    <br>
+    <br>
+    <p>*The system is only trained on German energy market data and therefore restricted to predictions for locations in Germany. Let me know if you have access to data for other locations.</p>
+</form>
+{%endblock%}
