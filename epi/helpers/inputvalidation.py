@@ -91,7 +91,7 @@ def invalid_geo(lat, lng):
     '''
     log.add.info(f"validation user geo coordinates")
     try:
-        response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key={config.googlemaps_api_key}").json()["results"][0]["formatted_address"]
+        response=requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key={config.google_key}").json()["results"][0]["formatted_address"]
     except Exception as e:
         log.add.info(f"google geo valiadation failed, please check api key first, {str(e)}")
         return True #as something is defenitly wrong

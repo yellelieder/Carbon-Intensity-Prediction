@@ -29,7 +29,7 @@ def _get_url(lat, lng):
             url : str
                 Url with correct parameter for requesting climate data.
     '''
-    url = f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
+    url = f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_key}"
     log.add.info(f"converted {lat} and {lng} to climate api url: {url}")
     return url
 

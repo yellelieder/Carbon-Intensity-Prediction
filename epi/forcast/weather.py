@@ -28,7 +28,7 @@ def _get_url(lat, lng):
             url : str
                 Url with correct parameter for requesting weather data.
     '''
-    result=f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_org_api_key}"
+    result=f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={lng}&units=metric&appid={config.openweathermap_key}"
     log.add.info(f"converting {lat} and {lng} to weather api url")
     return result
 

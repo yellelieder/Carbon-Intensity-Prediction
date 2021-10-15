@@ -48,7 +48,7 @@ def _get_free_id():
             result : int
     '''
     try:
-        df=pd.read_csv(config.training_log_folder_path,sep=",", dtype={
+        df=pd.read_csv(config.training_log_file,sep=",", dtype={
                         'ID': int,
                         "Type":str, 
                         "intervalls for training":str, 
@@ -61,10 +61,10 @@ def _get_free_id():
                         "evaluationresult":str
                     })
     except FileNotFoundError as exception:
-        common.print_fnf(config.training_log_folder_path, exception)
+        common.print_fnf(config.training_log_file, exception)
     max= df.loc[df['ID'].idxmax()][0]
     result = int(max)+1
-    log.add.info(f"returned next free id ({result}) in {config.training_log_folder_path}")
+    log.add.info(f"returned next free id ({result}) in {config.training_log_file}")
     return result
 
 
@@ -125,9 +125,9 @@ def update_ar_model(type, intervall, start_lag, end_lag, start_skip) -> None:
     #write details to training log
     csv_output = [str(model_id),column_name,str(intervall),str(df.iloc[0,0]).split(" ")[0],str(df.iloc[start_skip-1,0]).split(" ")[0],str(target_lags),str(start_lag), str(end_lag), int(target_rmse), str(evaluation_result) ]
     try:
-        with open(config.training_log_folder_path, 'a') as f:
+        with open(config.training_log_file, 'a') as f:
             writer = csv.writer(f)
             writer.writerow(csv_output)
-            log.add.info(f"documented model creation in {config.training_log_folder_path}")
+            log.add.info(f"documented model creation in {config.training_log_file}")
     except FileNotFoundError as exception:
-        common.print_fnf(config.training_log_folder_path, exception)
+        common.print_fnf(config.training_log_file, exception)

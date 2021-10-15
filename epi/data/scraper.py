@@ -84,7 +84,7 @@ def _get_last_date(type:str):
     path = config.download_production_folder if type==config.p_id else config.download_consumption_folder
     filename = common.get_latest_file(path)
     file_name_last_element= filename.split("_")[3]
-    date=str(time.mktime(datetime.strptime(file_name_last_element.split(".")[0], "%Y%m%d%H%M").timetuple())+config.day_intervall_for_schedule*86400).split(".")[0]+"000"
+    date=str(time.mktime(datetime.strptime(file_name_last_element.split(".")[0], "%Y%m%d%H%M").timetuple())+config.scheduler_intervall_days*86400).split(".")[0]+"000"
     log.add.info(f"calculated date up to which should be scraped: {date}")
     return date
 
@@ -171,10 +171,10 @@ def run():
     #if common.str_to_datetime(common.last_training_date)
     last_production_as_dt=common.str_to_datetime(common.last_training_date(config.p))
     last_consumption_as_dt=common.str_to_datetime(common.last_training_date(config.c))
-    scraping_threshold_date=(datetime.now()-timedelta(days=(config.day_intervall_for_schedule)+1))
+    scraping_threshold_date=(datetime.now()-timedelta(days=(config.scheduler_intervall_days)+1))
     if last_production_as_dt< scraping_threshold_date and last_consumption_as_dt<scraping_threshold_date:
         for type in range(1,3):
-            lag = config.production_training_lags if type==1 else config.consumption_training_lags
+            lag = config.production_lags if type==1 else config.consumption_lags
             type=str(type)
             _scrape(type)
             _merge(type)
