@@ -6,8 +6,9 @@ import os
 from epi import config
 from epi import logger as log
 
+
 def datetime_to_str(datetime_object):
-    '''
+    """
     Converts datetime object to string dd/mm/yyyy hh:mm:ss
 
         Parameters:
@@ -19,13 +20,16 @@ def datetime_to_str(datetime_object):
         ----------
 
             date_time : str
-    '''
-    date_time=datetime.strftime(datetime_object, config.dateformat)
-    log.add.info(f"converted datetime ({str(datetime_object)}) object to string ({date_time})")
+    """
+    date_time = datetime.strftime(datetime_object, config.dateformat)
+    log.add.info(
+        f"converted datetime ({str(datetime_object)}) object to string ({date_time})"
+    )
     return date_time
 
+
 def str_to_datetime(str_object):
-    '''
+    """
     Converts Datetime str to datetime object.
 
         Parameters:
@@ -37,13 +41,14 @@ def str_to_datetime(str_object):
         ----------
 
             date_time : datetime
-    '''
-    date_time=datetime.strptime(str_object, config.dateformat)
+    """
+    date_time = datetime.strptime(str_object, config.dateformat)
     log.add.info(f"converted string ({str_object}) to datetime object ({date_time})")
     return date_time
 
+
 def lag_to_datetime(period, start):
-    '''
+    """
     Turns row index from training data into human readable time.
 
         Parameters:
@@ -57,13 +62,18 @@ def lag_to_datetime(period, start):
 
             date_time : str
                 Exact time, accurate to 15 minutes.
-    '''
-    date_time=(str_to_datetime(start)+timedelta(seconds=period*900)).strftime(config.dateformat)
-    log.add.info(f"converted {period}. lag of training data into datetime object ({date_time})")
+    """
+    date_time = (str_to_datetime(start) + timedelta(seconds=period * 900)).strftime(
+        config.dateformat
+    )
+    log.add.info(
+        f"converted {period}. lag of training data into datetime object ({date_time})"
+    )
     return date_time
 
-def datetime_str_to_lag(time,type):
-    '''
+
+def datetime_str_to_lag(time, type):
+    """
     Converts datetime object into row index of csv file.
 
         Parameters:
@@ -78,15 +88,18 @@ def datetime_str_to_lag(time,type):
         ----------
 
             lag : int
-    '''
-    input_time_index=datetime.strptime(time, config.dateformat)
+    """
+    input_time_index = datetime.strptime(time, config.dateformat)
     base_time_index = str_to_datetime(last_training_date(type=type))
-    lag=int(divmod((input_time_index-base_time_index).total_seconds(),900)[0])-1
-    log.add.info(f"converted datetime as string ({str(time)}) into {lag}. lag timeframe")
+    lag = int(divmod((input_time_index - base_time_index).total_seconds(), 900)[0]) - 1
+    log.add.info(
+        f"converted datetime as string ({str(time)}) into {lag}. lag timeframe"
+    )
     return lag
 
-def last_training_date(type:str) -> str:
-    '''
+
+def last_training_date(type: str) -> str:
+    """
     Returns last date where training data is available.
 
         Parameters:
@@ -99,20 +112,22 @@ def last_training_date(type:str) -> str:
         ----------
 
             date : str
-    '''
+    """
     path = f"{config.training_data_folder}{type.capitalize()}.pkl"
     try:
-        df=pd.read_pickle(path)
-        date = df.iloc[-1,0]
-        date =datetime_to_str(date) if isinstance(date,datetime) else date
-        log.add.info(f"returned last available date ({date}) for training date type {type}")
+        df = pd.read_pickle(path)
+        date = df.iloc[-1, 0]
+        date = datetime_to_str(date) if isinstance(date, datetime) else date
+        log.add.info(
+            f"returned last available date ({date}) for training date type {type}"
+        )
         return date
     except FileNotFoundError as exception:
         print_fnf(path, exception)
 
 
 def format_date(date):
-    '''
+    """
     Re-formats date as string.
 
         Parameters:
@@ -126,13 +141,16 @@ def format_date(date):
 
             date : str
                 Format: d/m/y h:m:s
-    '''
-    date_time = datetime.strftime((datetime.strptime(str(date),"%Y-%m-%d %H:%M:%S")), config.dateformat)
+    """
+    date_time = datetime.strftime(
+        (datetime.strptime(str(date), "%Y-%m-%d %H:%M:%S")), config.dateformat
+    )
     log.add.info(f"reformated {date} into {date_time}")
     return date_time
 
+
 def get_latest_file(dir):
-    '''
+    """
     Returns last file form folder by alphabetical order.
 
         Parameters:
@@ -146,13 +164,14 @@ def get_latest_file(dir):
 
             file_name : str
                 Name of the last file from the folder in alphabetical order.
-    '''
-    file_name=sorted(os.listdir(dir)).pop()
+    """
+    file_name = sorted(os.listdir(dir)).pop()
     log.add.info(f"returned name of newest file ({file_name}) from {dir}")
     return file_name
 
+
 def merge_date_and_time(date, time):
-    '''
+    """
     Converts data and time to timestamp.
 
         Parameters:
@@ -166,13 +185,14 @@ def merge_date_and_time(date, time):
 
             date_time : str
                 In form dd/mm/yyy hh:mm:ss
-    '''
-    date_time=str(re.sub("[.]","/", date)+" "+time+":00")
+    """
+    date_time = str(re.sub("[.]", "/", date) + " " + time + ":00")
     log.add.info(f"merged {date} and {time} to {date_time}")
     return date_time
 
+
 def print_fnf(file_details, exception):
-    '''
+    """
     Handles FileNotFoundExceptions.
 
         Parameters:
@@ -186,7 +206,9 @@ def print_fnf(file_details, exception):
         ----------
 
             None : prints and loggs errors.
-    '''
-    print(f"ERROR: {file_details} file could not be found!\n Please restore original file form git and try again.")
+    """
+    print(
+        f"ERROR: {file_details} file could not be found!\n Please restore original file form git and try again."
+    )
     print(exception)
     log.add.info(f"file ({file_details})) not found exception: {str(exception)}")

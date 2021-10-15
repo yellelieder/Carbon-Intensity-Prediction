@@ -7,9 +7,10 @@ from epi.prediction import predictionhandler
 from epi.helpers import common
 from epi import logger as log
 
+
 class EPI(Resource):
     def get(self):
-        '''
+        """
         Handles users get request with prediction in form of json.
 
         Parameters:
@@ -23,16 +24,25 @@ class EPI(Resource):
 
             response : json
                 response to the request
-        '''
+        """
         log.add.info(f"handling get request in /api/ directory: {request}")
-        query=request.args 
-        result= prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+        query = request.args
+        result = prediction(
+            query.get("lat", type=float),
+            query.get("long", type=float),
+            query.get("stdate"),
+            query.get("sttime"),
+            query.get("endate"),
+            query.get("entime"),
+            query.get("dur", type=int),
+        )
         log.add.info(f"send response for API call: {result}")
         return result
 
+
 class TestEndpoint(Resource):
     def get(self):
-        '''
+        """
         Handles request for testing purposes.
         Uses same mechanics under the hood, but skips validation and weather forcasts.
 
@@ -45,16 +55,25 @@ class TestEndpoint(Resource):
 
             response : json
                 response to the request
-        '''
+        """
         log.add.info(f"handling get request in /api/ directory: {request}")
-        query=request.args 
-        result= _test_prediction(query.get("lat", type=float),query.get("long", type=float),query.get("stdate"), query.get("sttime"), query.get("endate"),query.get("entime"),query.get("dur", type=int))
+        query = request.args
+        result = _test_prediction(
+            query.get("lat", type=float),
+            query.get("long", type=float),
+            query.get("stdate"),
+            query.get("sttime"),
+            query.get("endate"),
+            query.get("entime"),
+            query.get("dur", type=int),
+        )
         log.add.info(f"send response for API TEST call: {result}")
         return result
 
+
 class Home(Resource):
     def get(self):
-        '''
+        """
         Shows home page to the user.
 
         Parameters:
@@ -66,15 +85,16 @@ class Home(Resource):
         ----------
 
             result : html
-        '''
-        headers = {'Content-Type': 'text/html'}
-        result= make_response(render_template(r'index.html'),200,headers)
+        """
+        headers = {"Content-Type": "text/html"}
+        result = make_response(render_template(r"index.html"), 200, headers)
         log.add.info(f"displayed index.html webapp screen")
         return result
 
+
 class Usage_Docu(Resource):
     def get(self):
-        '''
+        """
         Shows api deatils page to the user.
 
         Parameters:
@@ -86,22 +106,24 @@ class Usage_Docu(Resource):
         ----------
 
             result : html
-        '''
-        headers = {'Content-Type': 'text/html'}
-        result=  make_response(render_template(r'api.html'),200,headers)
+        """
+        headers = {"Content-Type": "text/html"}
+        result = make_response(render_template(r"api.html"), 200, headers)
         log.add.info(f"displayed api.html explaination screen")
         return result
 
+
 class Imprint(Resource):
     def get(self):
-        headers = {'Content-Type': 'text/html'}
-        result= make_response(render_template(r'imprint.html'),200,headers)
+        headers = {"Content-Type": "text/html"}
+        result = make_response(render_template(r"imprint.html"), 200, headers)
         log.add.info(f"displayed imprint.html screen")
         return result
 
+
 class App(Resource):
     def get(self):
-        '''
+        """
         Shows input form page to the user.
 
         Parameters:
@@ -113,14 +135,14 @@ class App(Resource):
         ----------
 
             result : html
-        '''
-        headers = {'Content-Type': 'text/html'}
-        result= make_response(render_template(r'form.html'),200,headers)
+        """
+        headers = {"Content-Type": "text/html"}
+        result = make_response(render_template(r"form.html"), 200, headers)
         log.add.info(f"displayed form.html visual input App")
         return result
 
     def post(self):
-        '''
+        """
         Converts user form inputs to prediction.
 
         Parameters:
@@ -132,22 +154,34 @@ class App(Resource):
         ----------
 
             result : html
-        '''
-        lat =float(request.form["lat"])
-        lng =float(request.form["lng"])
-        stdate=str(datetime.strptime(request.form["stdate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
-        sttime =str(request.form["sttime"])
-        enddate=str(datetime.strptime(request.form["enddate"], '%Y-%m-%d').strftime("%d/%m/%Y"))
-        endtime =str(request.form["endtime"])
+        """
+        lat = float(request.form["lat"])
+        lng = float(request.form["lng"])
+        stdate = str(
+            datetime.strptime(request.form["stdate"], "%Y-%m-%d").strftime("%d/%m/%Y")
+        )
+        sttime = str(request.form["sttime"])
+        enddate = str(
+            datetime.strptime(request.form["enddate"], "%Y-%m-%d").strftime("%d/%m/%Y")
+        )
+        endtime = str(request.form["endtime"])
         dur = int(request.form["dur"])
-        pred=prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
-        headers = {'Content-Type': 'text/html'}
-        result= make_response(render_template(r'result.html', key=list(pred.keys())[0], value=list(pred.values())[0]),headers)
-        log.add.info(f"received input from visual form: lat:{lat} lng:{lng} stdate:{stdate} sttime:{sttime} enddate:{enddate} endtime:{endtime} dur:{dur}")
+        pred = prediction(lat, lng, stdate, sttime, enddate, endtime, dur)[0]
+        headers = {"Content-Type": "text/html"}
+        result = make_response(
+            render_template(
+                r"result.html", key=list(pred.keys())[0], value=list(pred.values())[0]
+            ),
+            headers,
+        )
+        log.add.info(
+            f"received input from visual form: lat:{lat} lng:{lng} stdate:{stdate} sttime:{sttime} enddate:{enddate} endtime:{endtime} dur:{dur}"
+        )
         return result
 
-def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
-    '''
+
+def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur) -> json:
+    """
     Handles test prediction but skips input validation.
 
     Input validation must be skipped to be able to backtest.
@@ -161,17 +195,24 @@ def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
     ----------
 
         result : json
-    '''
-    start=common.merge_date_and_time(stdate,sttime)
-    end=common.merge_date_and_time(enddate,endtime)
-    result=predictionhandler.run(lat, lng, start, end, dur, "test")
-    result = {"ideal start":result[0],"fits data":result[1], "randome success":result [2]}, 200
+    """
+    start = common.merge_date_and_time(stdate, sttime)
+    end = common.merge_date_and_time(enddate, endtime)
+    result = predictionhandler.run(lat, lng, start, end, dur, "test")
+    result = (
+        {
+            "ideal start": result[0],
+            "fits data": result[1],
+            "randome success": result[2],
+        },
+        200,
+    )
     log.add.info(f"returned test prediction")
     return result
 
 
-def prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
-    '''
+def prediction(lat, lng, stdate, sttime, enddate, endtime, dur) -> json:
+    """
     Performs input validation.
 
     Parameters:
@@ -183,23 +224,30 @@ def prediction(lat, lng, stdate, sttime, enddate, endtime, dur)->json:
     ----------
 
         result : json
-    '''
-    error_key_name="error"
-    start=common.merge_date_and_time(stdate,sttime)
-    end=common.merge_date_and_time(enddate,endtime)
+    """
+    error_key_name = "error"
+    start = common.merge_date_and_time(stdate, sttime)
+    end = common.merge_date_and_time(enddate, endtime)
     if inputvalidation.start_after_end(start, end):
-        return {error_key_name:"end before start"}, 406 
+        return {error_key_name: "end before start"}, 406
     elif inputvalidation.start_in_past(start):
-        return {error_key_name:"enter upcoming timeframe"}, 406  
+        return {error_key_name: "enter upcoming timeframe"}, 406
     elif inputvalidation.time_le_dur(start, end, dur):
-        return {error_key_name:"duration not fitting in timeframe"}, 406
-    elif lat<-90 or lat>90:
-        return {error_key_name:"lattitude out of rang"}, 406
-    elif lng<-180 or lng>180:
-        return {error_key_name:"longitude out of range"}, 406
-    elif inputvalidation.invalid_geo(lat, lng):  
-        return {error_key_name:"enter german coodrinates"}, 406  
+        return {error_key_name: "duration not fitting in timeframe"}, 406
+    elif lat < -90 or lat > 90:
+        return {error_key_name: "lattitude out of rang"}, 406
+    elif lng < -180 or lng > 180:
+        return {error_key_name: "longitude out of range"}, 406
+    elif inputvalidation.invalid_geo(lat, lng):
+        return {error_key_name: "enter german coodrinates"}, 406
     else:
-        result = {"ideal start":predictionhandler.run(lat, lng, start, end, dur, test="no")}, 200
+        result = (
+            {
+                "ideal start": predictionhandler.run(
+                    lat, lng, start, end, dur, test="no"
+                )
+            },
+            200,
+        )
         log.add.info(f"all validations successfull, returned prediction")
         return result
