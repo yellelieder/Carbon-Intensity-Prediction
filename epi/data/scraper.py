@@ -241,4 +241,4 @@ def run():
             )
             log.add.info(f"scraping, cleaning, merging, training done for type {type}")
     else:
-        log.add.info(f"tried scraping, data is up to date")
+        log.add.info("tried scraping, data is up to date")

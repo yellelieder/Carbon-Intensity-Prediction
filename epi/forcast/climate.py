@@ -1,11 +1,7 @@
-import logging
 import requests
 import json
-import logging
 from datetime import datetime
 import math
-
-from requests.models import Request, requote_uri, to_native_string
 from epi.helpers import common
 from epi import config
 from epi import logger as log
@@ -62,7 +58,7 @@ def _get_forcast(lat, lng, days_from_now, days_total) -> json:
         print(
             "openweathermap.org climate forcast was not succefull, first check api keys"
         )
-        log.add.info(f"climate forcast failed")
+        log.add.info("climate forcast failed")
     log.add.info(
         f"requested climate api lat {lat}, lng {lng}, start in {days_from_now} days, {days_total} total days, result: {response}"
     )

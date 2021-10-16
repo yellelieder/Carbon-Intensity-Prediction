@@ -1,8 +1,5 @@
-import logging
-from types import resolve_bases
 import requests
 import json
-import logging
 from datetime import datetime
 import math
 from epi import config
@@ -110,9 +107,8 @@ def get_best_start(lat, lon, start: str, end: str, dur: int):
             max_wind_day = hour
             max_wind_speed = subset_sum_wind
         if subset_sum_wind < min_cloudiness:
-            min_cloud_day = (
-                hour  # for fast logic adaptation, just use clouds instead of wind
-            )
+            # for fast logic adaptation, just use clouds instead of wind
+            min_cloud_day = hour
             min_cloudiness = subset_sum_clouds
     start_hour = max_wind_day
     surise = datetime.utcfromtimestamp(sunrise).strftime("%H:%M")

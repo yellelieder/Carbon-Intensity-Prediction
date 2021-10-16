@@ -104,7 +104,7 @@ def invalid_geo(lat, lng):
             validation : bool
                 False if coordinates are in Germany, true if they are outside germany.
     """
-    log.add.info(f"validation user geo coordinates")
+    log.add.info("validation user geo coordinates")
     try:
         response = requests.get(
             f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&result_type=country&key={config.google_key}"

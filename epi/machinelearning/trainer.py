@@ -4,8 +4,6 @@ from statsmodels.tsa.ar_model import AutoReg
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 import math
-from webdriver_manager.utils import File
-from wtforms.fields.core import Label
 from epi.machinelearning import backtesting
 import time
 import csv
@@ -92,7 +90,7 @@ def update_ar_model(type, intervall, start_lag, end_lag, start_skip) -> None:
             end_lag : int
                 Maximum number of lags to be concidered for AR-Model training.
             
-            start_skip :int 
+            start_skip : int
                 First row to be excluded from training AND testing set.
 
         Returns:

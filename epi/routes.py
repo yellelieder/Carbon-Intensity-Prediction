@@ -88,7 +88,7 @@ class Home(Resource):
         """
         headers = {"Content-Type": "text/html"}
         result = make_response(render_template(r"index.html"), 200, headers)
-        log.add.info(f"displayed index.html webapp screen")
+        log.add.info("displayed index.html webapp screen")
         return result
 
 
@@ -109,7 +109,7 @@ class Usage_Docu(Resource):
         """
         headers = {"Content-Type": "text/html"}
         result = make_response(render_template(r"api.html"), 200, headers)
-        log.add.info(f"displayed api.html explaination screen")
+        log.add.info("displayed api.html explaination screen")
         return result
 
 
@@ -117,7 +117,7 @@ class Imprint(Resource):
     def get(self):
         headers = {"Content-Type": "text/html"}
         result = make_response(render_template(r"imprint.html"), 200, headers)
-        log.add.info(f"displayed imprint.html screen")
+        log.add.info("displayed imprint.html screen")
         return result
 
 
@@ -138,7 +138,7 @@ class App(Resource):
         """
         headers = {"Content-Type": "text/html"}
         result = make_response(render_template(r"form.html"), 200, headers)
-        log.add.info(f"displayed form.html visual input App")
+        log.add.info("displayed form.html visual input App")
         return result
 
     def post(self):
@@ -207,7 +207,7 @@ def _test_prediction(lat, lng, stdate, sttime, enddate, endtime, dur) -> json:
         },
         200,
     )
-    log.add.info(f"returned test prediction")
+    log.add.info("returned test prediction")
     return result
 
 
@@ -249,5 +249,5 @@ def prediction(lat, lng, stdate, sttime, enddate, endtime, dur) -> json:
             },
             200,
         )
-        log.add.info(f"all validations successfull, returned prediction")
+        log.add.info("all validations successfull, returned prediction")
         return result

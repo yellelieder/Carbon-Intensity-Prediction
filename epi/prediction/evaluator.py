@@ -93,5 +93,5 @@ def run(start, end, dur):
         predictor.find_optimum(time_series, dur, start),
         _random_prediction(time_series, start, dur),
     )
-    log.add.info(f"evaluation for testing purposes done")
+    log.add.info("evaluation for testing purposes done")
     return result

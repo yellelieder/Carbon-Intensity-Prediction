@@ -1,7 +1,6 @@
 import pandas as pd
 from pandas.core.frame import DataFrame
 import regex as re
-import os
 import numpy as np
 from epi import logger as log
 from epi import config
@@ -99,7 +98,7 @@ def _process_cols(type, df) -> DataFrame:
             ),
         }
         df[config.p] = df[config.p].apply(lambda y: int(float(str(y))))
-        log.add.info(f"Production data merged")
+        log.add.info("Production data merged")
     else:
         mwh = "Gesamt (Netzlast)[MWh]"
         # removing thousand seperators and replacing decimal colons with points
@@ -114,5 +113,5 @@ def _process_cols(type, df) -> DataFrame:
         df = df.replace({mwh: {0: mean}})
         df = {"Date": df["Datum"], config.c: df[mwh]}
         df[config.c] = df[config.c].apply(lambda y: int(float(str(y))))
-        log.add.info(f"Consumption data merged")
+        log.add.info("Consumption data merged")
     return df

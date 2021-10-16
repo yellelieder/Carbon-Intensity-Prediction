@@ -3,7 +3,6 @@ from math import sqrt
 from epi.helpers import common
 import matplotlib.pyplot as plt
 import pandas as pd
-import regex as re
 import statsmodels.api as sm
 from prettytable import PrettyTable
 from sklearn.metrics import mean_squared_error
@@ -69,7 +68,7 @@ def evaluate_model(training_data_file_path, intervalls, model):
     # calculate hourly mean for last year
     last_year = df[-(365 * 24 * 4) : -1]
     last_year_means = last_year.groupby(last_year["Date"].dt.hour).mean()
-    log.add.info(f"calculated yearly hourly mean in given dataset")
+    log.add.info("calculated yearly hourly mean in given dataset")
 
     # prepare visual outputs
     table = PrettyTable(

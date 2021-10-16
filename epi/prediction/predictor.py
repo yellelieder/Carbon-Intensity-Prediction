@@ -115,5 +115,5 @@ def ar_prediction(start, end, duration):
     """
     time_series = _production_consumption_ratio_prediction(start, end)
     point_in_time = find_optimum(time_series, duration, start)
-    log.add.info(f"ar model prediction done")
+    log.add.info("ar model prediction done")
     return point_in_time

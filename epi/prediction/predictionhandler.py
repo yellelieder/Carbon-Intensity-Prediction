@@ -59,7 +59,7 @@ def run(lat, lng, start, end, dur, test):
         prediction_direct_hit = prediction == target
         randome_direct_hit = randome_direct_hit == target
         result = prediction, prediction_direct_hit, randome_direct_hit
-        log.add.info(f"returned evaluation results")
+        log.add.info("returned evaluation results")
         return result
     if days_in_future < 30:
         if days_in_future < 4:
