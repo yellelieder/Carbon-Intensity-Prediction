@@ -23,9 +23,8 @@ def start_after_end(start, end):
             valitation : bool
                 False if input is valid, True if input is invalid.
     """
-    validation = datetime.strptime(start, config.dateformat) > datetime.strptime(
-        end, config.dateformat
-    )
+    print("\n\nStart: ",start," End: ",end)
+    validation = datetime.strptime(start, config.dateformat) > datetime.strptime(end, config.dateformat)
     log.add.info(f"validation, {start} is after {end} = {validation}")
     return validation
 

@@ -44,7 +44,7 @@ download_consumption_folder = f"epi{slash}ressources{slash}downloads{slash}consu
 training_log_file = f"epi{slash}ressources{slash}models{slash}models.csv"
 
 # default date format to be used in the system
-dateformat = "%d/%m/%Y %H:%m:%S"
+dateformat = "%d/%m/%Y %H:%M:%S"
 
 # commonly used keyword
 p = "Production"
