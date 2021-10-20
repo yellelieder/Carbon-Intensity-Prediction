@@ -39,9 +39,9 @@ def _get_prediction(start, end, type):
     return result
 
 
-def _production_consumption_ratio_prediction(start, end):
+def _prod_cons_ratio(start, end):
     """
-    Calculates predicted ratio of renevables and energy consumption for given timeframe.
+    Calculates predicted ratio of renewables and energy consumption for given timeframe.
 
         Parameters:
         ----------
@@ -113,7 +113,7 @@ def ar_prediction(start, end, duration):
 
             point_in_time : str
     """
-    time_series = _production_consumption_ratio_prediction(start, end)
+    time_series = _prod_cons_ratio(start, end)
     point_in_time = find_optimum(time_series, duration, start)
     log.add.info("ar model prediction done")
     return point_in_time

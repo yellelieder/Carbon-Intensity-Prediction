@@ -8,16 +8,16 @@ The goal of this project is to provide software engineers with a simple solution
 ## HOW IT WORKS:
 - we have gathered german* electricity market data (the system continues scraping current data)
 - the system considers weather forcasts (for predictions within the next 30 days)
-- and makes predictions for future availability of renevable energy
-- this enables you to run ressource intensive processes when ther is a high probability for an green energy surplus
+- and makes predictions for future availability of renewable energy
+- this enables you to run ressource intensive processes when there is a high probability for an green energy surplus
 
 ## WHY IT'S WORTH IT
 - software is responsible for at least 3% of world carbon emission
-- using renevables, if possible has the potential to drastically reduce this
+- using renewables, if possible has the potential to drastically reduce this
 
 ## HOW TO USE IT
 - make a call to /api/?lat=51.4582235&long=7.0158171&stdate=28.12.2021&sttime=06:45&endate=29.12.2021&entime=23:59&dur=180
-- lat = lattitue of where the electricity is going to be consumed (must be between -90 and +90)*
+- lat = lattitude of where the electricity is going to be consumed (must be between -90 and +90)*
 - lng = longitude (must be between -180 and +180)*
 - stdate = earliest possible date for the process to be started (Format: DD.MM.YYYY)
 - sttime = the time (Format: HH:MM)
@@ -39,7 +39,7 @@ Response will be a json like this:
 - training of machine learning models
 - mining of crypto currency
 - executing regression tests 
-- rendering video 
+- rendering videos 
 - running deployment pipelines 
 - automated processes like done with RPA
 .. basically everything usually done overnight, where you don't really care when it's done 

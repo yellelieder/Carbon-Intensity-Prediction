@@ -6,9 +6,9 @@ from epi import logger as log
 from epi import config
 
 
-def _production_consumption_ratio_actual(start, end):
+def _actual_prod_cons_ratio(start, end):
     """
-    Calculates predicted ratio of renevables and energy consumption for given timeframe.
+    Calculates predicted ratio of renewables and energy consumption for given timeframe.
 
         Parameters:
         ----------
@@ -88,7 +88,7 @@ def run(start, end, dur):
 
             randome_prediction : str
     """
-    time_series = _production_consumption_ratio_actual(start, end)
+    time_series = _actual_prod_cons_ratio(start, end)
     result = (
         predictor.find_optimum(time_series, dur, start),
         _random_prediction(time_series, start, dur),

@@ -45,7 +45,7 @@ def clean_file(type: str):
 def _process_cols(type, df) -> DataFrame:
     """
     Pre-processes the rows of a dataframe.
-    Merges date and time column, replaces decimal signs and merges renevables into a single column.
+    Merges date and time column, replaces decimal signs and merges renewables into a single column.
 
         Parameters:
         ----------
@@ -85,7 +85,7 @@ def _process_cols(type, df) -> DataFrame:
             df[column == 0] = np.nan
             mean = df[column].mean(skipna=True)
             df = df.replace({column: {0: mean}})
-        # merging all renevable columns
+        # merging all renewable columns
         df = {
             "Date": df["Datum"],
             config.p: (
