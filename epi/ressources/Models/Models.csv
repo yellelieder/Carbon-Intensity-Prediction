@@ -1,3 +1,4 @@
 ID, Type, intervalls for training, startdate, enddate, lags, lag_start,lag_end, rmse, evaluationresult
 1,Production,480,2015-01-01,2021-06-30,275,1,680,957,True
 2,Consumption,480,2015-01-01,2021-01-07,674,1,680,282,True
+

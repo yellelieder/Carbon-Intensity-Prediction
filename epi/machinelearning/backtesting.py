@@ -90,7 +90,7 @@ def evaluate_model(training_data_file_path, intervalls, model):
         prediction = predictions[key]
         target = value
         time = parser(datetime.strptime(str(df.iloc[key, 0]), "%Y-%m-%d %H:%M:%S"))
-        print(time)
+        
         hour = int((time.split(" ")[1]).split(":")[0])
         mean = int(last_year_means.iloc[hour, 0])
         dict.append(

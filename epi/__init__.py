@@ -28,7 +28,7 @@ scheduler.add_job(
     id="Scheduled task",
     func=scraper.run,
     trigger="interval",
-    seconds=config.scheduler_intervall_days * 60 * 60 * 24,
+    seconds=config.scheduler_intervall_days*60*60*24
 )  # 60sec*60min*24h
 scheduler.start()  # first execution always after itervall passed first time
 log.add.info("scheduler started")

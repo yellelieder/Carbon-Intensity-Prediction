@@ -194,7 +194,7 @@ def _merge(type: str):
     except FileNotFoundError as exception:
         common.print_fnf(dir, exception)
     df = pd.DataFrame(data)
-    file_name = config.merged_data_folder + dir.split(config.slash)[2]
+    file_name = config.merged_data_folder + (config.c if type == config.c_id else config.p)
     df.to_csv(file_name + ".csv")
     df.to_pickle(file_name + ".pkl")
     log.add.info(f"files from {dir} merged and persisted at {file_name}")
