@@ -5,6 +5,8 @@ Welcome to the EPI project!
 
 The goal of this project is to provide software engineers with a simple solution to concider carbon emission in their application development.
 
+A live demo is available at: http://172.104.146.198/
+
 ## HOW IT WORKS:
 - we have gathered german* electricity market data (the system continues scraping current data)
 - the system considers weather forcasts (for predictions within the next 30 days)
