@@ -4,10 +4,10 @@ import os
 """EVERYTHING BELOW CAN BE CUSTOMIZED"""
 
 # api key to access paid weather forcast service, they offer a free students access
-openweathermap_key = "89f83e40489b5e87c4cb16463dc68b42"
+openweathermap_key = "your_key"
 
 # google maps api key
-google_key = "AIzaSyCBkqBTgj99v45ScAWO-2A3Ffz8r0kQbc8"
+google_key = "your_key"
 
 # no. of intervalls that should be looked at for calculation models rmse
 rmse_intervall = 5 * 4 * 24  # 5 days, 4*15m per hour, 24 hours = 5 days
