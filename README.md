@@ -7,6 +7,7 @@ The goal of this project is to provide software engineers with a simple solution
 
 Detailt technical docu can be found here: 
 https://1drv.ms/b/s!Amx7HQVK7Pg8htw8V70W1RzXN-7pGA?e=eoLvlK
+
 (unfortunately only in german, as this was a university project, let me know if you need a translation)
 
 
